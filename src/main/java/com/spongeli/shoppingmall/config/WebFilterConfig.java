@@ -17,11 +17,9 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component
-@ServletComponentScan
+//@Component
 @WebFilter(filterName = "loginFilter", urlPatterns = "/*")
 public class WebFilterConfig implements Filter {
-    int i = 1;
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         System.out.println("-------------初始化----------");
