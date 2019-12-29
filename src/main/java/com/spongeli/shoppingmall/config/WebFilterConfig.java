@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
+import java.io.Console;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Enumeration;
@@ -30,26 +31,11 @@ public class WebFilterConfig implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpServletRequest request = (HttpServletRequest) servletRequest;
-        System.out.println(request.getRequestURL());
-        if (request.getRequestURL().toString().matches(".+.ico$")) {
-            filterChain.doFilter(servletRequest, servletResponse);
-        } else {
-            String origin = request.getHeader("Origin");
-            // 简单请求跨域，如果是跨域请求在响应头里面添加对应的Origin
-            if (StringUtils.isNotEmpty(origin)) {
-                response.addHeader("Access-Control-Allow-Origin", origin);
-            }
-            // 非简单请求跨域
-            response.addHeader("Access-Control-Allow-Headers", "content-type");
-            // 允许跨域请求的方法
-            response.addHeader("Access-Control-Allow-Methods", "*");
-            // 预检命令缓存 1小时
-            //        response.addHeader("Access-Control-Max-Age", "3600");
-            // 携带cookie的跨域
-            response.addHeader("Access-Control-Allow-Credentials", "true");
-            // 放行方法
-            filterChain.doFilter(servletRequest, servletResponse);
-        }
+
+        // 自适应所有自定义头
+//        System.out.println("过滤器被使用");
+        filterChain.doFilter(request, response);
+
     }
 
     @Override

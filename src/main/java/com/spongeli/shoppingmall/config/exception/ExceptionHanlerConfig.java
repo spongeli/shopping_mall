@@ -1,4 +1,4 @@
-package com.spongeli.shoppingmall.config;
+package com.spongeli.shoppingmall.config.exception;
 
 import com.spongeli.shoppingmall.common.exception.SystemException;
 import com.spongeli.shoppingmall.common.system.CommonResponse;

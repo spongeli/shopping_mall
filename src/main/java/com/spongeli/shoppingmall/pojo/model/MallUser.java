@@ -7,7 +7,7 @@ public class MallUser implements Serializable {
 
     private String username;
 
-    private String phone;
+    private String password;
 
     private static final long serialVersionUID = 1L;
 
@@ -27,12 +27,12 @@ public class MallUser implements Serializable {
         this.username = username == null ? null : username.trim();
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone == null ? null : phone.trim();
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
     }
 
     @Override
@@ -43,7 +43,7 @@ public class MallUser implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", userid=").append(userid);
         sb.append(", username=").append(username);
-        sb.append(", phone=").append(phone);
+        sb.append(", password=").append(password);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

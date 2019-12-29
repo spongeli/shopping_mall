@@ -23,7 +23,7 @@ public class CommonResponse {
         this.msg = errMsg;
     }
     public CommonResponse(Object data){
-        this.status = SystemConstant.FAIL;
+        this.status = SystemConstant.SUCCESS;
         this.data = data;
     }
 
