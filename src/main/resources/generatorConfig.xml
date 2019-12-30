@@ -15,6 +15,9 @@
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
 
+        <!--覆盖生成XML文件-->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
+
         <!-- 注释 -->
         <commentGenerator >
             <property name="suppressAllComments" value="true"/><!-- 是否取消注释 -->

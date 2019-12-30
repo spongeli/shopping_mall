@@ -1,9 +1,9 @@
-package com.spongeli.shoppingmall.controller.manager.user;
+package com.spongeli.shoppingmall.controller.manager;
 
 import com.spongeli.shoppingmall.common.system.BaseController;
 import com.spongeli.shoppingmall.common.system.CommonResponse;
 import com.spongeli.shoppingmall.entity.request.user.DoLoginInparam;
-import com.spongeli.shoppingmall.service.webservice.index.impl.MallUserService;
+import com.spongeli.shoppingmall.service.manager.MallUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
