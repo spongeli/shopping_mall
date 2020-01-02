@@ -32,7 +32,7 @@ public class MallUserServiceImpl implements MallUserService {
     private RedisUtil redisUtil;
     @Value("${mall.login.key}")
     private String pwdkey;
-    @Valid
+    @Value("mall.token.key")
     private String tokenkey;
 
     @Override

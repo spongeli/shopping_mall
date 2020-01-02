@@ -1,4 +1,4 @@
-package com.spongeli.shoppingmall.controller.manager;
+package com.spongeli.shoppingmall.controller.managercontroller;
 
 import com.spongeli.shoppingmall.common.system.BaseController;
 import com.spongeli.shoppingmall.common.system.CommonResponse;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/manager/user")
 public class UserController extends BaseController {
 
     @Autowired
@@ -21,5 +21,9 @@ public class UserController extends BaseController {
     @PostMapping("/login")
     public CommonResponse doLogin(@Valid @RequestBody DoLoginInparam inparam){
         return instanceSuccess(service.doLogin(inparam));
+    }
+    @PostMapping("/out_login")
+    public  CommonResponse outLogin(){
+        return instanceSuccess();
     }
 }

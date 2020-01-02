@@ -23,7 +23,10 @@ public class UserHandlerInterceptor implements HandlerInterceptor {
         RequestWrapper myRequestWrapper = new RequestWrapper((HttpServletRequest) request);
         String body = myRequestWrapper.getBody();
         System.out.println("我是拦截器："+body);
-        return true;
+
+        String token =  request.getHeader("token");
+        logger.info("token={}",token);
+        return false;
     }
 
     @Override

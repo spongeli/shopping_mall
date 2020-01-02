@@ -17,7 +17,7 @@ public class interceptorConfig implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new UserHandlerInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(new UserHandlerInterceptor()).addPathPatterns("/manager/user/**");
         //registry.addInterceptor(new MyInterceptor_copy()).addPathPatterns("/*");//有多个拦截器继续add进去
     }
 
