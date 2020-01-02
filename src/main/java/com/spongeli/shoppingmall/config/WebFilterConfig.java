@@ -32,13 +32,9 @@ public class WebFilterConfig implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpServletRequest request = (HttpServletRequest) servletRequest;
 
-        String token =  request.getHeader("token");
-
-
         // 自适应所有自定义头
         System.out.println("过滤器被使用");
         filterChain.doFilter(request, response);
-
     }
 
     @Override
