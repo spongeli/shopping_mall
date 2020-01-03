@@ -23,8 +23,7 @@ import java.util.Map;
 public class WebFilterConfig implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        System.out.println("-------------初始化----------");
-        System.out.println(JSON.toJSONString(filterConfig));
+//        System.out.println("-------------初始化----------");
     }
 
     @Override
@@ -33,7 +32,7 @@ public class WebFilterConfig implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
 
         // 自适应所有自定义头
-        System.out.println("过滤器被使用");
+//        System.out.println("过滤器被使用");
         filterChain.doFilter(request, response);
     }
 

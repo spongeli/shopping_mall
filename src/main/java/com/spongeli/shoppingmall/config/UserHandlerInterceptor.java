@@ -1,6 +1,7 @@
 package com.spongeli.shoppingmall.config;
 
 import com.spongeli.shoppingmall.common.util.RedisUtil;
+import com.spongeli.shoppingmall.pojo.model.MallUser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +24,18 @@ public class UserHandlerInterceptor implements HandlerInterceptor {
 //    private MallUserMapper dao;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
-        logger.info("拦截器被使用");
+//        logger.info("拦截器被使用");
+        String uri = request.getRequestURI();
+        if(uri.endsWith("/login")) return true;
+
+
         String token =  request.getHeader("token");
-        Object ss = redisUtil.get("token");
-        System.out.println(ss);
+        MallUser user = (MallUser)redisUtil.get(token);
+
+
+
+
+        System.out.println(user.getPassword());
 
         logger.info("token={}",token);
         return true;
@@ -34,11 +43,11 @@ public class UserHandlerInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable ModelAndView modelAndView) {
-        System.out.println("postHandle");
+//        System.out.println("postHandle");
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable Exception ex) {
-        System.out.println("afterCompletion");
+//        System.out.println("afterCompletion");
     }
 }
