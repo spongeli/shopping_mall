@@ -15,6 +15,8 @@ public class MallMenus implements Serializable {
 
     private Integer status;
 
+    private String iconPath;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -65,6 +67,14 @@ public class MallMenus implements Serializable {
         this.status = status;
     }
 
+    public String getIconPath() {
+        return iconPath;
+    }
+
+    public void setIconPath(String iconPath) {
+        this.iconPath = iconPath == null ? null : iconPath.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -77,6 +87,7 @@ public class MallMenus implements Serializable {
         sb.append(", order=").append(order);
         sb.append(", path=").append(path);
         sb.append(", status=").append(status);
+        sb.append(", iconPath=").append(iconPath);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

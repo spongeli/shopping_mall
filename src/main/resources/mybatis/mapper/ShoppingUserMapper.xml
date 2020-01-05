@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spongeli.shoppingmall.pojo.dao.ShoppingUserMapper">
+  <resultMap id="BaseResultMap" type="com.spongeli.shoppingmall.pojo.model.ShoppingUser">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="wx_openid" jdbcType="VARCHAR" property="wxOpenid" />
+    <result column="wx_nickname" jdbcType="VARCHAR" property="wxNickname" />
+    <result column="wx_userpic" jdbcType="VARCHAR" property="wxUserpic" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    user_id, wx_openid, wx_nickname, wx_userpic, phone, `status`, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.spongeli.shoppingmall.pojo.model.ShoppingUserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from shopping_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from shopping_user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from shopping_user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.spongeli.shoppingmall.pojo.model.ShoppingUserExample">
+    delete from shopping_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.spongeli.shoppingmall.pojo.model.ShoppingUser">
+    <selectKey keyProperty="userId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into shopping_user (wx_openid, wx_nickname, wx_userpic, 
+      phone, `status`, create_time
+      )
+    values (#{wxOpenid,jdbcType=VARCHAR}, #{wxNickname,jdbcType=VARCHAR}, #{wxUserpic,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.spongeli.shoppingmall.pojo.model.ShoppingUser">
+    <selectKey keyProperty="userId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into shopping_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="wxOpenid != null">
+        wx_openid,
+      </if>
+      <if test="wxNickname != null">
+        wx_nickname,
+      </if>
+      <if test="wxUserpic != null">
+        wx_userpic,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="wxOpenid != null">
+        #{wxOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="wxNickname != null">
+        #{wxNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="wxUserpic != null">
+        #{wxUserpic,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.spongeli.shoppingmall.pojo.model.ShoppingUserExample" resultType="java.lang.Long">
+    select count(*) from shopping_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update shopping_user
+    <set>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.wxOpenid != null">
+        wx_openid = #{record.wxOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wxNickname != null">
+        wx_nickname = #{record.wxNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wxUserpic != null">
+        wx_userpic = #{record.wxUserpic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update shopping_user
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      wx_openid = #{record.wxOpenid,jdbcType=VARCHAR},
+      wx_nickname = #{record.wxNickname,jdbcType=VARCHAR},
+      wx_userpic = #{record.wxUserpic,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      `status` = #{record.status,jdbcType=TINYINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.spongeli.shoppingmall.pojo.model.ShoppingUser">
+    update shopping_user
+    <set>
+      <if test="wxOpenid != null">
+        wx_openid = #{wxOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="wxNickname != null">
+        wx_nickname = #{wxNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="wxUserpic != null">
+        wx_userpic = #{wxUserpic,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.spongeli.shoppingmall.pojo.model.ShoppingUser">
+    update shopping_user
+    set wx_openid = #{wxOpenid,jdbcType=VARCHAR},
+      wx_nickname = #{wxNickname,jdbcType=VARCHAR},
+      wx_userpic = #{wxUserpic,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>

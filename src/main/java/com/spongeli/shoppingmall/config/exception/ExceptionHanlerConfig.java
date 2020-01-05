@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ExceptionHanlerConfig {
     @ExceptionHandler(SystemException.class)
     @ResponseBody
-    public CommonResponse exceptionHandler(SystemException e){
-        return new CommonResponse(e.getMessage());
+    public CommonResponse exceptionHandler(SystemException e) {
+        return new CommonResponse(e.getStatus(), e.getMessage(), null);
     }
 }

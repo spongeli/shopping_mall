@@ -30,7 +30,6 @@ public class WebFilterConfig implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpServletRequest request = (HttpServletRequest) servletRequest;
-
         // 自适应所有自定义头
 //        System.out.println("过滤器被使用");
         filterChain.doFilter(request, response);

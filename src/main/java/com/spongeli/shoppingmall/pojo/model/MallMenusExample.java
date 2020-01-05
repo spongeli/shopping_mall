@@ -483,6 +483,76 @@ public class MallMenusExample {
             addCriterion("`status` not between", value1, value2, "status");
             return (Criteria) this;
         }
+
+        public Criteria andIconPathIsNull() {
+            addCriterion("icon_path is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconPathIsNotNull() {
+            addCriterion("icon_path is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconPathEqualTo(String value) {
+            addCriterion("icon_path =", value, "iconPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconPathNotEqualTo(String value) {
+            addCriterion("icon_path <>", value, "iconPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconPathGreaterThan(String value) {
+            addCriterion("icon_path >", value, "iconPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconPathGreaterThanOrEqualTo(String value) {
+            addCriterion("icon_path >=", value, "iconPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconPathLessThan(String value) {
+            addCriterion("icon_path <", value, "iconPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconPathLessThanOrEqualTo(String value) {
+            addCriterion("icon_path <=", value, "iconPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconPathLike(String value) {
+            addCriterion("icon_path like", value, "iconPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconPathNotLike(String value) {
+            addCriterion("icon_path not like", value, "iconPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconPathIn(List<String> values) {
+            addCriterion("icon_path in", values, "iconPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconPathNotIn(List<String> values) {
+            addCriterion("icon_path not in", values, "iconPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconPathBetween(String value1, String value2) {
+            addCriterion("icon_path between", value1, value2, "iconPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconPathNotBetween(String value1, String value2) {
+            addCriterion("icon_path not between", value1, value2, "iconPath");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -2,14 +2,15 @@ package com.spongeli.shoppingmall.common.exception;
 
 import com.spongeli.shoppingmall.common.system.SystemConstant;
 
-public class SystemException extends RuntimeException  {
+public class SystemException extends RuntimeException {
     private String message;
     private int status = SystemConstant.FAIL;
+
     public SystemException(String message) {
         this.message = message;
     }
 
-    public SystemException(String message,int status) {
+    public SystemException(int status, String message) {
         this.status = status;
         this.message = message;
     }
@@ -25,6 +26,7 @@ public class SystemException extends RuntimeException  {
     public void setStatus(int status) {
         this.status = status;
     }
+
     @Override
     public String getMessage() {
         return message;

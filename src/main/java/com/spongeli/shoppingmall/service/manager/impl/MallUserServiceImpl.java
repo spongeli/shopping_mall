@@ -1,30 +1,34 @@
 package com.spongeli.shoppingmall.service.manager.impl;
 
 import com.spongeli.shoppingmall.common.exception.SystemException;
+import com.spongeli.shoppingmall.common.system.BaseService;
 import com.spongeli.shoppingmall.common.util.RedisUtil;
 import com.spongeli.shoppingmall.entity.request.user.DoLoginInparam;
+import com.spongeli.shoppingmall.entity.request.user.UpdateShoppingUserInparam;
 import com.spongeli.shoppingmall.entity.response.user.DoLoginOutparam;
 import com.spongeli.shoppingmall.pojo.dao.MallUserMapper;
 import com.spongeli.shoppingmall.pojo.model.MallUser;
 import com.spongeli.shoppingmall.pojo.model.MallUserExample;
 import com.spongeli.shoppingmall.service.manager.MallUserService;
 import com.spongeli.shoppingmall.utils.MD5Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import javax.validation.Valid;
 import java.util.List;
-import java.util.Objects;
 
 /**
- * @Description
+ * @ 管理员服务
  * @Author spongeli
  * @Date 2019/12/26 9:48
  **/
 @Service
-public class MallUserServiceImpl implements MallUserService {
+public class MallUserServiceImpl extends BaseService implements MallUserService {
+
+    private static final Logger logger = LogManager.getLogger(MallUserServiceImpl.class);
 
     @Autowired
     private MallUserMapper mapper;
@@ -40,6 +44,12 @@ public class MallUserServiceImpl implements MallUserService {
         return null;
     }
 
+    /**
+     * 管理员登陆
+     *
+     * @param inparam
+     * @return
+     */
     @Override
     public DoLoginOutparam doLogin(DoLoginInparam inparam) {
         MallUserExample example = new MallUserExample();
@@ -55,10 +65,20 @@ public class MallUserServiceImpl implements MallUserService {
         }
         String token = MD5Util.getMD5(inparam.getUsername() + '-' + tokenkey);
         // 存入缓存
-        redisUtil.set(token, user, 60 * 60 * 2);
+        redisUtil.set(token, user, 60 * 30);
         DoLoginOutparam outparam = new DoLoginOutparam();
         outparam.setToken(token);
         outparam.setUser(users.get(0));
         return outparam;
     }
+
+    /**
+     * 退出登录
+     */
+    @Override
+    public void outLogin() {
+        // 删除缓存
+        redisUtil.del(getCurrentUserToken());
+    }
+
 }

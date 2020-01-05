@@ -8,6 +8,7 @@
     <result column="order" jdbcType="INTEGER" property="order" />
     <result column="path" jdbcType="VARCHAR" property="path" />
     <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="icon_path" jdbcType="VARCHAR" property="iconPath" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, `name`, pid, `order`, `path`, `status`
+    id, `name`, pid, `order`, `path`, `status`, icon_path
   </sql>
   <select id="selectByExample" parameterType="com.spongeli.shoppingmall.pojo.model.MallMenusExample" resultMap="BaseResultMap">
     select
@@ -105,9 +106,11 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into mall_menus (`name`, pid, `order`, 
-      `path`, `status`)
+      `path`, `status`, icon_path
+      )
     values (#{name,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER}, #{order,jdbcType=INTEGER}, 
-      #{path,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
+      #{path,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{iconPath,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.spongeli.shoppingmall.pojo.model.MallMenus">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -130,6 +133,9 @@
       <if test="status != null">
         `status`,
       </if>
+      <if test="iconPath != null">
+        icon_path,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="name != null">
@@ -146,6 +152,9 @@
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
+      </if>
+      <if test="iconPath != null">
+        #{iconPath,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -176,6 +185,9 @@
       <if test="record.status != null">
         `status` = #{record.status,jdbcType=INTEGER},
       </if>
+      <if test="record.iconPath != null">
+        icon_path = #{record.iconPath,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -188,7 +200,8 @@
       pid = #{record.pid,jdbcType=INTEGER},
       `order` = #{record.order,jdbcType=INTEGER},
       `path` = #{record.path,jdbcType=VARCHAR},
-      `status` = #{record.status,jdbcType=INTEGER}
+      `status` = #{record.status,jdbcType=INTEGER},
+      icon_path = #{record.iconPath,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -211,6 +224,9 @@
       <if test="status != null">
         `status` = #{status,jdbcType=INTEGER},
       </if>
+      <if test="iconPath != null">
+        icon_path = #{iconPath,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -220,7 +236,8 @@
       pid = #{pid,jdbcType=INTEGER},
       `order` = #{order,jdbcType=INTEGER},
       `path` = #{path,jdbcType=VARCHAR},
-      `status` = #{status,jdbcType=INTEGER}
+      `status` = #{status,jdbcType=INTEGER},
+      icon_path = #{iconPath,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

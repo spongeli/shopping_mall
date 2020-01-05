@@ -4,6 +4,6 @@ import com.spongeli.shoppingmall.common.bean.MallMenusEx;
 
 import java.util.List;
 
-public interface MenusService {
+public interface MallMenusService {
     List<MallMenusEx> findAllMallMenus();
 }

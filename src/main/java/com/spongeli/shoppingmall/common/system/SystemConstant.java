@@ -8,5 +8,5 @@ package com.spongeli.shoppingmall.common.system;
 public interface SystemConstant {
     int SUCCESS = 200;
     int FAIL = 400;
-    int LOGIN_EXPIRE = 300;
+    int LOGIN_EXPIRE = 300; // 登陆过期
 }
