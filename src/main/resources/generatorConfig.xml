@@ -59,9 +59,11 @@
 <!--        <table tableName="mall_menus">-->
 <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
 <!--        </table>-->
-            <table tableName="shopping_user">
-                <generatedKey column="user_id" sqlStatement="Mysql" identity="true" />
+<!--            <table tableName="shopping_user">-->
+<!--                <generatedKey column="user_id" sqlStatement="Mysql" identity="true" />-->
+<!--            </table>-->
+            <table tableName="mall_category">
+                <generatedKey column="category_id" sqlStatement="Mysql" identity="true" />
             </table>
-
     </context>
 </generatorConfiguration>

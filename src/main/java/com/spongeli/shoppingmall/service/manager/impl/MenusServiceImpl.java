@@ -6,7 +6,7 @@ import com.spongeli.shoppingmall.pojo.dao.MallMenusMapper;
 import com.spongeli.shoppingmall.pojo.model.MallMenus;
 import com.spongeli.shoppingmall.pojo.model.MallMenusExample;
 import com.spongeli.shoppingmall.service.manager.MallMenusService;
-import com.spongeli.shoppingmall.utils.common.TreeUtil;
+import com.spongeli.shoppingmall.utils.common.TreeMenusUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,7 +30,7 @@ public class MenusServiceImpl extends BaseService implements MallMenusService {
         List<MallMenus> menus = mapper.selectByExample(new MallMenusExample());
         if(CollectionUtils.isEmpty(menus)) return new ArrayList<>();
         // 转换对象 并 获取菜单树,返回
-        return TreeUtil.toTree(menusToMenusEx(menus));
+        return TreeMenusUtil.toTree(menusToMenusEx(menus));
     }
 
 

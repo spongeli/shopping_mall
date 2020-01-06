@@ -5,7 +5,7 @@ import com.spongeli.shoppingmall.common.bean.MallMenusEx;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TreeUtil {
+public class TreeMenusUtil {
 
     /**
      * 所有待用"菜单"
