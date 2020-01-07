@@ -10,7 +10,9 @@ public class CommonResponse {
     private String msg;
     private Object data;
 
-    public CommonResponse(){}
+    public CommonResponse(){
+        this.data = "ok";
+    }
 
     public CommonResponse(int status, String errMsg, Object data) {
         this.status = status;
