@@ -45,14 +45,14 @@ public class CateAttrParamController extends BaseController {
      * @param param
      * @return
      */
-    @PostMapping("/{attrId}/save_param")
-    private CommonResponse addCateAttrParam(@PathVariable Integer attrId,String param) {
+    @PostMapping("/{attrId}/save_param/{param}")
+    private CommonResponse addCateAttrParam(@PathVariable Integer attrId,@PathVariable String param) {
         service.addCateAttrParam(attrId,param);
         return instanceSuccess();
     }
 
     /**
-     *
+     * 删除属性
      * @return
      */
     @PostMapping("/{attrId}/delete")
@@ -61,7 +61,7 @@ public class CateAttrParamController extends BaseController {
         return instanceSuccess();
     }
     /**
-     *
+     * 修改
      * @return
      */
     @PostMapping("/{attrId}/update")

@@ -84,6 +84,7 @@ public class CateAttrParamServiceImpl extends BaseService implements CateAttrPar
         MallCateParams param = new MallCateParams();
         param.setAttrId(attrId);
         BeanUtils.copyProperties(inparam,param);
-        mapper.updateByPrimaryKey(param);
+        mapper.updateByPrimaryKeySelective(param);
+
     }
 }
