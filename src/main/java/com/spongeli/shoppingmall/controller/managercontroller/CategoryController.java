@@ -16,12 +16,12 @@ public class CategoryController extends BaseController {
 
     /**
      * 获取所有分类
-     *
+     * @param scope<>all=全部&part=可见状态
      * @return
      */
     @GetMapping
-    public CommonResponse gainMallCategory() {
-        return instanceSuccess(service.gainMallCategory());
+    public CommonResponse gainMallCategory(@RequestParam String scope) {
+        return instanceSuccess(service.gainMallCategory(scope));
     }
 
     /**

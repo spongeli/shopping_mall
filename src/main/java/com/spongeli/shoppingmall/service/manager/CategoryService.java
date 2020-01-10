@@ -6,7 +6,7 @@ import com.spongeli.shoppingmall.pojo.model.MallCategory;
 import java.util.List;
 
 public interface CategoryService {
-    List<MallCategoryEx> gainMallCategory();
+    List<MallCategoryEx> gainMallCategory(String scope);
 
     void deleteCategory(Integer integer);
 

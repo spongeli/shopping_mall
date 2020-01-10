@@ -65,8 +65,10 @@
 <!--            <table tableName="mall_category">-->
 <!--                <generatedKey column="category_id" sqlStatement="Mysql" identity="true" />-->
 <!--            </table>-->
-        <table tableName="mall_cate_params">
-            <generatedKey column="attr_id" sqlStatement="Mysql" identity="true" />
+        <table tableName="mall_goods">
+            <generatedKey column="goods_id" sqlStatement="Mysql" identity="true" />
         </table>
+
+
     </context>
 </generatorConfiguration>

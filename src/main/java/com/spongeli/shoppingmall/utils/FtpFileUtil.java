@@ -1,5 +1,7 @@
 package com.spongeli.shoppingmall.utils;
 
+import com.spongeli.shoppingmall.common.exception.SystemException;
+import com.spongeli.shoppingmall.common.system.SystemConstant;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
@@ -20,45 +22,48 @@ import java.util.UUID;
 public class FtpFileUtil {
     private static Logger logger = LoggerFactory.getLogger(FtpFileUtil.class);
 
-//    public static String uploadFile(String originFileName, InputStream input) {
-//        String imgFilePath = null;
-//        String imgName = null;
-//        FTPClient ftp = new FTPClient();
-//        ftp.setControlEncoding("UTF-8");
-//        try {
-//            int reply;
-//            // 链接
-//            ftp.connect(FtpConstamt.FTP_ADDRESS, FtpConstamt.FTP_PORT);// 连接FTP服务器
-//            ftp.login(FtpConstamt.FTP_USERNAME, FtpConstamt.FTP_PASSWORD);// 登录
-//            reply = ftp.getReplyCode();
-//            if (!FTPReply.isPositiveCompletion(reply)) {
-//                ftp.disconnect();
-//                return "";
-//            }
-//            ftp.setFileType(FTPClient.BINARY_FILE_TYPE);
-//            imgFilePath = getImgFilePath();
+    public static String uploadFile(String originFileName, InputStream input) {
+        String imgFilePath = null;
+        String imgName = null;
+        FTPClient ftp = new FTPClient();
+        ftp.setControlEncoding("UTF-8");
+        try {
+
+            ftp.setConnectTimeout(2000);
+
+            int reply;
+            // 链接
+            ftp.connect(SystemConstant.FTP_ADDRESS, SystemConstant.FTP_PORT);// 连接FTP服务器
+            ftp.login(SystemConstant.FTP_USERNAME, SystemConstant.FTP_PASSWORD);// 登录
+            reply = ftp.getReplyCode();
+            if (!FTPReply.isPositiveCompletion(reply)) {
+                ftp.disconnect();
+                return "";
+            }
+            ftp.setFileType(FTPClient.BINARY_FILE_TYPE);
+            imgFilePath = getImgFilePath();
 //            ftp.makeDirectory(FtpConstamt.FTP_BASEPATH + "/" + imgFilePath);
 //            ftp.changeWorkingDirectory(FtpConstamt.FTP_BASEPATH + "/" + imgFilePath);
-//            imgName = getImgName(originFileName);
-//            ftp.enterLocalPassiveMode();
-//            boolean file = ftp.storeFile(imgName, input);
-//            logger.info("file=" + file);
-//            input.close();
-//            ftp.logout();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } finally {
-//            if (ftp.isConnected()) {
-//                try {
-//                    ftp.disconnect();
-//                } catch (IOException ioe) {
-//                    throw new SystemException("上传文件【" + originFileName + "】失败!");
-//                }
-//            }
-//
-//        }
-//        return FtpConstamt.RETURN_IMG_BASEPATH + "/" + imgFilePath + "/" + imgName;
-//    }
+            imgName = getImgName(originFileName);
+            ftp.enterLocalPassiveMode();
+            boolean file = ftp.storeFile(imgName, input);
+            logger.info("file=" + file);
+            input.close();
+            ftp.logout();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (ftp.isConnected()) {
+                try {
+                    ftp.disconnect();
+                } catch (IOException ioe) {
+                    throw new SystemException("上传文件【" + originFileName + "】失败!");
+                }
+            }
+
+        }
+        return imgName;
+    }
 
 //    public static boolean deleteFile(String fileName) {
 //        FTPClient ftp = new FTPClient();

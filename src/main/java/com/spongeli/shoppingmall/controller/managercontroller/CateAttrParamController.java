@@ -20,7 +20,7 @@ public class CateAttrParamController extends BaseController {
     /**
      * 获取数据
      * @param cateId
-     * @param type
+     * @param type  属性类别<>dynamic=动态属性&statics=静态属性
      * @return
      */
     @GetMapping("/{cateId}/{type}")

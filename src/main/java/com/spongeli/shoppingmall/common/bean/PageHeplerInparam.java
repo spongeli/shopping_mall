@@ -1,7 +1,7 @@
 package com.spongeli.shoppingmall.common.bean;
 
 public class PageHeplerInparam {
-    private int pageSize = 10;
+    private int pageSize = 5;
     private int pageCurrentPage = 1;
 
     public int getPageSize() {
