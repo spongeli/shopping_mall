@@ -7,8 +7,8 @@ import java.math.BigDecimal;
 public class AddGoodsInparam {
     @NotNull(message = "分类ID不能为空")
     private Integer cateId;
-    @NotEmpty(message = "属性名ID不能为空")
     private String cateName;
+    @NotEmpty(message = "商品名称不能为空")
     private String goodsName;
     @NotNull(message = "商品价格不能为空")
     private BigDecimal goodsPrice;

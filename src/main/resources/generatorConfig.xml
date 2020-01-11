@@ -65,10 +65,10 @@
 <!--            <table tableName="mall_category">-->
 <!--                <generatedKey column="category_id" sqlStatement="Mysql" identity="true" />-->
 <!--            </table>-->
-        <table tableName="mall_goods">
-            <generatedKey column="goods_id" sqlStatement="Mysql" identity="true" />
+        <table tableName="mall_order">
+<!--            <generatedKey column="goods_id" sqlStatement="Mysql" identity="true" />-->
         </table>
 
 
     </context>
-</generatorConfiguration>
+</generatorConfiguration>MallOrder
