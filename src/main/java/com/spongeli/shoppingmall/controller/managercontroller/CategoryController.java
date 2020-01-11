@@ -23,7 +23,14 @@ public class CategoryController extends BaseController {
     public CommonResponse gainMallCategory(@RequestParam String scope) {
         return instanceSuccess(service.gainMallCategory(scope));
     }
-
+    /**
+     * 查询所有分类数据
+     * @return
+     */
+    @GetMapping("/all")
+    public CommonResponse gainMallCategoryAll() {
+        return instanceSuccess(service.gainMallCategoryAll());
+    }
     /**
      * 获取所有分类
      *

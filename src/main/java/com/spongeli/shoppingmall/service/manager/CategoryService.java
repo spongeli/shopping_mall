@@ -15,4 +15,6 @@ public interface CategoryService {
     void addCategory(MallCategory category);
 
     MallCategory gainMallCategoryById(Integer cateid);
+
+    List<MallCategory> gainMallCategoryAll();
 }

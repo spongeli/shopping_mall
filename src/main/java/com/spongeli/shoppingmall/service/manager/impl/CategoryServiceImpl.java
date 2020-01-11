@@ -40,6 +40,11 @@ public class CategoryServiceImpl extends BaseService implements CategoryService 
         return TreeCategoryUtil.toTree(categoryToCategoryEx(list));
     }
 
+    @Override
+    public List<MallCategory> gainMallCategoryAll() {
+        return mapper.selectByExample(new MallCategoryExample());
+    }
+
     /**
      * 删除当前栏
      *
@@ -83,7 +88,6 @@ public class CategoryServiceImpl extends BaseService implements CategoryService 
     public MallCategory gainMallCategoryById(Integer cateid) {
         return mapper.selectByPrimaryKey(cateid);
     }
-
 
     private List<MallCategoryEx> categoryToCategoryEx(List<MallCategory> cates) {
         List<MallCategoryEx> list = new ArrayList<>();
