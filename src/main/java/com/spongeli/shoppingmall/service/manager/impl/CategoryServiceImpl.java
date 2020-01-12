@@ -3,6 +3,7 @@ package com.spongeli.shoppingmall.service.manager.impl;
 import com.spongeli.shoppingmall.common.bean.MallCategoryEx;
 import com.spongeli.shoppingmall.common.exception.SystemException;
 import com.spongeli.shoppingmall.common.system.BaseService;
+import com.spongeli.shoppingmall.common.system.SystemConstant;
 import com.spongeli.shoppingmall.pojo.dao.MallCategoryMapper;
 import com.spongeli.shoppingmall.pojo.model.MallCategory;
 import com.spongeli.shoppingmall.pojo.model.MallCategoryExample;
@@ -32,7 +33,7 @@ public class CategoryServiceImpl extends BaseService implements CategoryService 
     @Override
     public List<MallCategoryEx> gainMallCategory(String scope) {
         MallCategoryExample example = new MallCategoryExample();
-        if (!StringUtils.isEquals(scope, "all")) {
+        if (!StringUtils.isEquals(scope, SystemConstant.QUERY_ALL)) {
             example.createCriteria().andStatusEqualTo((byte) 0);
         }
         List<MallCategory> list = mapper.selectByExample(example);
