@@ -294,63 +294,63 @@ public class MallMenusExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrderIsNull() {
-            addCriterion("`order` is null");
+        public Criteria andLevelIsNull() {
+            addCriterion("`level` is null");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIsNotNull() {
-            addCriterion("`order` is not null");
+        public Criteria andLevelIsNotNull() {
+            addCriterion("`level` is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOrderEqualTo(Integer value) {
-            addCriterion("`order` =", value, "order");
+        public Criteria andLevelEqualTo(Integer value) {
+            addCriterion("`level` =", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andOrderNotEqualTo(Integer value) {
-            addCriterion("`order` <>", value, "order");
+        public Criteria andLevelNotEqualTo(Integer value) {
+            addCriterion("`level` <>", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andOrderGreaterThan(Integer value) {
-            addCriterion("`order` >", value, "order");
+        public Criteria andLevelGreaterThan(Integer value) {
+            addCriterion("`level` >", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andOrderGreaterThanOrEqualTo(Integer value) {
-            addCriterion("`order` >=", value, "order");
+        public Criteria andLevelGreaterThanOrEqualTo(Integer value) {
+            addCriterion("`level` >=", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andOrderLessThan(Integer value) {
-            addCriterion("`order` <", value, "order");
+        public Criteria andLevelLessThan(Integer value) {
+            addCriterion("`level` <", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andOrderLessThanOrEqualTo(Integer value) {
-            addCriterion("`order` <=", value, "order");
+        public Criteria andLevelLessThanOrEqualTo(Integer value) {
+            addCriterion("`level` <=", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIn(List<Integer> values) {
-            addCriterion("`order` in", values, "order");
+        public Criteria andLevelIn(List<Integer> values) {
+            addCriterion("`level` in", values, "level");
             return (Criteria) this;
         }
 
-        public Criteria andOrderNotIn(List<Integer> values) {
-            addCriterion("`order` not in", values, "order");
+        public Criteria andLevelNotIn(List<Integer> values) {
+            addCriterion("`level` not in", values, "level");
             return (Criteria) this;
         }
 
-        public Criteria andOrderBetween(Integer value1, Integer value2) {
-            addCriterion("`order` between", value1, value2, "order");
+        public Criteria andLevelBetween(Integer value1, Integer value2) {
+            addCriterion("`level` between", value1, value2, "level");
             return (Criteria) this;
         }
 
-        public Criteria andOrderNotBetween(Integer value1, Integer value2) {
-            addCriterion("`order` not between", value1, value2, "order");
+        public Criteria andLevelNotBetween(Integer value1, Integer value2) {
+            addCriterion("`level` not between", value1, value2, "level");
             return (Criteria) this;
         }
 

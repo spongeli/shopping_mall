@@ -12,7 +12,11 @@ public class MallIndexSetUp implements Serializable {
 
     private Integer goodsId;
 
+    private String goodsName;
+
     private String backGroundColor;
+
+    private Integer level;
 
     private Byte status;
 
@@ -54,12 +58,28 @@ public class MallIndexSetUp implements Serializable {
         this.goodsId = goodsId;
     }
 
+    public String getGoodsName() {
+        return goodsName;
+    }
+
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName == null ? null : goodsName.trim();
+    }
+
     public String getBackGroundColor() {
         return backGroundColor;
     }
 
     public void setBackGroundColor(String backGroundColor) {
         this.backGroundColor = backGroundColor == null ? null : backGroundColor.trim();
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
     public Byte getStatus() {
@@ -96,7 +116,9 @@ public class MallIndexSetUp implements Serializable {
         sb.append(", imgSrc=").append(imgSrc);
         sb.append(", type=").append(type);
         sb.append(", goodsId=").append(goodsId);
+        sb.append(", goodsName=").append(goodsName);
         sb.append(", backGroundColor=").append(backGroundColor);
+        sb.append(", level=").append(level);
         sb.append(", status=").append(status);
         sb.append(", clickStatus=").append(clickStatus);
         sb.append(", createTime=").append(createTime);

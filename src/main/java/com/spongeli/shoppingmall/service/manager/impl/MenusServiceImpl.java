@@ -26,8 +26,10 @@ public class MenusServiceImpl extends BaseService implements MallMenusService {
     private MallMenusMapper mapper;
     @Override
     public List<MallMenusEx> findAllMallMenus() {
+        MallMenusExample example = new MallMenusExample();
+        example.setOrderByClause("level desc");
         // 目前支持所有菜单
-        List<MallMenus> menus = mapper.selectByExample(new MallMenusExample());
+        List<MallMenus> menus = mapper.selectByExample(example);
         if(CollectionUtils.isEmpty(menus)) return new ArrayList<>();
         // 转换对象 并 获取菜单树,返回
         return TreeMenusUtil.toTree(menusToMenusEx(menus));

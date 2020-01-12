@@ -9,7 +9,7 @@ public class MallMenus implements Serializable {
 
     private Integer pid;
 
-    private Integer order;
+    private Integer level;
 
     private String path;
 
@@ -43,12 +43,12 @@ public class MallMenus implements Serializable {
         this.pid = pid;
     }
 
-    public Integer getOrder() {
-        return order;
+    public Integer getLevel() {
+        return level;
     }
 
-    public void setOrder(Integer order) {
-        this.order = order;
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
     public String getPath() {
@@ -84,7 +84,7 @@ public class MallMenus implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", name=").append(name);
         sb.append(", pid=").append(pid);
-        sb.append(", order=").append(order);
+        sb.append(", level=").append(level);
         sb.append(", path=").append(path);
         sb.append(", status=").append(status);
         sb.append(", iconPath=").append(iconPath);

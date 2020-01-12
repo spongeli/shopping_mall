@@ -105,12 +105,27 @@ public class GoodsServiceImpl extends BaseService implements GoodsService {
 
     /**
      * 删除商品
+     *
      * @param goodId
      */
     @Override
     public void deleteGoods(Integer goodId) {
         validGoodsExist(goodId);
         mapper.deleteByPrimaryKey(goodId);
+    }
+
+    @Override
+    public List<MallGoods> queryByKeyword(String keyword) {
+        MallGoodsExample example = new MallGoodsExample();
+        MallGoodsExample.Criteria criteria = example.createCriteria();
+        criteria.andGoodsNameLike("%" + keyword + "%");
+        MallGoodsExample.Criteria criteria1 = example.createCriteria();
+        criteria1.andGoodsHotsLabelLike("%" + keyword + "%");
+        example.or(criteria1);
+        MallGoodsExample.Criteria criteria2 = example.createCriteria();
+        criteria1.andCateNameLike("%" + keyword + "%");
+        example.or(criteria2);
+        return mapper.selectByExample(example);
     }
 
 
@@ -125,7 +140,7 @@ public class GoodsServiceImpl extends BaseService implements GoodsService {
         return goods;
     }
 
-    private String attrNameById(Integer attrId){
+    private String attrNameById(Integer attrId) {
         MallCategory category = categoryMapper.selectByPrimaryKey(attrId);
         if (Objects.isNull(category)) throw new SystemException("商品分类不存在");
         if (category.getStatus() == 1) throw new SystemException("商品分类状态异常");
