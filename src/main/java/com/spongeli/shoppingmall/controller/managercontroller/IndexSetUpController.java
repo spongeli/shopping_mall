@@ -42,13 +42,13 @@ public class IndexSetUpController extends BaseController {
         return instanceSuccess();
     }
 
-    @PostMapping("/update/{id}")
+    @PostMapping("/{id}/update")
     public CommonResponse updateIndexSetUp(@PathVariable Integer id,@RequestBody UpdateIndexSetUpInparam inparam){
         service.updateIndexSetUp(id,inparam);
         return instanceSuccess();
     }
 
-    @PostMapping("/delete/{id}")
+    @PostMapping("/{id}/delete")
     public CommonResponse delete(@PathVariable Integer id){
         service.delete(id);
         return instanceSuccess();

@@ -14,9 +14,10 @@ public class IndexSetUpInparam {
     private String imgSrc;
     @NotNull(message = "类型不能为空")
     private Byte type;
-    @NotNull(message = "商品ID不能为空")
+    //    @NotNull(message = "商品ID不能为空")
     private Integer goodsId;
-
+    private String goodsName;
+    private Integer level;
     private String backGroundColor;
 
     public String getImgSrc() {
@@ -41,6 +42,22 @@ public class IndexSetUpInparam {
 
     public void setGoodsId(Integer goodsId) {
         this.goodsId = goodsId;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public String getGoodsName() {
+        return goodsName;
+    }
+
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
     public String getBackGroundColor() {
