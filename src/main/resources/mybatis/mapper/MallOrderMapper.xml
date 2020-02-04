@@ -2,9 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spongeli.shoppingmall.pojo.dao.MallOrderMapper">
   <resultMap id="BaseResultMap" type="com.spongeli.shoppingmall.pojo.model.MallOrder">
-    <id column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <id column="order_id" jdbcType="INTEGER" property="orderId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="good_id" jdbcType="INTEGER" property="goodId" />
+    <result column="good_name" jdbcType="VARCHAR" property="goodName" />
     <result column="money" jdbcType="DECIMAL" property="money" />
     <result column="favorable_price" jdbcType="DECIMAL" property="favorablePrice" />
     <result column="status" jdbcType="TINYINT" property="status" />
@@ -73,8 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    order_id, user_id, good_id, money, favorable_price, `status`, address_city, address_detail, 
-    create_time, pay_time, confirm_time
+    order_id, user_id, good_id, good_name, money, favorable_price, `status`, address_city, 
+    address_detail, create_time, pay_time, confirm_time
   </sql>
   <select id="selectByExample" parameterType="com.spongeli.shoppingmall.pojo.model.MallOrderExample" resultMap="BaseResultMap">
     select
@@ -90,15 +91,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from mall_order
-    where order_id = #{orderId,jdbcType=VARCHAR}
+    where order_id = #{orderId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from mall_order
-    where order_id = #{orderId,jdbcType=VARCHAR}
+    where order_id = #{orderId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.spongeli.shoppingmall.pojo.model.MallOrderExample">
     delete from mall_order
@@ -108,13 +109,15 @@
   </delete>
   <insert id="insert" parameterType="com.spongeli.shoppingmall.pojo.model.MallOrder">
     insert into mall_order (order_id, user_id, good_id, 
-      money, favorable_price, `status`, 
-      address_city, address_detail, create_time, 
-      pay_time, confirm_time)
-    values (#{orderId,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{goodId,jdbcType=INTEGER}, 
-      #{money,jdbcType=DECIMAL}, #{favorablePrice,jdbcType=DECIMAL}, #{status,jdbcType=TINYINT}, 
-      #{addressCity,jdbcType=VARCHAR}, #{addressDetail,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{payTime,jdbcType=TIMESTAMP}, #{confirmTime,jdbcType=TIMESTAMP})
+      good_name, money, favorable_price, 
+      `status`, address_city, address_detail, 
+      create_time, pay_time, confirm_time
+      )
+    values (#{orderId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{goodId,jdbcType=INTEGER}, 
+      #{goodName,jdbcType=VARCHAR}, #{money,jdbcType=DECIMAL}, #{favorablePrice,jdbcType=DECIMAL}, 
+      #{status,jdbcType=TINYINT}, #{addressCity,jdbcType=VARCHAR}, #{addressDetail,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{payTime,jdbcType=TIMESTAMP}, #{confirmTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.spongeli.shoppingmall.pojo.model.MallOrder">
     insert into mall_order
@@ -127,6 +130,9 @@
       </if>
       <if test="goodId != null">
         good_id,
+      </if>
+      <if test="goodName != null">
+        good_name,
       </if>
       <if test="money != null">
         money,
@@ -155,13 +161,16 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="orderId != null">
-        #{orderId,jdbcType=VARCHAR},
+        #{orderId,jdbcType=INTEGER},
       </if>
       <if test="userId != null">
         #{userId,jdbcType=INTEGER},
       </if>
       <if test="goodId != null">
         #{goodId,jdbcType=INTEGER},
+      </if>
+      <if test="goodName != null">
+        #{goodName,jdbcType=VARCHAR},
       </if>
       <if test="money != null">
         #{money,jdbcType=DECIMAL},
@@ -199,13 +208,16 @@
     update mall_order
     <set>
       <if test="record.orderId != null">
-        order_id = #{record.orderId,jdbcType=VARCHAR},
+        order_id = #{record.orderId,jdbcType=INTEGER},
       </if>
       <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=INTEGER},
       </if>
       <if test="record.goodId != null">
         good_id = #{record.goodId,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodName != null">
+        good_name = #{record.goodName,jdbcType=VARCHAR},
       </if>
       <if test="record.money != null">
         money = #{record.money,jdbcType=DECIMAL},
@@ -238,9 +250,10 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update mall_order
-    set order_id = #{record.orderId,jdbcType=VARCHAR},
+    set order_id = #{record.orderId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
       good_id = #{record.goodId,jdbcType=INTEGER},
+      good_name = #{record.goodName,jdbcType=VARCHAR},
       money = #{record.money,jdbcType=DECIMAL},
       favorable_price = #{record.favorablePrice,jdbcType=DECIMAL},
       `status` = #{record.status,jdbcType=TINYINT},
@@ -261,6 +274,9 @@
       </if>
       <if test="goodId != null">
         good_id = #{goodId,jdbcType=INTEGER},
+      </if>
+      <if test="goodName != null">
+        good_name = #{goodName,jdbcType=VARCHAR},
       </if>
       <if test="money != null">
         money = #{money,jdbcType=DECIMAL},
@@ -287,12 +303,13 @@
         confirm_time = #{confirmTime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where order_id = #{orderId,jdbcType=VARCHAR}
+    where order_id = #{orderId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.spongeli.shoppingmall.pojo.model.MallOrder">
     update mall_order
     set user_id = #{userId,jdbcType=INTEGER},
       good_id = #{goodId,jdbcType=INTEGER},
+      good_name = #{goodName,jdbcType=VARCHAR},
       money = #{money,jdbcType=DECIMAL},
       favorable_price = #{favorablePrice,jdbcType=DECIMAL},
       `status` = #{status,jdbcType=TINYINT},
@@ -301,6 +318,6 @@
       create_time = #{createTime,jdbcType=TIMESTAMP},
       pay_time = #{payTime,jdbcType=TIMESTAMP},
       confirm_time = #{confirmTime,jdbcType=TIMESTAMP}
-    where order_id = #{orderId,jdbcType=VARCHAR}
+    where order_id = #{orderId,jdbcType=INTEGER}
   </update>
 </mapper>

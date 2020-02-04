@@ -65,9 +65,12 @@
 <!--            <table tableName="mall_category">-->
 <!--                <generatedKey column="category_id" sqlStatement="Mysql" identity="true" />-->
 <!--            </table>-->
-        <table tableName="mall_index_set_up">
-            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
-        </table>
+            <table tableName="mall_order">
+                <generatedKey column="goods_id" sqlStatement="Mysql" identity="true" />
+            </table>
+<!--        <table tableName="mall_index_set_up">-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+<!--        </table>-->
 
 
     </context>

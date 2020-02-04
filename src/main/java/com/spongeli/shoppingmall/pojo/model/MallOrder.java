@@ -5,11 +5,13 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class MallOrder implements Serializable {
-    private String orderId;
+    private Integer orderId;
 
     private Integer userId;
 
     private Integer goodId;
+
+    private String goodName;
 
     private BigDecimal money;
 
@@ -29,12 +31,12 @@ public class MallOrder implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public String getOrderId() {
+    public Integer getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId == null ? null : orderId.trim();
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
     }
 
     public Integer getUserId() {
@@ -51,6 +53,14 @@ public class MallOrder implements Serializable {
 
     public void setGoodId(Integer goodId) {
         this.goodId = goodId;
+    }
+
+    public String getGoodName() {
+        return goodName;
+    }
+
+    public void setGoodName(String goodName) {
+        this.goodName = goodName == null ? null : goodName.trim();
     }
 
     public BigDecimal getMoney() {
@@ -126,6 +136,7 @@ public class MallOrder implements Serializable {
         sb.append(", orderId=").append(orderId);
         sb.append(", userId=").append(userId);
         sb.append(", goodId=").append(goodId);
+        sb.append(", goodName=").append(goodName);
         sb.append(", money=").append(money);
         sb.append(", favorablePrice=").append(favorablePrice);
         sb.append(", status=").append(status);

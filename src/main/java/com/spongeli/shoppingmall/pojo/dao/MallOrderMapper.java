@@ -10,7 +10,7 @@ public interface MallOrderMapper {
 
     int deleteByExample(MallOrderExample example);
 
-    int deleteByPrimaryKey(String orderId);
+    int deleteByPrimaryKey(Integer orderId);
 
     int insert(MallOrder record);
 
@@ -18,7 +18,7 @@ public interface MallOrderMapper {
 
     List<MallOrder> selectByExample(MallOrderExample example);
 
-    MallOrder selectByPrimaryKey(String orderId);
+    MallOrder selectByPrimaryKey(Integer orderId);
 
     int updateByExampleSelective(@Param("record") MallOrder record, @Param("example") MallOrderExample example);
 

@@ -14,8 +14,8 @@ public interface SystemConstant {
 
     // ftp 服务器相关
     String FTP_ADDRESS = "47.104.69.239";
-    int FTP_PORT = 8080;
-    String FTP_USERNAME = "lc";
+    int FTP_PORT = 21;
+    String FTP_USERNAME = "lichao";
     String FTP_PASSWORD = "lichao666";
 
     // 系统常量相关
