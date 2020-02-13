@@ -3,13 +3,14 @@ package com.spongeli.shoppingmall.service.manager;
 import com.github.pagehelper.PageInfo;
 import com.spongeli.shoppingmall.entity.request.goods.AddGoodsInparam;
 import com.spongeli.shoppingmall.entity.request.goods.GainGoodsListInparam;
+import com.spongeli.shoppingmall.entity.response.goods.GainGoodByIdResponse;
 import com.spongeli.shoppingmall.pojo.model.MallGoods;
 
 import java.util.List;
 
 public interface GoodsService {
 
-    PageInfo<MallGoods> gainGoodsList(GainGoodsListInparam inparam);
+    PageInfo<MallGoods> gainGoodsList(boolean isAll, GainGoodsListInparam inparam);
 
     void addGoods(AddGoodsInparam inparam);
 
@@ -20,4 +21,6 @@ public interface GoodsService {
     void deleteGoods(Integer goodId);
 
     List<MallGoods> queryByKeyword(String keyword);
+
+    GainGoodByIdResponse GainGoodById(Integer goodId);
 }

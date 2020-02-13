@@ -12,9 +12,13 @@
     <result column="goods_original_price" jdbcType="DECIMAL" property="goodsOriginalPrice" />
     <result column="goods_header_img" jdbcType="VARCHAR" property="goodsHeaderImg" />
     <result column="goods_count" jdbcType="INTEGER" property="goodsCount" />
-    <result column="goods_detail" jdbcType="VARCHAR" property="goodsDetail" />
+    <result column="scan_count" jdbcType="INTEGER" property="scanCount" />
+    <result column="sales_count" jdbcType="INTEGER" property="salesCount" />
     <result column="goods_status" jdbcType="TINYINT" property="goodsStatus" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.spongeli.shoppingmall.pojo.model.MallGoods">
+    <result column="goods_detail" jdbcType="LONGVARCHAR" property="goodsDetail" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -76,9 +80,28 @@
   </sql>
   <sql id="Base_Column_List">
     goods_id, cate_id, cate_name, goods_hots_label, goods_name, goods_price, goods_weight, 
-    goods_original_price, goods_header_img, goods_count, goods_detail, goods_status, 
+    goods_original_price, goods_header_img, goods_count, scan_count, sales_count, goods_status, 
     create_time
   </sql>
+  <sql id="Blob_Column_List">
+    goods_detail
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.spongeli.shoppingmall.pojo.model.MallGoodsExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from mall_goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByExample" parameterType="com.spongeli.shoppingmall.pojo.model.MallGoodsExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -93,9 +116,11 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from mall_goods
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </select>
@@ -116,13 +141,13 @@
     insert into mall_goods (cate_id, cate_name, goods_hots_label, 
       goods_name, goods_price, goods_weight, 
       goods_original_price, goods_header_img, goods_count, 
-      goods_detail, goods_status, create_time
-      )
+      scan_count, sales_count, goods_status, 
+      create_time, goods_detail)
     values (#{cateId,jdbcType=INTEGER}, #{cateName,jdbcType=VARCHAR}, #{goodsHotsLabel,jdbcType=VARCHAR}, 
       #{goodsName,jdbcType=VARCHAR}, #{goodsPrice,jdbcType=DECIMAL}, #{goodsWeight,jdbcType=DOUBLE}, 
       #{goodsOriginalPrice,jdbcType=DECIMAL}, #{goodsHeaderImg,jdbcType=VARCHAR}, #{goodsCount,jdbcType=INTEGER}, 
-      #{goodsDetail,jdbcType=VARCHAR}, #{goodsStatus,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}
-      )
+      #{scanCount,jdbcType=INTEGER}, #{salesCount,jdbcType=INTEGER}, #{goodsStatus,jdbcType=TINYINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{goodsDetail,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.spongeli.shoppingmall.pojo.model.MallGoods">
     <selectKey keyProperty="goodsId" order="AFTER" resultType="java.lang.Integer">
@@ -157,14 +182,20 @@
       <if test="goodsCount != null">
         goods_count,
       </if>
-      <if test="goodsDetail != null">
-        goods_detail,
+      <if test="scanCount != null">
+        scan_count,
+      </if>
+      <if test="salesCount != null">
+        sales_count,
       </if>
       <if test="goodsStatus != null">
         goods_status,
       </if>
       <if test="createTime != null">
         create_time,
+      </if>
+      <if test="goodsDetail != null">
+        goods_detail,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -195,14 +226,20 @@
       <if test="goodsCount != null">
         #{goodsCount,jdbcType=INTEGER},
       </if>
-      <if test="goodsDetail != null">
-        #{goodsDetail,jdbcType=VARCHAR},
+      <if test="scanCount != null">
+        #{scanCount,jdbcType=INTEGER},
+      </if>
+      <if test="salesCount != null">
+        #{salesCount,jdbcType=INTEGER},
       </if>
       <if test="goodsStatus != null">
         #{goodsStatus,jdbcType=TINYINT},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsDetail != null">
+        #{goodsDetail,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -245,8 +282,11 @@
       <if test="record.goodsCount != null">
         goods_count = #{record.goodsCount,jdbcType=INTEGER},
       </if>
-      <if test="record.goodsDetail != null">
-        goods_detail = #{record.goodsDetail,jdbcType=VARCHAR},
+      <if test="record.scanCount != null">
+        scan_count = #{record.scanCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.salesCount != null">
+        sales_count = #{record.salesCount,jdbcType=INTEGER},
       </if>
       <if test="record.goodsStatus != null">
         goods_status = #{record.goodsStatus,jdbcType=TINYINT},
@@ -254,7 +294,31 @@
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.goodsDetail != null">
+        goods_detail = #{record.goodsDetail,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update mall_goods
+    set goods_id = #{record.goodsId,jdbcType=INTEGER},
+      cate_id = #{record.cateId,jdbcType=INTEGER},
+      cate_name = #{record.cateName,jdbcType=VARCHAR},
+      goods_hots_label = #{record.goodsHotsLabel,jdbcType=VARCHAR},
+      goods_name = #{record.goodsName,jdbcType=VARCHAR},
+      goods_price = #{record.goodsPrice,jdbcType=DECIMAL},
+      goods_weight = #{record.goodsWeight,jdbcType=DOUBLE},
+      goods_original_price = #{record.goodsOriginalPrice,jdbcType=DECIMAL},
+      goods_header_img = #{record.goodsHeaderImg,jdbcType=VARCHAR},
+      goods_count = #{record.goodsCount,jdbcType=INTEGER},
+      scan_count = #{record.scanCount,jdbcType=INTEGER},
+      sales_count = #{record.salesCount,jdbcType=INTEGER},
+      goods_status = #{record.goodsStatus,jdbcType=TINYINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      goods_detail = #{record.goodsDetail,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -271,7 +335,8 @@
       goods_original_price = #{record.goodsOriginalPrice,jdbcType=DECIMAL},
       goods_header_img = #{record.goodsHeaderImg,jdbcType=VARCHAR},
       goods_count = #{record.goodsCount,jdbcType=INTEGER},
-      goods_detail = #{record.goodsDetail,jdbcType=VARCHAR},
+      scan_count = #{record.scanCount,jdbcType=INTEGER},
+      sales_count = #{record.salesCount,jdbcType=INTEGER},
       goods_status = #{record.goodsStatus,jdbcType=TINYINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -308,8 +373,11 @@
       <if test="goodsCount != null">
         goods_count = #{goodsCount,jdbcType=INTEGER},
       </if>
-      <if test="goodsDetail != null">
-        goods_detail = #{goodsDetail,jdbcType=VARCHAR},
+      <if test="scanCount != null">
+        scan_count = #{scanCount,jdbcType=INTEGER},
+      </if>
+      <if test="salesCount != null">
+        sales_count = #{salesCount,jdbcType=INTEGER},
       </if>
       <if test="goodsStatus != null">
         goods_status = #{goodsStatus,jdbcType=TINYINT},
@@ -317,7 +385,28 @@
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="goodsDetail != null">
+        goods_detail = #{goodsDetail,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.spongeli.shoppingmall.pojo.model.MallGoods">
+    update mall_goods
+    set cate_id = #{cateId,jdbcType=INTEGER},
+      cate_name = #{cateName,jdbcType=VARCHAR},
+      goods_hots_label = #{goodsHotsLabel,jdbcType=VARCHAR},
+      goods_name = #{goodsName,jdbcType=VARCHAR},
+      goods_price = #{goodsPrice,jdbcType=DECIMAL},
+      goods_weight = #{goodsWeight,jdbcType=DOUBLE},
+      goods_original_price = #{goodsOriginalPrice,jdbcType=DECIMAL},
+      goods_header_img = #{goodsHeaderImg,jdbcType=VARCHAR},
+      goods_count = #{goodsCount,jdbcType=INTEGER},
+      scan_count = #{scanCount,jdbcType=INTEGER},
+      sales_count = #{salesCount,jdbcType=INTEGER},
+      goods_status = #{goodsStatus,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      goods_detail = #{goodsDetail,jdbcType=LONGVARCHAR}
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.spongeli.shoppingmall.pojo.model.MallGoods">
@@ -331,7 +420,8 @@
       goods_original_price = #{goodsOriginalPrice,jdbcType=DECIMAL},
       goods_header_img = #{goodsHeaderImg,jdbcType=VARCHAR},
       goods_count = #{goodsCount,jdbcType=INTEGER},
-      goods_detail = #{goodsDetail,jdbcType=VARCHAR},
+      scan_count = #{scanCount,jdbcType=INTEGER},
+      sales_count = #{salesCount,jdbcType=INTEGER},
       goods_status = #{goodsStatus,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where goods_id = #{goodsId,jdbcType=INTEGER}

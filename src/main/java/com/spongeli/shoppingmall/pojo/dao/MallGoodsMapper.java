@@ -16,15 +16,21 @@ public interface MallGoodsMapper {
 
     int insertSelective(MallGoods record);
 
+    List<MallGoods> selectByExampleWithBLOBs(MallGoodsExample example);
+
     List<MallGoods> selectByExample(MallGoodsExample example);
 
     MallGoods selectByPrimaryKey(Integer goodsId);
 
     int updateByExampleSelective(@Param("record") MallGoods record, @Param("example") MallGoodsExample example);
 
+    int updateByExampleWithBLOBs(@Param("record") MallGoods record, @Param("example") MallGoodsExample example);
+
     int updateByExample(@Param("record") MallGoods record, @Param("example") MallGoodsExample example);
 
     int updateByPrimaryKeySelective(MallGoods record);
+
+    int updateByPrimaryKeyWithBLOBs(MallGoods record);
 
     int updateByPrimaryKey(MallGoods record);
 }

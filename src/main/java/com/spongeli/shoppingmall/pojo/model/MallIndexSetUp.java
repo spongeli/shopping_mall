@@ -10,6 +10,10 @@ public class MallIndexSetUp implements Serializable {
 
     private Byte type;
 
+    private String activityName;
+
+    private String activityPath;
+
     private Integer goodsId;
 
     private String goodsName;
@@ -48,6 +52,22 @@ public class MallIndexSetUp implements Serializable {
 
     public void setType(Byte type) {
         this.type = type;
+    }
+
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName == null ? null : activityName.trim();
+    }
+
+    public String getActivityPath() {
+        return activityPath;
+    }
+
+    public void setActivityPath(String activityPath) {
+        this.activityPath = activityPath == null ? null : activityPath.trim();
     }
 
     public Integer getGoodsId() {
@@ -115,6 +135,8 @@ public class MallIndexSetUp implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", imgSrc=").append(imgSrc);
         sb.append(", type=").append(type);
+        sb.append(", activityName=").append(activityName);
+        sb.append(", activityPath=").append(activityPath);
         sb.append(", goodsId=").append(goodsId);
         sb.append(", goodsName=").append(goodsName);
         sb.append(", backGroundColor=").append(backGroundColor);

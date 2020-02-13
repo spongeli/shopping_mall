@@ -295,6 +295,146 @@ public class MallIndexSetUpExample {
             return (Criteria) this;
         }
 
+        public Criteria andActivityNameIsNull() {
+            addCriterion("activity_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityNameIsNotNull() {
+            addCriterion("activity_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityNameEqualTo(String value) {
+            addCriterion("activity_name =", value, "activityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityNameNotEqualTo(String value) {
+            addCriterion("activity_name <>", value, "activityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityNameGreaterThan(String value) {
+            addCriterion("activity_name >", value, "activityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityNameGreaterThanOrEqualTo(String value) {
+            addCriterion("activity_name >=", value, "activityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityNameLessThan(String value) {
+            addCriterion("activity_name <", value, "activityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityNameLessThanOrEqualTo(String value) {
+            addCriterion("activity_name <=", value, "activityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityNameLike(String value) {
+            addCriterion("activity_name like", value, "activityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityNameNotLike(String value) {
+            addCriterion("activity_name not like", value, "activityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityNameIn(List<String> values) {
+            addCriterion("activity_name in", values, "activityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityNameNotIn(List<String> values) {
+            addCriterion("activity_name not in", values, "activityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityNameBetween(String value1, String value2) {
+            addCriterion("activity_name between", value1, value2, "activityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityNameNotBetween(String value1, String value2) {
+            addCriterion("activity_name not between", value1, value2, "activityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityPathIsNull() {
+            addCriterion("activity_path is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityPathIsNotNull() {
+            addCriterion("activity_path is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityPathEqualTo(String value) {
+            addCriterion("activity_path =", value, "activityPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityPathNotEqualTo(String value) {
+            addCriterion("activity_path <>", value, "activityPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityPathGreaterThan(String value) {
+            addCriterion("activity_path >", value, "activityPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityPathGreaterThanOrEqualTo(String value) {
+            addCriterion("activity_path >=", value, "activityPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityPathLessThan(String value) {
+            addCriterion("activity_path <", value, "activityPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityPathLessThanOrEqualTo(String value) {
+            addCriterion("activity_path <=", value, "activityPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityPathLike(String value) {
+            addCriterion("activity_path like", value, "activityPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityPathNotLike(String value) {
+            addCriterion("activity_path not like", value, "activityPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityPathIn(List<String> values) {
+            addCriterion("activity_path in", values, "activityPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityPathNotIn(List<String> values) {
+            addCriterion("activity_path not in", values, "activityPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityPathBetween(String value1, String value2) {
+            addCriterion("activity_path between", value1, value2, "activityPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityPathNotBetween(String value1, String value2) {
+            addCriterion("activity_path not between", value1, value2, "activityPath");
+            return (Criteria) this;
+        }
+
         public Criteria andGoodsIdIsNull() {
             addCriterion("goods_id is null");
             return (Criteria) this;

@@ -746,73 +746,123 @@ public class MallGoodsExample {
             return (Criteria) this;
         }
 
-        public Criteria andGoodsDetailIsNull() {
-            addCriterion("goods_detail is null");
+        public Criteria andScanCountIsNull() {
+            addCriterion("scan_count is null");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsDetailIsNotNull() {
-            addCriterion("goods_detail is not null");
+        public Criteria andScanCountIsNotNull() {
+            addCriterion("scan_count is not null");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsDetailEqualTo(String value) {
-            addCriterion("goods_detail =", value, "goodsDetail");
+        public Criteria andScanCountEqualTo(Integer value) {
+            addCriterion("scan_count =", value, "scanCount");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsDetailNotEqualTo(String value) {
-            addCriterion("goods_detail <>", value, "goodsDetail");
+        public Criteria andScanCountNotEqualTo(Integer value) {
+            addCriterion("scan_count <>", value, "scanCount");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsDetailGreaterThan(String value) {
-            addCriterion("goods_detail >", value, "goodsDetail");
+        public Criteria andScanCountGreaterThan(Integer value) {
+            addCriterion("scan_count >", value, "scanCount");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsDetailGreaterThanOrEqualTo(String value) {
-            addCriterion("goods_detail >=", value, "goodsDetail");
+        public Criteria andScanCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("scan_count >=", value, "scanCount");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsDetailLessThan(String value) {
-            addCriterion("goods_detail <", value, "goodsDetail");
+        public Criteria andScanCountLessThan(Integer value) {
+            addCriterion("scan_count <", value, "scanCount");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsDetailLessThanOrEqualTo(String value) {
-            addCriterion("goods_detail <=", value, "goodsDetail");
+        public Criteria andScanCountLessThanOrEqualTo(Integer value) {
+            addCriterion("scan_count <=", value, "scanCount");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsDetailLike(String value) {
-            addCriterion("goods_detail like", value, "goodsDetail");
+        public Criteria andScanCountIn(List<Integer> values) {
+            addCriterion("scan_count in", values, "scanCount");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsDetailNotLike(String value) {
-            addCriterion("goods_detail not like", value, "goodsDetail");
+        public Criteria andScanCountNotIn(List<Integer> values) {
+            addCriterion("scan_count not in", values, "scanCount");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsDetailIn(List<String> values) {
-            addCriterion("goods_detail in", values, "goodsDetail");
+        public Criteria andScanCountBetween(Integer value1, Integer value2) {
+            addCriterion("scan_count between", value1, value2, "scanCount");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsDetailNotIn(List<String> values) {
-            addCriterion("goods_detail not in", values, "goodsDetail");
+        public Criteria andScanCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("scan_count not between", value1, value2, "scanCount");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsDetailBetween(String value1, String value2) {
-            addCriterion("goods_detail between", value1, value2, "goodsDetail");
+        public Criteria andSalesCountIsNull() {
+            addCriterion("sales_count is null");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsDetailNotBetween(String value1, String value2) {
-            addCriterion("goods_detail not between", value1, value2, "goodsDetail");
+        public Criteria andSalesCountIsNotNull() {
+            addCriterion("sales_count is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalesCountEqualTo(Integer value) {
+            addCriterion("sales_count =", value, "salesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalesCountNotEqualTo(Integer value) {
+            addCriterion("sales_count <>", value, "salesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalesCountGreaterThan(Integer value) {
+            addCriterion("sales_count >", value, "salesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalesCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("sales_count >=", value, "salesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalesCountLessThan(Integer value) {
+            addCriterion("sales_count <", value, "salesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalesCountLessThanOrEqualTo(Integer value) {
+            addCriterion("sales_count <=", value, "salesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalesCountIn(List<Integer> values) {
+            addCriterion("sales_count in", values, "salesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalesCountNotIn(List<Integer> values) {
+            addCriterion("sales_count not in", values, "salesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalesCountBetween(Integer value1, Integer value2) {
+            addCriterion("sales_count between", value1, value2, "salesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalesCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("sales_count not between", value1, value2, "salesCount");
             return (Criteria) this;
         }
 

@@ -17,8 +17,15 @@ public class IndexSetUpInparam {
     //    @NotNull(message = "商品ID不能为空")
     private Integer goodsId;
     private String goodsName;
+    private String activityName;
+    private String activityPath;
     private Integer level;
     private String backGroundColor;
+    @NotNull(message = "是否上架不能为空")
+    private Byte status;
+    @NotNull(message = "是否可点击上架不能为空")
+    private Byte clickStatus;
+
 
     public String getImgSrc() {
         return imgSrc;
@@ -66,5 +73,37 @@ public class IndexSetUpInparam {
 
     public void setBackGroundColor(String backGroundColor) {
         this.backGroundColor = backGroundColor;
+    }
+
+    public Byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
+    }
+
+    public Byte getClickStatus() {
+        return clickStatus;
+    }
+
+    public void setClickStatus(Byte clickStatus) {
+        this.clickStatus = clickStatus;
+    }
+
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
+    }
+
+    public String getActivityPath() {
+        return activityPath;
+    }
+
+    public void setActivityPath(String activityPath) {
+        this.activityPath = activityPath;
     }
 }

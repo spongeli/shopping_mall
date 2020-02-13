@@ -4,8 +4,11 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.spongeli.shoppingmall.common.exception.SystemException;
 import com.spongeli.shoppingmall.common.system.BaseService;
+import com.spongeli.shoppingmall.common.system.SystemConstant;
 import com.spongeli.shoppingmall.entity.request.goods.AddGoodsInparam;
 import com.spongeli.shoppingmall.entity.request.goods.GainGoodsListInparam;
+import com.spongeli.shoppingmall.entity.response.goods.GainGoodByIdResponse;
+import com.spongeli.shoppingmall.pojo.dao.MallCateParamsMapper;
 import com.spongeli.shoppingmall.pojo.dao.MallCategoryMapper;
 import com.spongeli.shoppingmall.pojo.dao.MallGoodsMapper;
 import com.spongeli.shoppingmall.pojo.model.*;
@@ -14,7 +17,9 @@ import com.spongeli.shoppingmall.utils.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -28,15 +33,18 @@ public class GoodsServiceImpl extends BaseService implements GoodsService {
     private MallGoodsMapper mapper;
     @Autowired
     private MallCategoryMapper categoryMapper;
-
+    @Autowired
+    private MallCateParamsMapper paramsMapper;
     /**
      * 查询商品列表
      *
+     *
+     * @param isAll
      * @param inparam
      * @return
      */
     @Override
-    public PageInfo<MallGoods> gainGoodsList(GainGoodsListInparam inparam) {
+    public PageInfo<MallGoods> gainGoodsList(boolean isAll, GainGoodsListInparam inparam) {
         String orderby = "goods_id asc";
         PageHelper.startPage(inparam.getPageInparam().getPageCurrentPage(), inparam.getPageInparam().getPageSize(), orderby);
         MallGoodsExample example = new MallGoodsExample();
@@ -50,6 +58,11 @@ public class GoodsServiceImpl extends BaseService implements GoodsService {
             MallGoodsExample.Criteria criteria2 = example.createCriteria();
             criteria1.andCateNameLike("%" + inparam.getSearch() + "%");
             example.or(criteria2);
+        }
+        // 只查上线的
+        if(isAll){
+            MallGoodsExample.Criteria criteria = example.createCriteria();
+            criteria.andGoodsStatusEqualTo(SystemConstant.YES);
         }
         List<MallGoods> goods = mapper.selectByExample(example);
         return new PageInfo<>(goods);
@@ -114,6 +127,11 @@ public class GoodsServiceImpl extends BaseService implements GoodsService {
         mapper.deleteByPrimaryKey(goodId);
     }
 
+    /**
+     * 通过关键字搜索
+     * @param keyword
+     * @return
+     */
     @Override
     public List<MallGoods> queryByKeyword(String keyword) {
         MallGoodsExample example = new MallGoodsExample();
@@ -126,6 +144,35 @@ public class GoodsServiceImpl extends BaseService implements GoodsService {
         criteria1.andCateNameLike("%" + keyword + "%");
         example.or(criteria2);
         return mapper.selectByExample(example);
+    }
+
+    @Override
+    public GainGoodByIdResponse GainGoodById(Integer goodId) {
+        GainGoodByIdResponse response = new GainGoodByIdResponse();
+
+        // 商品信息
+        MallGoods goods = validGoodsExist(goodId);
+        // 类别信息
+        MallCateParamsExample example = new MallCateParamsExample();
+        example.createCriteria().andCateIdEqualTo(goods.getCateId());
+        List<MallCateParams> cateParams = paramsMapper.selectByExample(example);
+        if(!CollectionUtils.isEmpty(cateParams)){
+            List<MallCateParams> dynamicCates = new ArrayList<>();
+            List<MallCateParams> staticsCates = new ArrayList<>();
+            cateParams.stream().forEach(item -> {
+                if(StringUtils.isEquals(item.getAttrType(),SystemConstant.CATE_DYNAMIC)){
+                    dynamicCates.add(item);
+                }else{
+                    staticsCates.add(item);
+                }
+            });
+            response.setDynamicCates(dynamicCates);
+            response.setStaticsCates(staticsCates);
+        }
+
+
+        response.setGoods(goods);
+        return response;
     }
 
 

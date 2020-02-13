@@ -39,29 +39,13 @@ public class IndexSetUpServiceImpl extends BaseService implements IndexSetUpServ
      * @return
      */
     @Override
-    public JSONObject gainIndexSetUpList(String scope) {
+    public List<MallIndexSetUp> gainIndexSetUpList(String scope) {
         MallIndexSetUpExample example = new MallIndexSetUpExample();
         if (!StringUtils.isEquals(scope, SystemConstant.QUERY_ALL)) {
             // 可用状态
             example.createCriteria().andStatusEqualTo(SystemConstant.YES);
         }
-        List<MallIndexSetUp> setUps = mapper.selectByExample(example);
-        if (CollectionUtils.isEmpty(setUps)) return null;
-
-        List<MallIndexSetUp> banner = new ArrayList<>();
-        List<MallIndexSetUp> recommend = new ArrayList<>();
-        setUps.stream().forEach(item -> {
-            if (Objects.equals(item.getType(), (byte) 0)) {
-                banner.add(item);
-            } else {
-                recommend.add(item);
-            }
-        });
-
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("banner", banner);
-        jsonObject.put("recommend", recommend);
-        return jsonObject;
+        return mapper.selectByExample(example);
     }
 
     /**
@@ -77,8 +61,6 @@ public class IndexSetUpServiceImpl extends BaseService implements IndexSetUpServ
 
         MallIndexSetUp setUp = new MallIndexSetUp();
         BeanUtils.copyProperties(inparam, setUp);
-        setUp.setClickStatus(SystemConstant.YES); // 是否可点击
-        setUp.setStatus(SystemConstant.YES); // 是否显示
         setUp.setCreateTime(new Date());
         mapper.insert(setUp);
     }

@@ -4,7 +4,6 @@ import com.spongeli.shoppingmall.common.system.BaseController;
 import com.spongeli.shoppingmall.common.system.CommonResponse;
 import com.spongeli.shoppingmall.entity.request.goods.AddGoodsInparam;
 import com.spongeli.shoppingmall.entity.request.goods.GainGoodsListInparam;
-import com.spongeli.shoppingmall.pojo.model.MallGoods;
 import com.spongeli.shoppingmall.service.manager.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +23,7 @@ public class GoodsController extends BaseController {
      */
     @PostMapping
     private CommonResponse gainGoodsList(@RequestBody GainGoodsListInparam inparam) {
-        return instanceSuccess(service.gainGoodsList(inparam));
+        return instanceSuccess(service.gainGoodsList(false, inparam));
     }
 
     /**

@@ -24,4 +24,7 @@ public interface SystemConstant {
 
     Byte YES = (byte)0;
     Byte NO = (byte)1;
+
+    String CATE_DYNAMIC = "dynamic";
+    String CATE_STATICS = "statics";
 }
