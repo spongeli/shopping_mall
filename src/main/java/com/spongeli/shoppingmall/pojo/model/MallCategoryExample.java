@@ -295,6 +295,76 @@ public class MallCategoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andCategoryImgIsNull() {
+            addCriterion("category_img is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryImgIsNotNull() {
+            addCriterion("category_img is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryImgEqualTo(String value) {
+            addCriterion("category_img =", value, "categoryImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryImgNotEqualTo(String value) {
+            addCriterion("category_img <>", value, "categoryImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryImgGreaterThan(String value) {
+            addCriterion("category_img >", value, "categoryImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryImgGreaterThanOrEqualTo(String value) {
+            addCriterion("category_img >=", value, "categoryImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryImgLessThan(String value) {
+            addCriterion("category_img <", value, "categoryImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryImgLessThanOrEqualTo(String value) {
+            addCriterion("category_img <=", value, "categoryImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryImgLike(String value) {
+            addCriterion("category_img like", value, "categoryImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryImgNotLike(String value) {
+            addCriterion("category_img not like", value, "categoryImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryImgIn(List<String> values) {
+            addCriterion("category_img in", values, "categoryImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryImgNotIn(List<String> values) {
+            addCriterion("category_img not in", values, "categoryImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryImgBetween(String value1, String value2) {
+            addCriterion("category_img between", value1, value2, "categoryImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryImgNotBetween(String value1, String value2) {
+            addCriterion("category_img not between", value1, value2, "categoryImg");
+            return (Criteria) this;
+        }
+
         public Criteria andCategoryDescIsNull() {
             addCriterion("category_desc is null");
             return (Criteria) this;

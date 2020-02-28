@@ -10,6 +10,8 @@ public class MallCategory implements Serializable {
 
     private String categoryName;
 
+    private String categoryImg;
+
     private String categoryDesc;
 
     private Integer categoryOrder;
@@ -42,6 +44,14 @@ public class MallCategory implements Serializable {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName == null ? null : categoryName.trim();
+    }
+
+    public String getCategoryImg() {
+        return categoryImg;
+    }
+
+    public void setCategoryImg(String categoryImg) {
+        this.categoryImg = categoryImg == null ? null : categoryImg.trim();
     }
 
     public String getCategoryDesc() {
@@ -85,6 +95,7 @@ public class MallCategory implements Serializable {
         sb.append(", categoryId=").append(categoryId);
         sb.append(", categoryParentId=").append(categoryParentId);
         sb.append(", categoryName=").append(categoryName);
+        sb.append(", categoryImg=").append(categoryImg);
         sb.append(", categoryDesc=").append(categoryDesc);
         sb.append(", categoryOrder=").append(categoryOrder);
         sb.append(", createTime=").append(createTime);

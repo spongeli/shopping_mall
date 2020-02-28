@@ -18,6 +18,7 @@ import org.springframework.util.CollectionUtils;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class CategoryServiceImpl extends BaseService implements CategoryService {
@@ -66,10 +67,15 @@ public class CategoryServiceImpl extends BaseService implements CategoryService 
     public void updateCategory(Integer integer, MallCategory category) {
         MallCategory primaryKey = mapper.selectByPrimaryKey(integer);
         if (primaryKey == null) throw new SystemException("分类不存在");
+        if(Objects.nonNull(category.getCategoryParentId())){
+            if (StringUtils.isEmpty(category.getCategoryImg()))
+                throw new SystemException("如果是二级分类，二级分类头图必传!");
+        }
         primaryKey.setCategoryName(category.getCategoryName());
         primaryKey.setCategoryDesc(category.getCategoryDesc());
-        primaryKey.setCategoryParentId(category.getCategoryParentId());
+        primaryKey.setCategoryParentId(category.getCategoryParentId() == null ? 0 : category.getCategoryParentId());
         primaryKey.setCategoryOrder(category.getCategoryOrder());
+        primaryKey.setCategoryImg(category.getCategoryImg());
         mapper.updateByPrimaryKey(primaryKey);
     }
 
@@ -80,6 +86,11 @@ public class CategoryServiceImpl extends BaseService implements CategoryService 
      */
     @Override
     public void addCategory(MallCategory category) {
+        if (Objects.nonNull(category.getCategoryParentId())) {
+            if (StringUtils.isEmpty(category.getCategoryImg()))
+                throw new SystemException("如果是二级分类，二级分类头图必传!");
+        }
+
         category.setStatus((byte) 0);//正常
         category.setCreateTime(new Date());
         mapper.insert(category);

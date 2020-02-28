@@ -5,6 +5,7 @@
     <id column="category_id" jdbcType="INTEGER" property="categoryId" />
     <result column="category_parent_id" jdbcType="INTEGER" property="categoryParentId" />
     <result column="category_name" jdbcType="VARCHAR" property="categoryName" />
+    <result column="category_img" jdbcType="VARCHAR" property="categoryImg" />
     <result column="category_desc" jdbcType="VARCHAR" property="categoryDesc" />
     <result column="category_order" jdbcType="INTEGER" property="categoryOrder" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -69,8 +70,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    category_id, category_parent_id, category_name, category_desc, category_order, create_time, 
-    `status`
+    category_id, category_parent_id, category_name, category_img, category_desc, category_order, 
+    create_time, `status`
   </sql>
   <select id="selectByExample" parameterType="com.spongeli.shoppingmall.pojo.model.MallCategoryExample" resultMap="BaseResultMap">
     select
@@ -106,12 +107,12 @@
     <selectKey keyProperty="categoryId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into mall_category (category_parent_id, category_name, category_desc, 
-      category_order, create_time, `status`
-      )
-    values (#{categoryParentId,jdbcType=INTEGER}, #{categoryName,jdbcType=VARCHAR}, #{categoryDesc,jdbcType=VARCHAR}, 
-      #{categoryOrder,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}
-      )
+    insert into mall_category (category_parent_id, category_name, category_img, 
+      category_desc, category_order, create_time, 
+      `status`)
+    values (#{categoryParentId,jdbcType=INTEGER}, #{categoryName,jdbcType=VARCHAR}, #{categoryImg,jdbcType=VARCHAR}, 
+      #{categoryDesc,jdbcType=VARCHAR}, #{categoryOrder,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="com.spongeli.shoppingmall.pojo.model.MallCategory">
     <selectKey keyProperty="categoryId" order="AFTER" resultType="java.lang.Integer">
@@ -124,6 +125,9 @@
       </if>
       <if test="categoryName != null">
         category_name,
+      </if>
+      <if test="categoryImg != null">
+        category_img,
       </if>
       <if test="categoryDesc != null">
         category_desc,
@@ -144,6 +148,9 @@
       </if>
       <if test="categoryName != null">
         #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryImg != null">
+        #{categoryImg,jdbcType=VARCHAR},
       </if>
       <if test="categoryDesc != null">
         #{categoryDesc,jdbcType=VARCHAR},
@@ -177,6 +184,9 @@
       <if test="record.categoryName != null">
         category_name = #{record.categoryName,jdbcType=VARCHAR},
       </if>
+      <if test="record.categoryImg != null">
+        category_img = #{record.categoryImg,jdbcType=VARCHAR},
+      </if>
       <if test="record.categoryDesc != null">
         category_desc = #{record.categoryDesc,jdbcType=VARCHAR},
       </if>
@@ -199,6 +209,7 @@
     set category_id = #{record.categoryId,jdbcType=INTEGER},
       category_parent_id = #{record.categoryParentId,jdbcType=INTEGER},
       category_name = #{record.categoryName,jdbcType=VARCHAR},
+      category_img = #{record.categoryImg,jdbcType=VARCHAR},
       category_desc = #{record.categoryDesc,jdbcType=VARCHAR},
       category_order = #{record.categoryOrder,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -215,6 +226,9 @@
       </if>
       <if test="categoryName != null">
         category_name = #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryImg != null">
+        category_img = #{categoryImg,jdbcType=VARCHAR},
       </if>
       <if test="categoryDesc != null">
         category_desc = #{categoryDesc,jdbcType=VARCHAR},
@@ -235,6 +249,7 @@
     update mall_category
     set category_parent_id = #{categoryParentId,jdbcType=INTEGER},
       category_name = #{categoryName,jdbcType=VARCHAR},
+      category_img = #{categoryImg,jdbcType=VARCHAR},
       category_desc = #{categoryDesc,jdbcType=VARCHAR},
       category_order = #{categoryOrder,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
