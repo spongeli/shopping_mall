@@ -39,13 +39,34 @@ public class GoodsServiceImpl extends BaseService implements GoodsService {
      * 查询商品列表
      *
      *
-     * @param isAll
+     * @param isOnline
      * @param inparam
      * @return
      */
     @Override
-    public PageInfo<MallGoods> gainGoodsList(boolean isAll, GainGoodsListInparam inparam) {
+    public PageInfo<MallGoods> gainGoodsList(boolean isOnline, GainGoodsListInparam inparam) {
         String orderby = "goods_id asc";
+
+        if(StringUtils.isNotEmpty(inparam.getOrderRule())){
+            // 排序规则<> 1=综合排序&2=销量排序&3=价格排序（倒序）&4=价格排序（顺序）
+            switch(inparam.getOrderRule()){
+                case GainGoodsListInparam.ORDER_RULE_2 :
+                    orderby = "sales_count desc";
+                    break;
+                case GainGoodsListInparam.ORDER_RULE_3 :
+                    orderby = "goods_price desc";
+                    break;
+                case GainGoodsListInparam.ORDER_RULE_4 :
+                    orderby = "goods_price asc";
+                    break;
+                default:
+                    orderby = "scan_count desc";
+            }
+        }else{
+            orderby =  "scan_count asc";
+        }
+
+
         PageHelper.startPage(inparam.getPageInparam().getPageCurrentPage(), inparam.getPageInparam().getPageSize(), orderby);
         MallGoodsExample example = new MallGoodsExample();
         example.setOrderByClause(orderby);
@@ -59,8 +80,14 @@ public class GoodsServiceImpl extends BaseService implements GoodsService {
             criteria1.andCateNameLike("%" + inparam.getSearch() + "%");
             example.or(criteria2);
         }
+
+        if(Objects.nonNull(inparam.getCateId()) && inparam.getCateId() != -1){
+            MallGoodsExample.Criteria criteria = example.createCriteria();
+            criteria.andCateIdEqualTo(inparam.getCateId());
+        }
+
         // 只查上线的
-        if(isAll){
+        if(isOnline){
             MallGoodsExample.Criteria criteria = example.createCriteria();
             criteria.andGoodsStatusEqualTo(SystemConstant.YES);
         }

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date 2020/2/27 10:30
  **/
 @RestController
-@RequestMapping("/web/goods")
+@RequestMapping("/web/cates")
 public class WebCategoryController extends BaseController {
 
     @Autowired

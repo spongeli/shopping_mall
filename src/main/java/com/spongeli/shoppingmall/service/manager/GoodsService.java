@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface GoodsService {
 
-    PageInfo<MallGoods> gainGoodsList(boolean isAll, GainGoodsListInparam inparam);
+    PageInfo<MallGoods> gainGoodsList(boolean isOnline, GainGoodsListInparam inparam);
 
     void addGoods(AddGoodsInparam inparam);
 
