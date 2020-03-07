@@ -1,8 +1,10 @@
 package com.spongeli.shoppingmall.config;
 
 import com.spongeli.shoppingmall.common.bean.RequestMallUSerBean;
+import com.spongeli.shoppingmall.common.bean.ShoppingUserEx;
 import com.spongeli.shoppingmall.common.exception.SystemException;
 import com.spongeli.shoppingmall.common.system.RequestHolder;
+import com.spongeli.shoppingmall.common.system.ShoppingUserHolder;
 import com.spongeli.shoppingmall.common.system.SystemConstant;
 import com.spongeli.shoppingmall.common.util.RedisUtil;
 import com.spongeli.shoppingmall.pojo.model.MallUser;
@@ -21,14 +23,20 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * @Description
+ * @Author spongeli
+ * @Date 2020/3/6 11:18
+ **/
 @Configuration
-public class UserHandlerInterceptor implements HandlerInterceptor {
+public class ShoppingUserHandlerInterceptor implements HandlerInterceptor {
     @Autowired
     private RedisUtil redisUtil;
-    @Value("mall.token.key")
-    private String tokenkey;
+    @Value("mall.user.login.key")
+    private String loginKey;
+
     private static final String START_TIME = "requestStartTime";
-    private static final Logger logger = LogManager.getLogger(UserHandlerInterceptor.class);
+    private static final Logger logger = LogManager.getLogger(ShoppingUserHandlerInterceptor.class);
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
@@ -36,18 +44,14 @@ public class UserHandlerInterceptor implements HandlerInterceptor {
         request.setAttribute(START_TIME, System.currentTimeMillis());
 
         String uri = request.getRequestURI();
-        if (uri.endsWith("/login")) return true;
+        logger.info("前台请求拦截");
+
         String token = request.getHeader("token");
-        MallUser user = (MallUser) redisUtil.get(token);
-        // 验证token是否正确
-        if (user == null || !StringUtils.isEquals(token, MD5Util.getMD5(user.getUsername() + "-" + tokenkey))) {
-            throw new SystemException(SystemConstant.LOGIN_EXPIRE, "登陆过期，请重新登陆");
-        }
+        ShoppingUserEx ex =  (ShoppingUserEx)redisUtil.get(token);
+
+        logger.info(ex);
         // 存储上下文信息
-        RequestMallUSerBean requestMallUSerBean = new RequestMallUSerBean();
-        requestMallUSerBean.setToken(token);
-        BeanUtils.copyProperties(user, requestMallUSerBean);
-        RequestHolder.addAll(requestMallUSerBean, request);
+        ShoppingUserHolder.addAll(ex, request);
         return true;
     }
 

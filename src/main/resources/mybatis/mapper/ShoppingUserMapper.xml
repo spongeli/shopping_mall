@@ -9,6 +9,7 @@
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="status" jdbcType="TINYINT" property="status" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="login_last_time" jdbcType="TIMESTAMP" property="loginLastTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    user_id, wx_openid, wx_nickname, wx_userpic, phone, `status`, create_time
+    user_id, wx_openid, wx_nickname, wx_userpic, phone, `status`, create_time, login_last_time
   </sql>
   <select id="selectByExample" parameterType="com.spongeli.shoppingmall.pojo.model.ShoppingUserExample" resultMap="BaseResultMap">
     select
@@ -106,11 +107,11 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into shopping_user (wx_openid, wx_nickname, wx_userpic, 
-      phone, `status`, create_time
-      )
+      phone, `status`, create_time, 
+      login_last_time)
     values (#{wxOpenid,jdbcType=VARCHAR}, #{wxNickname,jdbcType=VARCHAR}, #{wxUserpic,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}
-      )
+      #{phone,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{loginLastTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.spongeli.shoppingmall.pojo.model.ShoppingUser">
     <selectKey keyProperty="userId" order="AFTER" resultType="java.lang.Integer">
@@ -136,6 +137,9 @@
       <if test="createTime != null">
         create_time,
       </if>
+      <if test="loginLastTime != null">
+        login_last_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="wxOpenid != null">
@@ -155,6 +159,9 @@
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginLastTime != null">
+        #{loginLastTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -188,6 +195,9 @@
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.loginLastTime != null">
+        login_last_time = #{record.loginLastTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -201,7 +211,8 @@
       wx_userpic = #{record.wxUserpic,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
       `status` = #{record.status,jdbcType=TINYINT},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      login_last_time = #{record.loginLastTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -227,6 +238,9 @@
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="loginLastTime != null">
+        login_last_time = #{loginLastTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
@@ -237,7 +251,8 @@
       wx_userpic = #{wxUserpic,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       `status` = #{status,jdbcType=TINYINT},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      login_last_time = #{loginLastTime,jdbcType=TIMESTAMP}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
 </mapper>

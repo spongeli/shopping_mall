@@ -26,7 +26,7 @@
 
         <!--数据库链接地址账号密码-->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://47.104.69.239:3307/shopping_mall?useUnicode=true&amp;characterEncoding=utf-8"
+                        connectionURL="jdbc:mysql://47.104.69.239:3307/shopping_mall?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false"
                         userId="root"
                         password="123456">
         </jdbcConnection>
@@ -62,12 +62,12 @@
 <!--                <table tableName="mall_goods">-->
 <!--                    <generatedKey column="goods_id" sqlStatement="Mysql" identity="true" />-->
 <!--                </table>-->
-<!--            <table tableName="shopping_user">-->
-<!--                <generatedKey column="user_id" sqlStatement="Mysql" identity="true" />-->
-<!--            </table>-->
-            <table tableName="mall_category">
-                <generatedKey column="category_id" sqlStatement="Mysql" identity="true" />
+            <table tableName="shopping_user">
+                <generatedKey column="user_id" sqlStatement="Mysql" identity="true" />
             </table>
+<!--            <table tableName="mall_category">-->
+<!--                <generatedKey column="category_id" sqlStatement="Mysql" identity="true" />-->
+<!--            </table>-->
 <!--            <table tableName="mall_order">-->
 <!--                <generatedKey column="goods_id" sqlStatement="Mysql" identity="true" />-->
 <!--            </table>-->

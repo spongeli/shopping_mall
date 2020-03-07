@@ -564,6 +564,66 @@ public class ShoppingUserExample {
             addCriterion("create_time not between", value1, value2, "createTime");
             return (Criteria) this;
         }
+
+        public Criteria andLoginLastTimeIsNull() {
+            addCriterion("login_last_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginLastTimeIsNotNull() {
+            addCriterion("login_last_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginLastTimeEqualTo(Date value) {
+            addCriterion("login_last_time =", value, "loginLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginLastTimeNotEqualTo(Date value) {
+            addCriterion("login_last_time <>", value, "loginLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginLastTimeGreaterThan(Date value) {
+            addCriterion("login_last_time >", value, "loginLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginLastTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("login_last_time >=", value, "loginLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginLastTimeLessThan(Date value) {
+            addCriterion("login_last_time <", value, "loginLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginLastTimeLessThanOrEqualTo(Date value) {
+            addCriterion("login_last_time <=", value, "loginLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginLastTimeIn(List<Date> values) {
+            addCriterion("login_last_time in", values, "loginLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginLastTimeNotIn(List<Date> values) {
+            addCriterion("login_last_time not in", values, "loginLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginLastTimeBetween(Date value1, Date value2) {
+            addCriterion("login_last_time between", value1, value2, "loginLastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginLastTimeNotBetween(Date value1, Date value2) {
+            addCriterion("login_last_time not between", value1, value2, "loginLastTime");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

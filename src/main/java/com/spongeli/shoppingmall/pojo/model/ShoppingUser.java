@@ -18,6 +18,8 @@ public class ShoppingUser implements Serializable {
 
     private Date createTime;
 
+    private Date loginLastTime;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getUserId() {
@@ -76,6 +78,14 @@ public class ShoppingUser implements Serializable {
         this.createTime = createTime;
     }
 
+    public Date getLoginLastTime() {
+        return loginLastTime;
+    }
+
+    public void setLoginLastTime(Date loginLastTime) {
+        this.loginLastTime = loginLastTime;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -89,6 +99,7 @@ public class ShoppingUser implements Serializable {
         sb.append(", phone=").append(phone);
         sb.append(", status=").append(status);
         sb.append(", createTime=").append(createTime);
+        sb.append(", loginLastTime=").append(loginLastTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

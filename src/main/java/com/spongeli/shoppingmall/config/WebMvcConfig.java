@@ -11,6 +11,8 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 
     @Autowired
     private UserHandlerInterceptor userHandlerInterceptor;
+    @Autowired
+    private ShoppingUserHandlerInterceptor shoppingUserHandlerInterceptor;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -23,7 +25,10 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 
     @Override
     protected void addInterceptors(InterceptorRegistry registry) {
+//        后台拦截
         registry.addInterceptor(userHandlerInterceptor).addPathPatterns("/manager/**");
+//        前台拦截
+        registry.addInterceptor(shoppingUserHandlerInterceptor).addPathPatterns("/web/**");
         super.addInterceptors(registry);
     }
 }
