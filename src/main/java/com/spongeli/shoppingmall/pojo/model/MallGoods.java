@@ -23,6 +23,8 @@ public class MallGoods implements Serializable {
 
     private String goodsHeaderImg;
 
+    private String goodsDetail;
+
     private Integer goodsCount;
 
     private Integer scanCount;
@@ -32,8 +34,6 @@ public class MallGoods implements Serializable {
     private Byte goodsStatus;
 
     private Date createTime;
-
-    private String goodsDetail;
 
     private static final long serialVersionUID = 1L;
 
@@ -109,6 +109,14 @@ public class MallGoods implements Serializable {
         this.goodsHeaderImg = goodsHeaderImg == null ? null : goodsHeaderImg.trim();
     }
 
+    public String getGoodsDetail() {
+        return goodsDetail;
+    }
+
+    public void setGoodsDetail(String goodsDetail) {
+        this.goodsDetail = goodsDetail == null ? null : goodsDetail.trim();
+    }
+
     public Integer getGoodsCount() {
         return goodsCount;
     }
@@ -149,14 +157,6 @@ public class MallGoods implements Serializable {
         this.createTime = createTime;
     }
 
-    public String getGoodsDetail() {
-        return goodsDetail;
-    }
-
-    public void setGoodsDetail(String goodsDetail) {
-        this.goodsDetail = goodsDetail == null ? null : goodsDetail.trim();
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -172,12 +172,12 @@ public class MallGoods implements Serializable {
         sb.append(", goodsWeight=").append(goodsWeight);
         sb.append(", goodsOriginalPrice=").append(goodsOriginalPrice);
         sb.append(", goodsHeaderImg=").append(goodsHeaderImg);
+        sb.append(", goodsDetail=").append(goodsDetail);
         sb.append(", goodsCount=").append(goodsCount);
         sb.append(", scanCount=").append(scanCount);
         sb.append(", salesCount=").append(salesCount);
         sb.append(", goodsStatus=").append(goodsStatus);
         sb.append(", createTime=").append(createTime);
-        sb.append(", goodsDetail=").append(goodsDetail);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

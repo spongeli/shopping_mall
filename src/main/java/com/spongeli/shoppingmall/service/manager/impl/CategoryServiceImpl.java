@@ -87,8 +87,12 @@ public class CategoryServiceImpl extends BaseService implements CategoryService 
     @Override
     public void addCategory(MallCategory category) {
         if (Objects.nonNull(category.getCategoryParentId())) {
+        //  二级分类
             if (StringUtils.isEmpty(category.getCategoryImg()))
                 throw new SystemException("如果是二级分类，二级分类头图必传!");
+        }else{
+        //  父级
+            category.setCategoryParentId(0);
         }
 
         category.setStatus((byte) 0);//正常

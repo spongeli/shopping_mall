@@ -45,8 +45,8 @@ public class CateAttrParamController extends BaseController {
      * @param param
      * @return
      */
-    @PostMapping("/{attrId}/save_param/{param}")
-    private CommonResponse addCateAttrParam(@PathVariable Integer attrId,@PathVariable String param) {
+    @PostMapping("/{attrId}/save_param")
+    private CommonResponse addCateAttrParam(@PathVariable Integer attrId,@RequestParam("param") String param) {
         service.addCateAttrParam(attrId,param);
         return instanceSuccess();
     }

@@ -81,14 +81,14 @@ public class GoodsServiceImpl extends BaseService implements GoodsService {
             example.or(criteria2);
         }
 
+        MallGoodsExample.Criteria criteria = example.createCriteria();
         if(Objects.nonNull(inparam.getCateId()) && inparam.getCateId() != -1){
-            MallGoodsExample.Criteria criteria = example.createCriteria();
             criteria.andCateIdEqualTo(inparam.getCateId());
         }
 
         // 只查上线的
         if(isOnline){
-            MallGoodsExample.Criteria criteria = example.createCriteria();
+//            MallGoodsExample.Criteria criteria = example.createCriteria();
             criteria.andGoodsStatusEqualTo(SystemConstant.YES);
         }
         List<MallGoods> goods = mapper.selectByExample(example);
