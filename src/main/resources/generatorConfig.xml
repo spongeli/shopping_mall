@@ -59,8 +59,8 @@
 <!--        <table tableName="mall_menus">-->
 <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
 <!--        </table>-->
-                <table tableName="mall_goods">
-                    <generatedKey column="goods_id" sqlStatement="Mysql" identity="true" />
+                <table tableName="mall_goods_services">
+                    <generatedKey column="service_id" sqlStatement="Mysql" identity="true" />
                 </table>
 <!--            <table tableName="shopping_user">-->
 <!--                <generatedKey column="user_id" sqlStatement="Mysql" identity="true" />-->
