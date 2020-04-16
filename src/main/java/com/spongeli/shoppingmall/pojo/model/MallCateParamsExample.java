@@ -2,7 +2,6 @@ package com.spongeli.shoppingmall.pojo.model;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 public class MallCateParamsExample {
@@ -106,32 +105,6 @@ public class MallCateParamsExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        protected void addCriterionForJDBCDate(String condition, Date value, String property) {
-            if (value == null) {
-                throw new RuntimeException("Value for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Date(value.getTime()), property);
-        }
-
-        protected void addCriterionForJDBCDate(String condition, List<Date> values, String property) {
-            if (values == null || values.size() == 0) {
-                throw new RuntimeException("Value list for " + property + " cannot be null or empty");
-            }
-            List<java.sql.Date> dateList = new ArrayList<java.sql.Date>();
-            Iterator<Date> iter = values.iterator();
-            while (iter.hasNext()) {
-                dateList.add(new java.sql.Date(iter.next().getTime()));
-            }
-            addCriterion(condition, dateList, property);
-        }
-
-        protected void addCriterionForJDBCDate(String condition, Date value1, Date value2, String property) {
-            if (value1 == null || value2 == null) {
-                throw new RuntimeException("Between values for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
-        }
-
         public Criteria andAttrIdIsNull() {
             addCriterion("attr_id is null");
             return (Criteria) this;
@@ -189,66 +162,6 @@ public class MallCateParamsExample {
 
         public Criteria andAttrIdNotBetween(Integer value1, Integer value2) {
             addCriterion("attr_id not between", value1, value2, "attrId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCateIdIsNull() {
-            addCriterion("cate_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCateIdIsNotNull() {
-            addCriterion("cate_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCateIdEqualTo(Integer value) {
-            addCriterion("cate_id =", value, "cateId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCateIdNotEqualTo(Integer value) {
-            addCriterion("cate_id <>", value, "cateId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCateIdGreaterThan(Integer value) {
-            addCriterion("cate_id >", value, "cateId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCateIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("cate_id >=", value, "cateId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCateIdLessThan(Integer value) {
-            addCriterion("cate_id <", value, "cateId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCateIdLessThanOrEqualTo(Integer value) {
-            addCriterion("cate_id <=", value, "cateId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCateIdIn(List<Integer> values) {
-            addCriterion("cate_id in", values, "cateId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCateIdNotIn(List<Integer> values) {
-            addCriterion("cate_id not in", values, "cateId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCateIdBetween(Integer value1, Integer value2) {
-            addCriterion("cate_id between", value1, value2, "cateId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCateIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("cate_id not between", value1, value2, "cateId");
             return (Criteria) this;
         }
 
@@ -452,73 +365,73 @@ public class MallCateParamsExample {
             return (Criteria) this;
         }
 
-        public Criteria andAttrListIsNull() {
-            addCriterion("attr_list is null");
+        public Criteria andAttrValueIsNull() {
+            addCriterion("attr_value is null");
             return (Criteria) this;
         }
 
-        public Criteria andAttrListIsNotNull() {
-            addCriterion("attr_list is not null");
+        public Criteria andAttrValueIsNotNull() {
+            addCriterion("attr_value is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAttrListEqualTo(String value) {
-            addCriterion("attr_list =", value, "attrList");
+        public Criteria andAttrValueEqualTo(String value) {
+            addCriterion("attr_value =", value, "attrValue");
             return (Criteria) this;
         }
 
-        public Criteria andAttrListNotEqualTo(String value) {
-            addCriterion("attr_list <>", value, "attrList");
+        public Criteria andAttrValueNotEqualTo(String value) {
+            addCriterion("attr_value <>", value, "attrValue");
             return (Criteria) this;
         }
 
-        public Criteria andAttrListGreaterThan(String value) {
-            addCriterion("attr_list >", value, "attrList");
+        public Criteria andAttrValueGreaterThan(String value) {
+            addCriterion("attr_value >", value, "attrValue");
             return (Criteria) this;
         }
 
-        public Criteria andAttrListGreaterThanOrEqualTo(String value) {
-            addCriterion("attr_list >=", value, "attrList");
+        public Criteria andAttrValueGreaterThanOrEqualTo(String value) {
+            addCriterion("attr_value >=", value, "attrValue");
             return (Criteria) this;
         }
 
-        public Criteria andAttrListLessThan(String value) {
-            addCriterion("attr_list <", value, "attrList");
+        public Criteria andAttrValueLessThan(String value) {
+            addCriterion("attr_value <", value, "attrValue");
             return (Criteria) this;
         }
 
-        public Criteria andAttrListLessThanOrEqualTo(String value) {
-            addCriterion("attr_list <=", value, "attrList");
+        public Criteria andAttrValueLessThanOrEqualTo(String value) {
+            addCriterion("attr_value <=", value, "attrValue");
             return (Criteria) this;
         }
 
-        public Criteria andAttrListLike(String value) {
-            addCriterion("attr_list like", value, "attrList");
+        public Criteria andAttrValueLike(String value) {
+            addCriterion("attr_value like", value, "attrValue");
             return (Criteria) this;
         }
 
-        public Criteria andAttrListNotLike(String value) {
-            addCriterion("attr_list not like", value, "attrList");
+        public Criteria andAttrValueNotLike(String value) {
+            addCriterion("attr_value not like", value, "attrValue");
             return (Criteria) this;
         }
 
-        public Criteria andAttrListIn(List<String> values) {
-            addCriterion("attr_list in", values, "attrList");
+        public Criteria andAttrValueIn(List<String> values) {
+            addCriterion("attr_value in", values, "attrValue");
             return (Criteria) this;
         }
 
-        public Criteria andAttrListNotIn(List<String> values) {
-            addCriterion("attr_list not in", values, "attrList");
+        public Criteria andAttrValueNotIn(List<String> values) {
+            addCriterion("attr_value not in", values, "attrValue");
             return (Criteria) this;
         }
 
-        public Criteria andAttrListBetween(String value1, String value2) {
-            addCriterion("attr_list between", value1, value2, "attrList");
+        public Criteria andAttrValueBetween(String value1, String value2) {
+            addCriterion("attr_value between", value1, value2, "attrValue");
             return (Criteria) this;
         }
 
-        public Criteria andAttrListNotBetween(String value1, String value2) {
-            addCriterion("attr_list not between", value1, value2, "attrList");
+        public Criteria andAttrValueNotBetween(String value1, String value2) {
+            addCriterion("attr_value not between", value1, value2, "attrValue");
             return (Criteria) this;
         }
 
@@ -533,52 +446,52 @@ public class MallCateParamsExample {
         }
 
         public Criteria andCreateTimeEqualTo(Date value) {
-            addCriterionForJDBCDate("create_time =", value, "createTime");
+            addCriterion("create_time =", value, "createTime");
             return (Criteria) this;
         }
 
         public Criteria andCreateTimeNotEqualTo(Date value) {
-            addCriterionForJDBCDate("create_time <>", value, "createTime");
+            addCriterion("create_time <>", value, "createTime");
             return (Criteria) this;
         }
 
         public Criteria andCreateTimeGreaterThan(Date value) {
-            addCriterionForJDBCDate("create_time >", value, "createTime");
+            addCriterion("create_time >", value, "createTime");
             return (Criteria) this;
         }
 
         public Criteria andCreateTimeGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("create_time >=", value, "createTime");
+            addCriterion("create_time >=", value, "createTime");
             return (Criteria) this;
         }
 
         public Criteria andCreateTimeLessThan(Date value) {
-            addCriterionForJDBCDate("create_time <", value, "createTime");
+            addCriterion("create_time <", value, "createTime");
             return (Criteria) this;
         }
 
         public Criteria andCreateTimeLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("create_time <=", value, "createTime");
+            addCriterion("create_time <=", value, "createTime");
             return (Criteria) this;
         }
 
         public Criteria andCreateTimeIn(List<Date> values) {
-            addCriterionForJDBCDate("create_time in", values, "createTime");
+            addCriterion("create_time in", values, "createTime");
             return (Criteria) this;
         }
 
         public Criteria andCreateTimeNotIn(List<Date> values) {
-            addCriterionForJDBCDate("create_time not in", values, "createTime");
+            addCriterion("create_time not in", values, "createTime");
             return (Criteria) this;
         }
 
         public Criteria andCreateTimeBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("create_time between", value1, value2, "createTime");
+            addCriterion("create_time between", value1, value2, "createTime");
             return (Criteria) this;
         }
 
         public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("create_time not between", value1, value2, "createTime");
+            addCriterion("create_time not between", value1, value2, "createTime");
             return (Criteria) this;
         }
     }

@@ -33,6 +33,12 @@ public class MallGoods implements Serializable {
 
     private Byte goodsStatus;
 
+    private String dynamicParam;
+
+    private String serviceParam;
+
+    private String staticsParam;
+
     private Date createTime;
 
     private static final long serialVersionUID = 1L;
@@ -149,6 +155,30 @@ public class MallGoods implements Serializable {
         this.goodsStatus = goodsStatus;
     }
 
+    public String getDynamicParam() {
+        return dynamicParam;
+    }
+
+    public void setDynamicParam(String dynamicParam) {
+        this.dynamicParam = dynamicParam == null ? null : dynamicParam.trim();
+    }
+
+    public String getServiceParam() {
+        return serviceParam;
+    }
+
+    public void setServiceParam(String serviceParam) {
+        this.serviceParam = serviceParam == null ? null : serviceParam.trim();
+    }
+
+    public String getStaticsParam() {
+        return staticsParam;
+    }
+
+    public void setStaticsParam(String staticsParam) {
+        this.staticsParam = staticsParam == null ? null : staticsParam.trim();
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -177,6 +207,9 @@ public class MallGoods implements Serializable {
         sb.append(", scanCount=").append(scanCount);
         sb.append(", salesCount=").append(salesCount);
         sb.append(", goodsStatus=").append(goodsStatus);
+        sb.append(", dynamicParam=").append(dynamicParam);
+        sb.append(", serviceParam=").append(serviceParam);
+        sb.append(", staticsParam=").append(staticsParam);
         sb.append(", createTime=").append(createTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

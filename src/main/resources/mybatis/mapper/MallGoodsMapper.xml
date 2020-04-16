@@ -16,6 +16,9 @@
     <result column="scan_count" jdbcType="INTEGER" property="scanCount" />
     <result column="sales_count" jdbcType="INTEGER" property="salesCount" />
     <result column="goods_status" jdbcType="TINYINT" property="goodsStatus" />
+    <result column="dynamic_param" jdbcType="VARCHAR" property="dynamicParam" />
+    <result column="service_param" jdbcType="VARCHAR" property="serviceParam" />
+    <result column="statics_param" jdbcType="VARCHAR" property="staticsParam" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -79,7 +82,7 @@
   <sql id="Base_Column_List">
     goods_id, cate_id, cate_name, goods_hots_label, goods_name, goods_price, goods_weight, 
     goods_original_price, goods_header_img, goods_detail, goods_count, scan_count, sales_count, 
-    goods_status, create_time
+    goods_status, dynamic_param, service_param, statics_param, create_time
   </sql>
   <select id="selectByExample" parameterType="com.spongeli.shoppingmall.pojo.model.MallGoodsExample" resultMap="BaseResultMap">
     select
@@ -119,12 +122,14 @@
       goods_name, goods_price, goods_weight, 
       goods_original_price, goods_header_img, goods_detail, 
       goods_count, scan_count, sales_count, 
-      goods_status, create_time)
+      goods_status, dynamic_param, service_param, 
+      statics_param, create_time)
     values (#{cateId,jdbcType=INTEGER}, #{cateName,jdbcType=VARCHAR}, #{goodsHotsLabel,jdbcType=VARCHAR}, 
       #{goodsName,jdbcType=VARCHAR}, #{goodsPrice,jdbcType=DECIMAL}, #{goodsWeight,jdbcType=DOUBLE}, 
       #{goodsOriginalPrice,jdbcType=DECIMAL}, #{goodsHeaderImg,jdbcType=VARCHAR}, #{goodsDetail,jdbcType=VARCHAR}, 
       #{goodsCount,jdbcType=INTEGER}, #{scanCount,jdbcType=INTEGER}, #{salesCount,jdbcType=INTEGER}, 
-      #{goodsStatus,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP})
+      #{goodsStatus,jdbcType=TINYINT}, #{dynamicParam,jdbcType=VARCHAR}, #{serviceParam,jdbcType=VARCHAR}, 
+      #{staticsParam,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.spongeli.shoppingmall.pojo.model.MallGoods">
     <selectKey keyProperty="goodsId" order="AFTER" resultType="java.lang.Integer">
@@ -171,6 +176,15 @@
       <if test="goodsStatus != null">
         goods_status,
       </if>
+      <if test="dynamicParam != null">
+        dynamic_param,
+      </if>
+      <if test="serviceParam != null">
+        service_param,
+      </if>
+      <if test="staticsParam != null">
+        statics_param,
+      </if>
       <if test="createTime != null">
         create_time,
       </if>
@@ -214,6 +228,15 @@
       </if>
       <if test="goodsStatus != null">
         #{goodsStatus,jdbcType=TINYINT},
+      </if>
+      <if test="dynamicParam != null">
+        #{dynamicParam,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceParam != null">
+        #{serviceParam,jdbcType=VARCHAR},
+      </if>
+      <if test="staticsParam != null">
+        #{staticsParam,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -271,6 +294,15 @@
       <if test="record.goodsStatus != null">
         goods_status = #{record.goodsStatus,jdbcType=TINYINT},
       </if>
+      <if test="record.dynamicParam != null">
+        dynamic_param = #{record.dynamicParam,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceParam != null">
+        service_param = #{record.serviceParam,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staticsParam != null">
+        statics_param = #{record.staticsParam,jdbcType=VARCHAR},
+      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
@@ -295,6 +327,9 @@
       scan_count = #{record.scanCount,jdbcType=INTEGER},
       sales_count = #{record.salesCount,jdbcType=INTEGER},
       goods_status = #{record.goodsStatus,jdbcType=TINYINT},
+      dynamic_param = #{record.dynamicParam,jdbcType=VARCHAR},
+      service_param = #{record.serviceParam,jdbcType=VARCHAR},
+      statics_param = #{record.staticsParam,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -342,6 +377,15 @@
       <if test="goodsStatus != null">
         goods_status = #{goodsStatus,jdbcType=TINYINT},
       </if>
+      <if test="dynamicParam != null">
+        dynamic_param = #{dynamicParam,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceParam != null">
+        service_param = #{serviceParam,jdbcType=VARCHAR},
+      </if>
+      <if test="staticsParam != null">
+        statics_param = #{staticsParam,jdbcType=VARCHAR},
+      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -363,6 +407,9 @@
       scan_count = #{scanCount,jdbcType=INTEGER},
       sales_count = #{salesCount,jdbcType=INTEGER},
       goods_status = #{goodsStatus,jdbcType=TINYINT},
+      dynamic_param = #{dynamicParam,jdbcType=VARCHAR},
+      service_param = #{serviceParam,jdbcType=VARCHAR},
+      statics_param = #{staticsParam,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>

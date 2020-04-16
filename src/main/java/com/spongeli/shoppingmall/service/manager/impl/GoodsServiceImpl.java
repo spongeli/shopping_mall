@@ -1,5 +1,6 @@
 package com.spongeli.shoppingmall.service.manager.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.spongeli.shoppingmall.common.exception.SystemException;
@@ -109,6 +110,9 @@ public class GoodsServiceImpl extends BaseService implements GoodsService {
         goods.setCreateTime(new Date());
         // 设置属性名称
         goods.setCateName(attrNameById(inparam.getCateId()));
+        goods.setStaticsParam(JSON.toJSONString(inparam.getServiceParam()));
+        goods.setDynamicParam(JSON.toJSONString(inparam.getDynamicParam()));
+        goods.setServiceParam(JSON.toJSONString(inparam.getDynamicParam()));
         mapper.insert(goods);
     }
 
@@ -179,9 +183,13 @@ public class GoodsServiceImpl extends BaseService implements GoodsService {
 
         // 商品信息
         MallGoods goods = validGoodsExist(goodId);
+
         // 类别信息
+
+
+
         MallCateParamsExample example = new MallCateParamsExample();
-        example.createCriteria().andCateIdEqualTo(goods.getCateId());
+//        example.createCriteria().andCateIdEqualTo(goods.getCateId());
         List<MallCateParams> cateParams = paramsMapper.selectByExample(example);
         if(!CollectionUtils.isEmpty(cateParams)){
             List<MallCateParams> dynamicCates = new ArrayList<>();

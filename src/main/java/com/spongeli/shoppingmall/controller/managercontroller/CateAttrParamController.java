@@ -4,6 +4,7 @@ import com.spongeli.shoppingmall.common.system.BaseController;
 import com.spongeli.shoppingmall.common.system.CommonResponse;
 import com.spongeli.shoppingmall.entity.request.cate.AddCateAttrInparam;
 import com.spongeli.shoppingmall.entity.request.cate.UdateCateParamInparam;
+import com.spongeli.shoppingmall.entity.request.common.CommonInparam;
 import com.spongeli.shoppingmall.service.manager.CateAttrParamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,13 +20,15 @@ public class CateAttrParamController extends BaseController {
 
     /**
      * 获取数据
-     * @param cateId
      * @param type  属性类别<>dynamic=动态属性&statics=静态属性
+     * @param inparam 分页信息<>
+     *     private int pageSize = 5;
+     *     private int pageCurrentPage = 1;
      * @return
      */
-    @GetMapping("/{cateId}/{type}")
-    private CommonResponse gainCateAttrParam(@PathVariable Integer cateId, @PathVariable String type) {
-        return instanceSuccess(service.gainCateAttrParam(cateId, type));
+    @PostMapping("/{type}")
+    private CommonResponse gainCateAttrParam(@PathVariable String type, @RequestBody CommonInparam inparam) {
+        return instanceSuccess(service.gainCateAttrParam(type, inparam));
     }
 
     /**

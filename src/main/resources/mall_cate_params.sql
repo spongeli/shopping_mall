@@ -11,7 +11,7 @@
  Target Server Version : 80016
  File Encoding         : 65001
 
- Date: 15/04/2020 17:56:44
+ Date: 16/04/2020 11:55:18
 */
 
 SET NAMES utf8mb4;
@@ -23,11 +23,10 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `mall_cate_params`;
 CREATE TABLE `mall_cate_params`  (
   `attr_id` int(11) NOT NULL AUTO_INCREMENT,
-  `cate_id` int(11) NULL DEFAULT NULL,
   `attr_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `attr_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `attr_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '参数类型<>statics=静态的&dynamic=动态的&service=服务',
   `attr_status` tinyint(255) NULL DEFAULT NULL,
-  `attr_list` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `attr_value` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `create_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`attr_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
@@ -35,11 +34,12 @@ CREATE TABLE `mall_cate_params`  (
 -- ----------------------------
 -- Records of mall_cate_params
 -- ----------------------------
-INSERT INTO `mall_cate_params` VALUES (1, 1, '型号', 'dynamic', NULL, '桑塔纳,大众', '2020-04-15 00:00:00');
-INSERT INTO `mall_cate_params` VALUES (2, 1, '颜色', 'statics', NULL, '红色,黄色,蓝色', '2020-04-15 00:00:00');
-INSERT INTO `mall_cate_params` VALUES (3, 3, '尺寸', 'dynamic', 0, 'X,XL,XLL', '2020-04-15 00:00:00');
-INSERT INTO `mall_cate_params` VALUES (4, 3, '产地', 'statics', 0, '酒泉', '2020-04-15 00:00:00');
-INSERT INTO `mall_cate_params` VALUES (5, 3, '颜色', 'dynamic', 0, '蓝色,红色,白色,绿色', '2020-04-15 00:00:00');
+INSERT INTO `mall_cate_params` VALUES (1, '型号', 'dynamic', 0, '桑塔纳,大众', '2020-04-15 00:00:00');
+INSERT INTO `mall_cate_params` VALUES (2, '颜色', 'statics', NULL, '红色,黄色,蓝色', '2020-04-15 00:00:00');
+INSERT INTO `mall_cate_params` VALUES (3, '尺寸', 'dynamic', 0, 'X,XL,XLL', '2020-04-15 00:00:00');
+INSERT INTO `mall_cate_params` VALUES (4, '产地', 'statics', 0, '酒泉', '2020-04-15 00:00:00');
+INSERT INTO `mall_cate_params` VALUES (5, '颜色', 'dynamic', 0, '蓝色,红色,白色,绿色', '2020-04-15 00:00:00');
+INSERT INTO `mall_cate_params` VALUES (6, '假一赔十', 'service', NULL, '假一赔十', '2020-04-16 09:52:46');
 
 -- ----------------------------
 -- Table structure for mall_category
@@ -69,20 +69,23 @@ INSERT INTO `mall_category` VALUES (3, 2, '衣服', 'http://127.0.0.1:9000/uploa
 -- ----------------------------
 DROP TABLE IF EXISTS `mall_goods`;
 CREATE TABLE `mall_goods`  (
-  `goods_id` int(11) NOT NULL AUTO_INCREMENT,
-  `cate_id` int(255) NULL DEFAULT NULL,
-  `cate_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `goods_hots_label` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `goods_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `goods_price` decimal(10, 2) NULL DEFAULT NULL,
-  `goods_weight` double NULL DEFAULT NULL,
-  `goods_original_price` decimal(10, 2) NULL DEFAULT NULL,
-  `goods_header_img` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `goods_detail` varchar(1024) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `goods_count` int(11) NULL DEFAULT NULL,
-  `scan_count` int(11) NULL DEFAULT NULL,
-  `sales_count` int(11) NULL DEFAULT NULL,
-  `goods_status` tinyint(255) NULL DEFAULT NULL,
+  `goods_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品ID',
+  `cate_id` int(255) NULL DEFAULT NULL COMMENT '分类ID',
+  `cate_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '分类名称',
+  `goods_hots_label` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '热卖标签',
+  `goods_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '名字',
+  `goods_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '价格',
+  `goods_weight` double NULL DEFAULT NULL COMMENT '重量(g)',
+  `goods_original_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '原价',
+  `goods_header_img` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '头图（多个用,隔开）',
+  `goods_detail` varchar(1024) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '描述',
+  `goods_count` int(11) NULL DEFAULT NULL COMMENT '数量',
+  `scan_count` int(11) UNSIGNED ZEROFILL NULL DEFAULT NULL COMMENT '浏览量',
+  `sales_count` int(11) UNSIGNED ZEROFILL NULL DEFAULT NULL COMMENT ' 销售量',
+  `goods_status` tinyint(255) NULL DEFAULT NULL COMMENT '状态 0 上架',
+  `dynamic_param` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '动态参数',
+  `service_param` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '服务参数',
+  `statics_param` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '静态参数',
   `create_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`goods_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
@@ -90,9 +93,10 @@ CREATE TABLE `mall_goods`  (
 -- ----------------------------
 -- Records of mall_goods
 -- ----------------------------
-INSERT INTO `mall_goods` VALUES (1, 3, '衣服', NULL, '卫衣', 99.00, 200, 98.80, 'http://127.0.0.1:9000/upload/a31a588e-7011-426d-ac48-4f150beca951.jpg,http://127.0.0.1:9000/upload/5433b364-e055-48e8-b393-b3611f0fc04f.jpg,http://127.0.0.1:9000/upload/5349de5a-9c3a-443e-a891-c10a6ca3eff1.jpg', '<p>213</p><p><img src=\"http://127.0.0.1:9000/upload/653b2da0-1d49-48ac-8b48-876d4bc0c230.jpg\"><img src=\"http://127.0.0.1:9000/upload/42a24958-a0ed-4a0d-bd00-7d011c88aa7a.png\"><img src=\"http://127.0.0.1:9000/upload/a9cffb51-3087-40e3-a51d-ee1962c1811c.jpg\"></p>', 123, NULL, NULL, 0, '2020-04-15 10:20:29');
-INSERT INTO `mall_goods` VALUES (2, 3, '衣服', NULL, '1', 1.00, 1, 1.00, 'http://127.0.0.1:9000/upload/262ac5fa-38e2-4ea9-a5a5-d69cb7b08026.jpg', '<p><br></p><p><img src=\"http://127.0.0.1:9000/upload/091f879e-c25e-4378-b14b-dcbcd1f132a4.jpg\"></p>', 1, NULL, NULL, 1, '2020-04-15 11:18:57');
-INSERT INTO `mall_goods` VALUES (3, 3, '衣服', NULL, '99', 32.00, 32, NULL, 'http://127.0.0.1:9000/upload/c0fde4b9-c9d1-4189-b8f9-145ee48a701f.jpg', '<p><br></p><p><img src=\"http://127.0.0.1:9000/upload/25324c1d-c451-45af-8338-7dd63cd6c6ff.jpg\"></p>', 23, NULL, NULL, 1, '2020-04-15 11:23:03');
+INSERT INTO `mall_goods` VALUES (1, 3, '衣服', NULL, '卫衣', 99.00, 200, 98.80, 'http://127.0.0.1:9000/upload/a31a588e-7011-426d-ac48-4f150beca951.jpg,http://127.0.0.1:9000/upload/5433b364-e055-48e8-b393-b3611f0fc04f.jpg,http://127.0.0.1:9000/upload/5349de5a-9c3a-443e-a891-c10a6ca3eff1.jpg', '<p>213</p><p><img src=\"http://127.0.0.1:9000/upload/653b2da0-1d49-48ac-8b48-876d4bc0c230.jpg\"><img src=\"http://127.0.0.1:9000/upload/42a24958-a0ed-4a0d-bd00-7d011c88aa7a.png\"><img src=\"http://127.0.0.1:9000/upload/a9cffb51-3087-40e3-a51d-ee1962c1811c.jpg\"></p>', 123, NULL, NULL, 0, NULL, NULL, NULL, '2020-04-15 10:20:29');
+INSERT INTO `mall_goods` VALUES (2, 3, '衣服', NULL, '1', 1.00, 1, 1.00, 'http://127.0.0.1:9000/upload/262ac5fa-38e2-4ea9-a5a5-d69cb7b08026.jpg', '<p><br></p><p><img src=\"http://127.0.0.1:9000/upload/091f879e-c25e-4378-b14b-dcbcd1f132a4.jpg\"></p>', 1, NULL, NULL, 1, NULL, NULL, NULL, '2020-04-15 11:18:57');
+INSERT INTO `mall_goods` VALUES (3, 3, '衣服', NULL, '99', 32.00, 32, NULL, 'http://127.0.0.1:9000/upload/c0fde4b9-c9d1-4189-b8f9-145ee48a701f.jpg', '<p><br></p><p><img src=\"http://127.0.0.1:9000/upload/25324c1d-c451-45af-8338-7dd63cd6c6ff.jpg\"></p>', 23, NULL, NULL, 1, NULL, NULL, NULL, '2020-04-15 11:23:03');
+INSERT INTO `mall_goods` VALUES (8, 3, '衣服', NULL, '1', 1.00, 1, 1.00, 'http://127.0.0.1:9000/upload/cf485f8e-3910-4ec2-9fda-e2de5a5ffa4f.png', '<p><br></p><p><img src=\"http://127.0.0.1:9000/upload/00197018-ec08-4f6b-bc53-ddbc50f4d558.jpg\"></p>', 1, NULL, NULL, 1, '[1,3,5]', '[1,3,5]', '[6]', '2020-04-16 11:43:31');
 
 -- ----------------------------
 -- Table structure for mall_index_set_up
@@ -151,7 +155,7 @@ INSERT INTO `mall_menus` VALUES (5, '数据管理', 0, 5, NULL, 0, 'icon-data');
 INSERT INTO `mall_menus` VALUES (6, '用户列表', 1, 9, 'user_list', 0, 'icon-caidan\r\nicon-caidan\r\nicon-caidan');
 INSERT INTO `mall_menus` VALUES (7, '商品列表', 3, 9, 'goods_list', 0, 'icon-caidan\r\nicon-caidan\r\nicon-caidan');
 INSERT INTO `mall_menus` VALUES (8, '分类参数', 3, 8, 'goods_classes', 0, 'icon-caidan');
-INSERT INTO `mall_menus` VALUES (9, '商品分类', 3, 7, 'goods_param', 0, 'icon-caidan');
+INSERT INTO `mall_menus` VALUES (9, '商品参数', 3, 7, 'goods_param', 0, 'icon-caidan');
 INSERT INTO `mall_menus` VALUES (10, '订单列表', 4, 9, 'order_list', 0, 'icon-caidan');
 INSERT INTO `mall_menus` VALUES (11, '系统配置', 0, 4, 'system', 0, 'icon-peizhi');
 INSERT INTO `mall_menus` VALUES (12, '商城首页配置', 11, 9, 'index_config', 0, 'icon-caidan');

@@ -3,12 +3,11 @@
 <mapper namespace="com.spongeli.shoppingmall.pojo.dao.MallCateParamsMapper">
   <resultMap id="BaseResultMap" type="com.spongeli.shoppingmall.pojo.model.MallCateParams">
     <id column="attr_id" jdbcType="INTEGER" property="attrId" />
-    <result column="cate_id" jdbcType="INTEGER" property="cateId" />
     <result column="attr_name" jdbcType="VARCHAR" property="attrName" />
     <result column="attr_type" jdbcType="VARCHAR" property="attrType" />
     <result column="attr_status" jdbcType="TINYINT" property="attrStatus" />
-    <result column="attr_list" jdbcType="VARCHAR" property="attrList" />
-    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="attr_value" jdbcType="VARCHAR" property="attrValue" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    attr_id, cate_id, attr_name, attr_type, attr_status, attr_list, create_time
+    attr_id, attr_name, attr_type, attr_status, attr_value, create_time
   </sql>
   <select id="selectByExample" parameterType="com.spongeli.shoppingmall.pojo.model.MallCateParamsExample" resultMap="BaseResultMap">
     select
@@ -105,12 +104,10 @@
     <selectKey keyProperty="attrId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into mall_cate_params (cate_id, attr_name, attr_type, 
-      attr_status, attr_list, create_time
-      )
-    values (#{cateId,jdbcType=INTEGER}, #{attrName,jdbcType=VARCHAR}, #{attrType,jdbcType=VARCHAR}, 
-      #{attrStatus,jdbcType=TINYINT}, #{attrList,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}
-      )
+    insert into mall_cate_params (attr_name, attr_type, attr_status, 
+      attr_value, create_time)
+    values (#{attrName,jdbcType=VARCHAR}, #{attrType,jdbcType=VARCHAR}, #{attrStatus,jdbcType=TINYINT}, 
+      #{attrValue,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.spongeli.shoppingmall.pojo.model.MallCateParams">
     <selectKey keyProperty="attrId" order="AFTER" resultType="java.lang.Integer">
@@ -118,9 +115,6 @@
     </selectKey>
     insert into mall_cate_params
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="cateId != null">
-        cate_id,
-      </if>
       <if test="attrName != null">
         attr_name,
       </if>
@@ -130,17 +124,14 @@
       <if test="attrStatus != null">
         attr_status,
       </if>
-      <if test="attrList != null">
-        attr_list,
+      <if test="attrValue != null">
+        attr_value,
       </if>
       <if test="createTime != null">
         create_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="cateId != null">
-        #{cateId,jdbcType=INTEGER},
-      </if>
       <if test="attrName != null">
         #{attrName,jdbcType=VARCHAR},
       </if>
@@ -150,11 +141,11 @@
       <if test="attrStatus != null">
         #{attrStatus,jdbcType=TINYINT},
       </if>
-      <if test="attrList != null">
-        #{attrList,jdbcType=VARCHAR},
+      <if test="attrValue != null">
+        #{attrValue,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=DATE},
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -170,9 +161,6 @@
       <if test="record.attrId != null">
         attr_id = #{record.attrId,jdbcType=INTEGER},
       </if>
-      <if test="record.cateId != null">
-        cate_id = #{record.cateId,jdbcType=INTEGER},
-      </if>
       <if test="record.attrName != null">
         attr_name = #{record.attrName,jdbcType=VARCHAR},
       </if>
@@ -182,11 +170,11 @@
       <if test="record.attrStatus != null">
         attr_status = #{record.attrStatus,jdbcType=TINYINT},
       </if>
-      <if test="record.attrList != null">
-        attr_list = #{record.attrList,jdbcType=VARCHAR},
+      <if test="record.attrValue != null">
+        attr_value = #{record.attrValue,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null">
-        create_time = #{record.createTime,jdbcType=DATE},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null">
@@ -196,12 +184,11 @@
   <update id="updateByExample" parameterType="map">
     update mall_cate_params
     set attr_id = #{record.attrId,jdbcType=INTEGER},
-      cate_id = #{record.cateId,jdbcType=INTEGER},
       attr_name = #{record.attrName,jdbcType=VARCHAR},
       attr_type = #{record.attrType,jdbcType=VARCHAR},
       attr_status = #{record.attrStatus,jdbcType=TINYINT},
-      attr_list = #{record.attrList,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=DATE}
+      attr_value = #{record.attrValue,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -209,9 +196,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.spongeli.shoppingmall.pojo.model.MallCateParams">
     update mall_cate_params
     <set>
-      <if test="cateId != null">
-        cate_id = #{cateId,jdbcType=INTEGER},
-      </if>
       <if test="attrName != null">
         attr_name = #{attrName,jdbcType=VARCHAR},
       </if>
@@ -221,23 +205,22 @@
       <if test="attrStatus != null">
         attr_status = #{attrStatus,jdbcType=TINYINT},
       </if>
-      <if test="attrList != null">
-        attr_list = #{attrList,jdbcType=VARCHAR},
+      <if test="attrValue != null">
+        attr_value = #{attrValue,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
-        create_time = #{createTime,jdbcType=DATE},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where attr_id = #{attrId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.spongeli.shoppingmall.pojo.model.MallCateParams">
     update mall_cate_params
-    set cate_id = #{cateId,jdbcType=INTEGER},
-      attr_name = #{attrName,jdbcType=VARCHAR},
+    set attr_name = #{attrName,jdbcType=VARCHAR},
       attr_type = #{attrType,jdbcType=VARCHAR},
       attr_status = #{attrStatus,jdbcType=TINYINT},
-      attr_list = #{attrList,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=DATE}
+      attr_value = #{attrValue,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
     where attr_id = #{attrId,jdbcType=INTEGER}
   </update>
 </mapper>

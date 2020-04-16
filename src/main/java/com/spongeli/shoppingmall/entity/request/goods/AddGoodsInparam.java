@@ -3,6 +3,7 @@ package com.spongeli.shoppingmall.entity.request.goods;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.List;
 
 public class AddGoodsInparam {
     @NotNull(message = "分类ID不能为空")
@@ -21,6 +22,10 @@ public class AddGoodsInparam {
     private Integer goodsCount;
     @NotEmpty(message = "商品详情不能为空")
     private String goodsDetail;
+
+    private List<Integer> dynamicParam;
+    private List<Integer> serviceParam;
+    private List<Integer> staticsParam;
 
     public Integer getCateId() {
         return cateId;
@@ -92,5 +97,29 @@ public class AddGoodsInparam {
 
     public void setGoodsDetail(String goodsDetail) {
         this.goodsDetail = goodsDetail;
+    }
+
+    public List<Integer> getDynamicParam() {
+        return dynamicParam;
+    }
+
+    public void setDynamicParam(List<Integer> dynamicParam) {
+        this.dynamicParam = dynamicParam;
+    }
+
+    public List<Integer> getServiceParam() {
+        return serviceParam;
+    }
+
+    public void setServiceParam(List<Integer> serviceParam) {
+        this.serviceParam = serviceParam;
+    }
+
+    public List<Integer> getStaticsParam() {
+        return staticsParam;
+    }
+
+    public void setStaticsParam(List<Integer> staticsParam) {
+        this.staticsParam = staticsParam;
     }
 }

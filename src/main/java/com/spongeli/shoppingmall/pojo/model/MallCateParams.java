@@ -6,15 +6,13 @@ import java.util.Date;
 public class MallCateParams implements Serializable {
     private Integer attrId;
 
-    private Integer cateId;
-
     private String attrName;
 
     private String attrType;
 
     private Byte attrStatus;
 
-    private String attrList;
+    private String attrValue;
 
     private Date createTime;
 
@@ -26,14 +24,6 @@ public class MallCateParams implements Serializable {
 
     public void setAttrId(Integer attrId) {
         this.attrId = attrId;
-    }
-
-    public Integer getCateId() {
-        return cateId;
-    }
-
-    public void setCateId(Integer cateId) {
-        this.cateId = cateId;
     }
 
     public String getAttrName() {
@@ -60,12 +50,12 @@ public class MallCateParams implements Serializable {
         this.attrStatus = attrStatus;
     }
 
-    public String getAttrList() {
-        return attrList;
+    public String getAttrValue() {
+        return attrValue;
     }
 
-    public void setAttrList(String attrList) {
-        this.attrList = attrList == null ? null : attrList.trim();
+    public void setAttrValue(String attrValue) {
+        this.attrValue = attrValue == null ? null : attrValue.trim();
     }
 
     public Date getCreateTime() {
@@ -83,11 +73,10 @@ public class MallCateParams implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", attrId=").append(attrId);
-        sb.append(", cateId=").append(cateId);
         sb.append(", attrName=").append(attrName);
         sb.append(", attrType=").append(attrType);
         sb.append(", attrStatus=").append(attrStatus);
-        sb.append(", attrList=").append(attrList);
+        sb.append(", attrValue=").append(attrValue);
         sb.append(", createTime=").append(createTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

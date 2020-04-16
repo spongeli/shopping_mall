@@ -996,6 +996,216 @@ public class MallGoodsExample {
             return (Criteria) this;
         }
 
+        public Criteria andDynamicParamIsNull() {
+            addCriterion("dynamic_param is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDynamicParamIsNotNull() {
+            addCriterion("dynamic_param is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDynamicParamEqualTo(String value) {
+            addCriterion("dynamic_param =", value, "dynamicParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andDynamicParamNotEqualTo(String value) {
+            addCriterion("dynamic_param <>", value, "dynamicParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andDynamicParamGreaterThan(String value) {
+            addCriterion("dynamic_param >", value, "dynamicParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andDynamicParamGreaterThanOrEqualTo(String value) {
+            addCriterion("dynamic_param >=", value, "dynamicParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andDynamicParamLessThan(String value) {
+            addCriterion("dynamic_param <", value, "dynamicParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andDynamicParamLessThanOrEqualTo(String value) {
+            addCriterion("dynamic_param <=", value, "dynamicParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andDynamicParamLike(String value) {
+            addCriterion("dynamic_param like", value, "dynamicParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andDynamicParamNotLike(String value) {
+            addCriterion("dynamic_param not like", value, "dynamicParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andDynamicParamIn(List<String> values) {
+            addCriterion("dynamic_param in", values, "dynamicParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andDynamicParamNotIn(List<String> values) {
+            addCriterion("dynamic_param not in", values, "dynamicParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andDynamicParamBetween(String value1, String value2) {
+            addCriterion("dynamic_param between", value1, value2, "dynamicParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andDynamicParamNotBetween(String value1, String value2) {
+            addCriterion("dynamic_param not between", value1, value2, "dynamicParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andServiceParamIsNull() {
+            addCriterion("service_param is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andServiceParamIsNotNull() {
+            addCriterion("service_param is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andServiceParamEqualTo(String value) {
+            addCriterion("service_param =", value, "serviceParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andServiceParamNotEqualTo(String value) {
+            addCriterion("service_param <>", value, "serviceParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andServiceParamGreaterThan(String value) {
+            addCriterion("service_param >", value, "serviceParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andServiceParamGreaterThanOrEqualTo(String value) {
+            addCriterion("service_param >=", value, "serviceParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andServiceParamLessThan(String value) {
+            addCriterion("service_param <", value, "serviceParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andServiceParamLessThanOrEqualTo(String value) {
+            addCriterion("service_param <=", value, "serviceParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andServiceParamLike(String value) {
+            addCriterion("service_param like", value, "serviceParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andServiceParamNotLike(String value) {
+            addCriterion("service_param not like", value, "serviceParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andServiceParamIn(List<String> values) {
+            addCriterion("service_param in", values, "serviceParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andServiceParamNotIn(List<String> values) {
+            addCriterion("service_param not in", values, "serviceParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andServiceParamBetween(String value1, String value2) {
+            addCriterion("service_param between", value1, value2, "serviceParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andServiceParamNotBetween(String value1, String value2) {
+            addCriterion("service_param not between", value1, value2, "serviceParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andStaticsParamIsNull() {
+            addCriterion("statics_param is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStaticsParamIsNotNull() {
+            addCriterion("statics_param is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStaticsParamEqualTo(String value) {
+            addCriterion("statics_param =", value, "staticsParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andStaticsParamNotEqualTo(String value) {
+            addCriterion("statics_param <>", value, "staticsParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andStaticsParamGreaterThan(String value) {
+            addCriterion("statics_param >", value, "staticsParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andStaticsParamGreaterThanOrEqualTo(String value) {
+            addCriterion("statics_param >=", value, "staticsParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andStaticsParamLessThan(String value) {
+            addCriterion("statics_param <", value, "staticsParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andStaticsParamLessThanOrEqualTo(String value) {
+            addCriterion("statics_param <=", value, "staticsParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andStaticsParamLike(String value) {
+            addCriterion("statics_param like", value, "staticsParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andStaticsParamNotLike(String value) {
+            addCriterion("statics_param not like", value, "staticsParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andStaticsParamIn(List<String> values) {
+            addCriterion("statics_param in", values, "staticsParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andStaticsParamNotIn(List<String> values) {
+            addCriterion("statics_param not in", values, "staticsParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andStaticsParamBetween(String value1, String value2) {
+            addCriterion("statics_param between", value1, value2, "staticsParam");
+            return (Criteria) this;
+        }
+
+        public Criteria andStaticsParamNotBetween(String value1, String value2) {
+            addCriterion("statics_param not between", value1, value2, "staticsParam");
+            return (Criteria) this;
+        }
+
         public Criteria andCreateTimeIsNull() {
             addCriterion("create_time is null");
             return (Criteria) this;
