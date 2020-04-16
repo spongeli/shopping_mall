@@ -3,7 +3,6 @@ package com.spongeli.shoppingmall.service.manager.impl;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.spongeli.shoppingmall.common.bean.MallCategoryEx;
 import com.spongeli.shoppingmall.common.bean.MallGoodsEx;
 import com.spongeli.shoppingmall.common.exception.SystemException;
 import com.spongeli.shoppingmall.common.system.BaseService;
@@ -185,14 +184,23 @@ public class GoodsServiceImpl extends BaseService implements GoodsService {
     private List<MallGoodsEx> zhMallGoods(List<MallGoods> list){
         List<MallGoodsEx> goodsExes = new ArrayList<>();
         list.stream().forEach(item -> {
-            MallGoodsEx ex = new MallGoodsEx();
-            BeanUtils.copyProperties(item, ex);
-            ex.setDynamicParamList(JSON.parseArray(item.getDynamicParam(),Integer.class));
-            ex.setServiceParamList(JSON.parseArray(item.getServiceParam(),Integer.class));
-            ex.setStaticsParamList(JSON.parseArray(item.getStaticsParam(),Integer.class));
-            goodsExes.add(ex);
+            goodsExes.add(zhMallGood(item));
         });
         return goodsExes;
+    }
+
+    /**
+     * 转换成数组
+     * @param item
+     * @return
+     */
+    private MallGoodsEx zhMallGood(MallGoods item){
+        MallGoodsEx ex = new MallGoodsEx();
+        BeanUtils.copyProperties(item, ex);
+        ex.setDynamicParamList(JSON.parseArray(item.getDynamicParam(),Integer.class));
+        ex.setServiceParamList(JSON.parseArray(item.getServiceParam(),Integer.class));
+        ex.setStaticsParamList(JSON.parseArray(item.getStaticsParam(),Integer.class));
+        return ex;
     }
 
     @Override
@@ -200,31 +208,27 @@ public class GoodsServiceImpl extends BaseService implements GoodsService {
         GainGoodByIdResponse response = new GainGoodByIdResponse();
 
         // 商品信息
-        MallGoods goods = validGoodsExist(goodId);
+        MallGoodsEx goods = zhMallGood(validGoodsExist(goodId));
 
         // 类别信息
-
-
-
+        // 动态属性
         MallCateParamsExample example = new MallCateParamsExample();
-//        example.createCriteria().andCateIdEqualTo(goods.getCateId());
-        List<MallCateParams> cateParams = paramsMapper.selectByExample(example);
-        if(!CollectionUtils.isEmpty(cateParams)){
-            List<MallCateParams> dynamicCates = new ArrayList<>();
-            List<MallCateParams> staticsCates = new ArrayList<>();
-            cateParams.stream().forEach(item -> {
-                if(StringUtils.isEquals(item.getAttrType(),SystemConstant.CATE_DYNAMIC)){
-                    dynamicCates.add(item);
-                }else{
-                    staticsCates.add(item);
-                }
-            });
-            response.setDynamicCates(dynamicCates);
-            response.setStaticsCates(staticsCates);
-        }
+        example.createCriteria().andAttrIdIn(goods.getDynamicParamList());
+        List<MallCateParams> dynamicParams = paramsMapper.selectByExample(example);
+        // 服务信息
+        MallCateParamsExample example2 = new MallCateParamsExample();
+        example2.createCriteria().andAttrIdIn(goods.getServiceParamList());
+        List<MallCateParams> servicesParams = paramsMapper.selectByExample(example2);
 
+        // 静态属性
+        MallCateParamsExample example3 = new MallCateParamsExample();
+        example3.createCriteria().andAttrIdIn(goods.getStaticsParamList());
+        List<MallCateParams> staticsParams = paramsMapper.selectByExample(example3);
 
         response.setGoods(goods);
+        response.setStaticsCates(staticsParams);
+        response.setDynamicCates(dynamicParams);
+        response.setServiceCates(servicesParams);
         return response;
     }
 

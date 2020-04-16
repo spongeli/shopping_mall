@@ -1,5 +1,6 @@
 package com.spongeli.shoppingmall.entity.response.goods;
 
+import com.spongeli.shoppingmall.common.bean.MallGoodsEx;
 import com.spongeli.shoppingmall.pojo.model.MallCateParams;
 import com.spongeli.shoppingmall.pojo.model.MallGoods;
 
@@ -11,16 +12,18 @@ import java.util.List;
  * @Date 2020/2/5 11:53
  **/
 public class GainGoodByIdResponse {
-    private MallGoods goods;
+    private MallGoodsEx goods;
     // 动态属性
     private List<MallCateParams> dynamicCates;
     // 静态属性
     private List<MallCateParams> staticsCates;
-    public MallGoods getGoods() {
+    // 服务信息
+    private List<MallCateParams> serviceCates;
+    public MallGoodsEx getGoods() {
         return goods;
     }
 
-    public void setGoods(MallGoods goods) {
+    public void setGoods(MallGoodsEx goods) {
         this.goods = goods;
     }
 
@@ -38,5 +41,13 @@ public class GainGoodByIdResponse {
 
     public void setStaticsCates(List<MallCateParams> staticsCates) {
         this.staticsCates = staticsCates;
+    }
+
+    public List<MallCateParams> getServiceCates() {
+        return serviceCates;
+    }
+
+    public void setServiceCates(List<MallCateParams> serviceCates) {
+        this.serviceCates = serviceCates;
     }
 }

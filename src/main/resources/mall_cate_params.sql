@@ -11,7 +11,7 @@
  Target Server Version : 80016
  File Encoding         : 65001
 
- Date: 16/04/2020 11:55:18
+ Date: 16/04/2020 18:00:50
 */
 
 SET NAMES utf8mb4;
@@ -29,7 +29,7 @@ CREATE TABLE `mall_cate_params`  (
   `attr_value` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `create_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`attr_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of mall_cate_params
@@ -39,7 +39,8 @@ INSERT INTO `mall_cate_params` VALUES (2, '颜色', 'statics', NULL, '红色,黄
 INSERT INTO `mall_cate_params` VALUES (3, '尺寸', 'dynamic', 0, 'X,XL,XLL', '2020-04-15 00:00:00');
 INSERT INTO `mall_cate_params` VALUES (4, '产地', 'statics', 0, '酒泉', '2020-04-15 00:00:00');
 INSERT INTO `mall_cate_params` VALUES (5, '颜色', 'dynamic', 0, '蓝色,红色,白色,绿色', '2020-04-15 00:00:00');
-INSERT INTO `mall_cate_params` VALUES (6, '假一赔十', 'service', NULL, '假一赔十', '2020-04-16 09:52:46');
+INSERT INTO `mall_cate_params` VALUES (6, '假一赔十', 'service', 0, '假一赔十', '2020-04-16 09:52:46');
+INSERT INTO `mall_cate_params` VALUES (7, '七天包换', 'service', 0, '七天包换,上门服务,1,123,123,124,123,1231,12414', '2020-04-16 17:49:04');
 
 -- ----------------------------
 -- Table structure for mall_category
@@ -88,15 +89,14 @@ CREATE TABLE `mall_goods`  (
   `statics_param` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '静态参数',
   `create_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`goods_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of mall_goods
 -- ----------------------------
-INSERT INTO `mall_goods` VALUES (1, 3, '衣服', NULL, '卫衣', 99.00, 200, 98.80, 'http://127.0.0.1:9000/upload/a31a588e-7011-426d-ac48-4f150beca951.jpg,http://127.0.0.1:9000/upload/5433b364-e055-48e8-b393-b3611f0fc04f.jpg,http://127.0.0.1:9000/upload/5349de5a-9c3a-443e-a891-c10a6ca3eff1.jpg', '<p>213</p><p><img src=\"http://127.0.0.1:9000/upload/653b2da0-1d49-48ac-8b48-876d4bc0c230.jpg\"><img src=\"http://127.0.0.1:9000/upload/42a24958-a0ed-4a0d-bd00-7d011c88aa7a.png\"><img src=\"http://127.0.0.1:9000/upload/a9cffb51-3087-40e3-a51d-ee1962c1811c.jpg\"></p>', 123, NULL, NULL, 0, NULL, NULL, NULL, '2020-04-15 10:20:29');
-INSERT INTO `mall_goods` VALUES (2, 3, '衣服', NULL, '1', 1.00, 1, 1.00, 'http://127.0.0.1:9000/upload/262ac5fa-38e2-4ea9-a5a5-d69cb7b08026.jpg', '<p><br></p><p><img src=\"http://127.0.0.1:9000/upload/091f879e-c25e-4378-b14b-dcbcd1f132a4.jpg\"></p>', 1, NULL, NULL, 1, NULL, NULL, NULL, '2020-04-15 11:18:57');
-INSERT INTO `mall_goods` VALUES (3, 3, '衣服', NULL, '99', 32.00, 32, NULL, 'http://127.0.0.1:9000/upload/c0fde4b9-c9d1-4189-b8f9-145ee48a701f.jpg', '<p><br></p><p><img src=\"http://127.0.0.1:9000/upload/25324c1d-c451-45af-8338-7dd63cd6c6ff.jpg\"></p>', 23, NULL, NULL, 1, NULL, NULL, NULL, '2020-04-15 11:23:03');
-INSERT INTO `mall_goods` VALUES (8, 3, '衣服', NULL, '1', 1.00, 1, 1.00, 'http://127.0.0.1:9000/upload/cf485f8e-3910-4ec2-9fda-e2de5a5ffa4f.png', '<p><br></p><p><img src=\"http://127.0.0.1:9000/upload/00197018-ec08-4f6b-bc53-ddbc50f4d558.jpg\"></p>', 1, NULL, NULL, 1, '[1,3,5]', '[1,3,5]', '[6]', '2020-04-16 11:43:31');
+INSERT INTO `mall_goods` VALUES (12, 3, '衣服', NULL, '衣服', 1.00, 1, 1.00, 'http://127.0.0.1:9000/upload/ff0bae9f-4269-4ee0-864d-1252bdd13555.png', '<p><br></p><p><img src=\"http://127.0.0.1:9000/upload/447d9733-39c8-479b-a63d-c0e531e79881.jpg\"></p>', 1, NULL, NULL, 0, '[]', '[]', '[]', '2020-04-16 16:54:29');
+INSERT INTO `mall_goods` VALUES (13, 3, '衣服', NULL, '有参数', 1.00, 1, 1.00, 'http://127.0.0.1:9000/upload/97c33163-a730-4228-bf8a-d7d24d6cb0da.jpg', '<p><br></p><p><img src=\"http://127.0.0.1:9000/upload/7fa79ab1-71b6-4332-a9d6-c10ef6b926c4.jpg\"></p>', 1, NULL, NULL, 0, '[1,3]', '[6]', '[2]', '2020-04-16 16:55:44');
+INSERT INTO `mall_goods` VALUES (14, 3, '衣服', NULL, '大衣', 299.00, 200, 399.00, 'http://127.0.0.1:9000/upload/b2ee4d13-6876-4d08-bc1b-63c970b8530e.jpg,http://127.0.0.1:9000/upload/b00d94f6-56b7-471b-a805-f03cfcd9c7bb.jpg,http://127.0.0.1:9000/upload/1ef7d5c0-99eb-4460-855c-0c6ee095bf83.jpg', '<p><br></p><p><img src=\"http://127.0.0.1:9000/upload/af1d3246-60db-4a98-bcc2-d76d3fb73f3e.jpg\"></p>', 100, NULL, NULL, 0, '[3,5]', '[7]', '[2]', '2020-04-16 17:06:12');
 
 -- ----------------------------
 -- Table structure for mall_index_set_up
