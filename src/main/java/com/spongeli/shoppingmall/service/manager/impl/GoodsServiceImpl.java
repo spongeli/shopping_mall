@@ -3,6 +3,8 @@ package com.spongeli.shoppingmall.service.manager.impl;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.spongeli.shoppingmall.common.bean.MallCategoryEx;
+import com.spongeli.shoppingmall.common.bean.MallGoodsEx;
 import com.spongeli.shoppingmall.common.exception.SystemException;
 import com.spongeli.shoppingmall.common.system.BaseService;
 import com.spongeli.shoppingmall.common.system.SystemConstant;
@@ -45,7 +47,7 @@ public class GoodsServiceImpl extends BaseService implements GoodsService {
      * @return
      */
     @Override
-    public PageInfo<MallGoods> gainGoodsList(boolean isOnline, GainGoodsListInparam inparam) {
+    public PageInfo<MallGoodsEx> gainGoodsList(boolean isOnline, GainGoodsListInparam inparam) {
         String orderby = "goods_id asc";
 
         if(StringUtils.isNotEmpty(inparam.getOrderRule())){
@@ -93,7 +95,7 @@ public class GoodsServiceImpl extends BaseService implements GoodsService {
             criteria.andGoodsStatusEqualTo(SystemConstant.YES);
         }
         List<MallGoods> goods = mapper.selectByExample(example);
-        return new PageInfo<>(goods);
+        return new PageInfo<>(zhMallGoods(goods));
     }
 
     /**
@@ -110,9 +112,9 @@ public class GoodsServiceImpl extends BaseService implements GoodsService {
         goods.setCreateTime(new Date());
         // 设置属性名称
         goods.setCateName(attrNameById(inparam.getCateId()));
-        goods.setStaticsParam(JSON.toJSONString(inparam.getServiceParam()));
+        goods.setStaticsParam(JSON.toJSONString(inparam.getStaticsParam()));
         goods.setDynamicParam(JSON.toJSONString(inparam.getDynamicParam()));
-        goods.setServiceParam(JSON.toJSONString(inparam.getDynamicParam()));
+        goods.setServiceParam(JSON.toJSONString(inparam.getServiceParam()));
         mapper.insert(goods);
     }
 
@@ -144,6 +146,9 @@ public class GoodsServiceImpl extends BaseService implements GoodsService {
             inparam.setCateName(attrNameById(inparam.getCateId()));
         }
         BeanUtils.copyProperties(inparam, goods);
+        goods.setStaticsParam(JSON.toJSONString(inparam.getStaticsParam()));
+        goods.setDynamicParam(JSON.toJSONString(inparam.getDynamicParam()));
+        goods.setServiceParam(JSON.toJSONString(inparam.getServiceParam()));
         mapper.updateByPrimaryKey(goods);
     }
 
@@ -164,7 +169,7 @@ public class GoodsServiceImpl extends BaseService implements GoodsService {
      * @return
      */
     @Override
-    public List<MallGoods> queryByKeyword(String keyword) {
+    public List<MallGoodsEx> queryByKeyword(String keyword) {
         MallGoodsExample example = new MallGoodsExample();
         MallGoodsExample.Criteria criteria = example.createCriteria();
         criteria.andGoodsNameLike("%" + keyword + "%");
@@ -174,7 +179,20 @@ public class GoodsServiceImpl extends BaseService implements GoodsService {
         MallGoodsExample.Criteria criteria2 = example.createCriteria();
         criteria1.andCateNameLike("%" + keyword + "%");
         example.or(criteria2);
-        return mapper.selectByExample(example);
+        return zhMallGoods(mapper.selectByExample(example));
+    }
+
+    private List<MallGoodsEx> zhMallGoods(List<MallGoods> list){
+        List<MallGoodsEx> goodsExes = new ArrayList<>();
+        list.stream().forEach(item -> {
+            MallGoodsEx ex = new MallGoodsEx();
+            BeanUtils.copyProperties(item, ex);
+            ex.setDynamicParamList(JSON.parseArray(item.getDynamicParam(),Integer.class));
+            ex.setServiceParamList(JSON.parseArray(item.getServiceParam(),Integer.class));
+            ex.setStaticsParamList(JSON.parseArray(item.getStaticsParam(),Integer.class));
+            goodsExes.add(ex);
+        });
+        return goodsExes;
     }
 
     @Override

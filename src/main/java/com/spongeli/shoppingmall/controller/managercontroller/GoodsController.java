@@ -61,6 +61,7 @@ public class GoodsController extends BaseController {
         service.deleteGoods(goodId);
         return instanceSuccess();
     }
+
     @GetMapping("/{keyword}/query")
     private CommonResponse queryByKeyword(@PathVariable String keyword){
         return instanceSuccess(service.queryByKeyword(keyword));
