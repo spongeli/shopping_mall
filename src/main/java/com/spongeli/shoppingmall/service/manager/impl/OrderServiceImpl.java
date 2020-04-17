@@ -3,6 +3,7 @@ package com.spongeli.shoppingmall.service.manager.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.spongeli.shoppingmall.common.system.BaseService;
+import com.spongeli.shoppingmall.common.system.ManagerBaseService;
 import com.spongeli.shoppingmall.entity.request.order.GainOrderListInparam;
 import com.spongeli.shoppingmall.pojo.dao.MallOrderMapper;
 import com.spongeli.shoppingmall.pojo.model.MallGoods;
@@ -22,7 +23,7 @@ import java.util.List;
  * @Date 2020/2/4 9:59
  **/
 @Service
-public class OrderServiceImpl extends BaseService implements OrderService {
+public class OrderServiceImpl extends ManagerBaseService implements OrderService {
     @Autowired
     private MallOrderMapper mapper;
 

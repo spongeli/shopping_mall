@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Objects;
 
 /**
  * @Description
@@ -29,14 +30,14 @@ import javax.servlet.http.HttpServletResponse;
  * @Date 2020/3/6 11:18
  **/
 @Configuration
-public class ShoppingUserHandlerInterceptor implements HandlerInterceptor {
+public class WebUserHandlerInterceptor implements HandlerInterceptor {
     @Autowired
     private RedisUtil redisUtil;
     @Value("mall.user.login.key")
     private String loginKey;
 
     private static final String START_TIME = "requestStartTime";
-    private static final Logger logger = LogManager.getLogger(ShoppingUserHandlerInterceptor.class);
+    private static final Logger logger = LogManager.getLogger(WebUserHandlerInterceptor.class);
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
@@ -44,14 +45,15 @@ public class ShoppingUserHandlerInterceptor implements HandlerInterceptor {
         request.setAttribute(START_TIME, System.currentTimeMillis());
 
         String uri = request.getRequestURI();
-        logger.info("前台请求拦截");
+        logger.info("前台请求拦截:" + uri);
 
         String token = request.getHeader("token");
-        ShoppingUserEx ex =  (ShoppingUserEx)redisUtil.get(token);
-
-        logger.info(ex);
-        // 存储上下文信息
-        ShoppingUserHolder.addAll(ex, request);
+        if(StringUtils.isNotEmpty(token)){
+            ShoppingUserEx ex = (ShoppingUserEx) redisUtil.get(token);
+            ex.setToken(token);
+            // 存储上下文信息
+            ShoppingUserHolder.addAll(ex, request);
+        }
         return true;
     }
 

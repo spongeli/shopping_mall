@@ -7,6 +7,7 @@ import com.spongeli.shoppingmall.common.bean.ShoppingUserEx;
 import com.spongeli.shoppingmall.common.exception.SystemException;
 import com.spongeli.shoppingmall.common.system.BaseService;
 import com.spongeli.shoppingmall.common.system.SystemConstant;
+import com.spongeli.shoppingmall.common.system.WebBaseService;
 import com.spongeli.shoppingmall.common.wx.WxConstant;
 import com.spongeli.shoppingmall.pojo.dao.MallUserMapper;
 import com.spongeli.shoppingmall.pojo.dao.ShoppingUserMapper;
@@ -37,7 +38,7 @@ import java.util.Map;
  * @Date 2020/3/6 9:38
  **/
 @Service
-public class WxServiceImpl extends BaseService implements WxService {
+public class WxServiceImpl extends WebBaseService implements WxService {
     private static final Logger logger = LogManager.getLogger(WxServiceImpl.class);
 
     @Value("mall.user.login.key")
@@ -47,7 +48,7 @@ public class WxServiceImpl extends BaseService implements WxService {
     private ShoppingUserMapper mapper;
 
     @Override
-    public Object login(String token) {
+    public JSONObject login(String token) {
         // 获取用户 openid {"session_key":"jD6iMEg58WvpBP2LnDZlXQ==","openid":"orhZe5UPLD68g0aPcTk0FijhkOKc"}
         JSONObject authInfo = geuAuthInfo(token);
         String openid = authInfo.getString("openid");
@@ -72,8 +73,11 @@ public class WxServiceImpl extends BaseService implements WxService {
         userEx.setSessionKey(authInfo.getString("session_key"));
         String tempToken = MD5Util.getMD5(openid + '-' + loginKey);
 //        存缓存
-        redisUtil.set(tempToken, userEx, 60 * 60);
-        return tempToken;
+        redisUtil.set(tempToken, userEx);
+        JSONObject res = new JSONObject();
+        res.put("token",tempToken);
+        res.put("userinfo",user);
+        return res;
     }
 
     private void updateUserLastLoginTime(ShoppingUser shoppingUser) {

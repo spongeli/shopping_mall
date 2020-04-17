@@ -2,6 +2,7 @@ package com.spongeli.shoppingmall.service.manager.impl;
 
 import com.spongeli.shoppingmall.common.exception.SystemException;
 import com.spongeli.shoppingmall.common.system.BaseService;
+import com.spongeli.shoppingmall.common.system.ManagerBaseService;
 import com.spongeli.shoppingmall.common.util.RedisUtil;
 import com.spongeli.shoppingmall.entity.request.user.DoLoginInparam;
 import com.spongeli.shoppingmall.entity.request.user.UpdateShoppingUserInparam;
@@ -26,7 +27,7 @@ import java.util.List;
  * @Date 2019/12/26 9:48
  **/
 @Service
-public class MallUserServiceImpl extends BaseService implements MallUserService {
+public class MallUserServiceImpl extends ManagerBaseService implements MallUserService {
 
     private static final Logger logger = LogManager.getLogger(MallUserServiceImpl.class);
 

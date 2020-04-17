@@ -10,9 +10,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 public class WebMvcConfig extends WebMvcConfigurationSupport {
 
     @Autowired
-    private UserHandlerInterceptor userHandlerInterceptor;
+    private ManagerUserHandlerInterceptor managerUserHandlerInterceptor;
     @Autowired
-    private ShoppingUserHandlerInterceptor shoppingUserHandlerInterceptor;
+    private WebUserHandlerInterceptor webUserHandlerInterceptor;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -26,9 +26,9 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     @Override
     protected void addInterceptors(InterceptorRegistry registry) {
 //        后台拦截
-        registry.addInterceptor(userHandlerInterceptor).addPathPatterns("/manager/**");
+        registry.addInterceptor(managerUserHandlerInterceptor).addPathPatterns("/manager/**");
 //        前台拦截
-        registry.addInterceptor(shoppingUserHandlerInterceptor).addPathPatterns("/web/**");
+        registry.addInterceptor(webUserHandlerInterceptor).addPathPatterns("/web/**");
         super.addInterceptors(registry);
     }
 }

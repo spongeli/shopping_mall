@@ -4,8 +4,8 @@
   <resultMap id="BaseResultMap" type="com.spongeli.shoppingmall.pojo.model.ShoppingUser">
     <id column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="wx_openid" jdbcType="VARCHAR" property="wxOpenid" />
-    <result column="wx_nickname" jdbcType="VARCHAR" property="wxNickname" />
-    <result column="wx_userpic" jdbcType="VARCHAR" property="wxUserpic" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="userpic" jdbcType="VARCHAR" property="userpic" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="status" jdbcType="TINYINT" property="status" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -70,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    user_id, wx_openid, wx_nickname, wx_userpic, phone, `status`, create_time, login_last_time
+    user_id, wx_openid, nickname, userpic, phone, `status`, create_time, login_last_time
   </sql>
   <select id="selectByExample" parameterType="com.spongeli.shoppingmall.pojo.model.ShoppingUserExample" resultMap="BaseResultMap">
     select
@@ -106,10 +106,10 @@
     <selectKey keyProperty="userId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into shopping_user (wx_openid, wx_nickname, wx_userpic, 
+    insert into shopping_user (wx_openid, nickname, userpic, 
       phone, `status`, create_time, 
       login_last_time)
-    values (#{wxOpenid,jdbcType=VARCHAR}, #{wxNickname,jdbcType=VARCHAR}, #{wxUserpic,jdbcType=VARCHAR}, 
+    values (#{wxOpenid,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{userpic,jdbcType=VARCHAR}, 
       #{phone,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
       #{loginLastTime,jdbcType=TIMESTAMP})
   </insert>
@@ -122,11 +122,11 @@
       <if test="wxOpenid != null">
         wx_openid,
       </if>
-      <if test="wxNickname != null">
-        wx_nickname,
+      <if test="nickname != null">
+        nickname,
       </if>
-      <if test="wxUserpic != null">
-        wx_userpic,
+      <if test="userpic != null">
+        userpic,
       </if>
       <if test="phone != null">
         phone,
@@ -145,11 +145,11 @@
       <if test="wxOpenid != null">
         #{wxOpenid,jdbcType=VARCHAR},
       </if>
-      <if test="wxNickname != null">
-        #{wxNickname,jdbcType=VARCHAR},
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
       </if>
-      <if test="wxUserpic != null">
-        #{wxUserpic,jdbcType=VARCHAR},
+      <if test="userpic != null">
+        #{userpic,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
         #{phone,jdbcType=VARCHAR},
@@ -180,11 +180,11 @@
       <if test="record.wxOpenid != null">
         wx_openid = #{record.wxOpenid,jdbcType=VARCHAR},
       </if>
-      <if test="record.wxNickname != null">
-        wx_nickname = #{record.wxNickname,jdbcType=VARCHAR},
+      <if test="record.nickname != null">
+        nickname = #{record.nickname,jdbcType=VARCHAR},
       </if>
-      <if test="record.wxUserpic != null">
-        wx_userpic = #{record.wxUserpic,jdbcType=VARCHAR},
+      <if test="record.userpic != null">
+        userpic = #{record.userpic,jdbcType=VARCHAR},
       </if>
       <if test="record.phone != null">
         phone = #{record.phone,jdbcType=VARCHAR},
@@ -207,8 +207,8 @@
     update shopping_user
     set user_id = #{record.userId,jdbcType=INTEGER},
       wx_openid = #{record.wxOpenid,jdbcType=VARCHAR},
-      wx_nickname = #{record.wxNickname,jdbcType=VARCHAR},
-      wx_userpic = #{record.wxUserpic,jdbcType=VARCHAR},
+      nickname = #{record.nickname,jdbcType=VARCHAR},
+      userpic = #{record.userpic,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
       `status` = #{record.status,jdbcType=TINYINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -223,11 +223,11 @@
       <if test="wxOpenid != null">
         wx_openid = #{wxOpenid,jdbcType=VARCHAR},
       </if>
-      <if test="wxNickname != null">
-        wx_nickname = #{wxNickname,jdbcType=VARCHAR},
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
       </if>
-      <if test="wxUserpic != null">
-        wx_userpic = #{wxUserpic,jdbcType=VARCHAR},
+      <if test="userpic != null">
+        userpic = #{userpic,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
         phone = #{phone,jdbcType=VARCHAR},
@@ -247,8 +247,8 @@
   <update id="updateByPrimaryKey" parameterType="com.spongeli.shoppingmall.pojo.model.ShoppingUser">
     update shopping_user
     set wx_openid = #{wxOpenid,jdbcType=VARCHAR},
-      wx_nickname = #{wxNickname,jdbcType=VARCHAR},
-      wx_userpic = #{wxUserpic,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      userpic = #{userpic,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       `status` = #{status,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},

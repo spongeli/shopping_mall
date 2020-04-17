@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.spongeli.shoppingmall.common.bean.PageHeplerInparam;
 import com.spongeli.shoppingmall.common.exception.SystemException;
 import com.spongeli.shoppingmall.common.system.BaseService;
+import com.spongeli.shoppingmall.common.system.ManagerBaseService;
 import com.spongeli.shoppingmall.entity.request.cate.AddCateAttrInparam;
 import com.spongeli.shoppingmall.entity.request.cate.UdateCateParamInparam;
 import com.spongeli.shoppingmall.entity.request.common.CommonInparam;
@@ -23,7 +24,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class CateAttrParamServiceImpl extends BaseService implements CateAttrParamService {
+public class CateAttrParamServiceImpl extends ManagerBaseService implements CateAttrParamService {
     @Autowired
     private MallCateParamsMapper mapper;
 

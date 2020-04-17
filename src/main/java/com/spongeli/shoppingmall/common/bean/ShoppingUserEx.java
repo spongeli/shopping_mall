@@ -8,6 +8,7 @@ import com.spongeli.shoppingmall.pojo.model.ShoppingUser;
  * @Date 2020/3/6 15:05
  **/
 public class ShoppingUserEx extends ShoppingUser {
+    private String token;
     private String sessionKey;
 
     public String getSessionKey() {
@@ -16,5 +17,13 @@ public class ShoppingUserEx extends ShoppingUser {
 
     public void setSessionKey(String sessionKey) {
         this.sessionKey = sessionKey;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

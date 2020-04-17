@@ -41,7 +41,7 @@ public class ConsumerServiceImpl extends BaseService implements ConsumerService 
         example.setOrderByClause(orderby);
         if (StringUtils.isNotEmpty(inparam.getSearch())) {
             ShoppingUserExample.Criteria criteria = example.createCriteria();
-            criteria.andWxNicknameLike("%" + inparam.getSearch() + "%");
+            criteria.andNicknameLike("%" + inparam.getSearch() + "%");
             ShoppingUserExample.Criteria criteria1 = example.createCriteria();
             criteria1.andPhoneLike("%"+inparam.getSearch()+"%");
             example.or(criteria1);

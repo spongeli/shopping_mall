@@ -22,13 +22,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Configuration
-public class UserHandlerInterceptor implements HandlerInterceptor {
+public class ManagerUserHandlerInterceptor implements HandlerInterceptor {
     @Autowired
     private RedisUtil redisUtil;
     @Value("mall.token.key")
     private String tokenkey;
     private static final String START_TIME = "requestStartTime";
-    private static final Logger logger = LogManager.getLogger(UserHandlerInterceptor.class);
+    private static final Logger logger = LogManager.getLogger(ManagerUserHandlerInterceptor.class);
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {

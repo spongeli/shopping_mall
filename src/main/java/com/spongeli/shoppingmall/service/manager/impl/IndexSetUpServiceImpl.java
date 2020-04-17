@@ -3,6 +3,7 @@ package com.spongeli.shoppingmall.service.manager.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.spongeli.shoppingmall.common.exception.SystemException;
 import com.spongeli.shoppingmall.common.system.BaseService;
+import com.spongeli.shoppingmall.common.system.ManagerBaseService;
 import com.spongeli.shoppingmall.common.system.SystemConstant;
 import com.spongeli.shoppingmall.entity.request.index.IndexSetUpInparam;
 import com.spongeli.shoppingmall.entity.request.index.UpdateIndexSetUpInparam;
@@ -28,7 +29,7 @@ import java.util.Objects;
  **/
 
 @Service
-public class IndexSetUpServiceImpl extends BaseService implements IndexSetUpService {
+public class IndexSetUpServiceImpl extends ManagerBaseService implements IndexSetUpService {
     @Autowired
     private MallIndexSetUpMapper mapper;
 

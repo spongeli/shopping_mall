@@ -235,143 +235,143 @@ public class ShoppingUserExample {
             return (Criteria) this;
         }
 
-        public Criteria andWxNicknameIsNull() {
-            addCriterion("wx_nickname is null");
+        public Criteria andNicknameIsNull() {
+            addCriterion("nickname is null");
             return (Criteria) this;
         }
 
-        public Criteria andWxNicknameIsNotNull() {
-            addCriterion("wx_nickname is not null");
+        public Criteria andNicknameIsNotNull() {
+            addCriterion("nickname is not null");
             return (Criteria) this;
         }
 
-        public Criteria andWxNicknameEqualTo(String value) {
-            addCriterion("wx_nickname =", value, "wxNickname");
+        public Criteria andNicknameEqualTo(String value) {
+            addCriterion("nickname =", value, "nickname");
             return (Criteria) this;
         }
 
-        public Criteria andWxNicknameNotEqualTo(String value) {
-            addCriterion("wx_nickname <>", value, "wxNickname");
+        public Criteria andNicknameNotEqualTo(String value) {
+            addCriterion("nickname <>", value, "nickname");
             return (Criteria) this;
         }
 
-        public Criteria andWxNicknameGreaterThan(String value) {
-            addCriterion("wx_nickname >", value, "wxNickname");
+        public Criteria andNicknameGreaterThan(String value) {
+            addCriterion("nickname >", value, "nickname");
             return (Criteria) this;
         }
 
-        public Criteria andWxNicknameGreaterThanOrEqualTo(String value) {
-            addCriterion("wx_nickname >=", value, "wxNickname");
+        public Criteria andNicknameGreaterThanOrEqualTo(String value) {
+            addCriterion("nickname >=", value, "nickname");
             return (Criteria) this;
         }
 
-        public Criteria andWxNicknameLessThan(String value) {
-            addCriterion("wx_nickname <", value, "wxNickname");
+        public Criteria andNicknameLessThan(String value) {
+            addCriterion("nickname <", value, "nickname");
             return (Criteria) this;
         }
 
-        public Criteria andWxNicknameLessThanOrEqualTo(String value) {
-            addCriterion("wx_nickname <=", value, "wxNickname");
+        public Criteria andNicknameLessThanOrEqualTo(String value) {
+            addCriterion("nickname <=", value, "nickname");
             return (Criteria) this;
         }
 
-        public Criteria andWxNicknameLike(String value) {
-            addCriterion("wx_nickname like", value, "wxNickname");
+        public Criteria andNicknameLike(String value) {
+            addCriterion("nickname like", value, "nickname");
             return (Criteria) this;
         }
 
-        public Criteria andWxNicknameNotLike(String value) {
-            addCriterion("wx_nickname not like", value, "wxNickname");
+        public Criteria andNicknameNotLike(String value) {
+            addCriterion("nickname not like", value, "nickname");
             return (Criteria) this;
         }
 
-        public Criteria andWxNicknameIn(List<String> values) {
-            addCriterion("wx_nickname in", values, "wxNickname");
+        public Criteria andNicknameIn(List<String> values) {
+            addCriterion("nickname in", values, "nickname");
             return (Criteria) this;
         }
 
-        public Criteria andWxNicknameNotIn(List<String> values) {
-            addCriterion("wx_nickname not in", values, "wxNickname");
+        public Criteria andNicknameNotIn(List<String> values) {
+            addCriterion("nickname not in", values, "nickname");
             return (Criteria) this;
         }
 
-        public Criteria andWxNicknameBetween(String value1, String value2) {
-            addCriterion("wx_nickname between", value1, value2, "wxNickname");
+        public Criteria andNicknameBetween(String value1, String value2) {
+            addCriterion("nickname between", value1, value2, "nickname");
             return (Criteria) this;
         }
 
-        public Criteria andWxNicknameNotBetween(String value1, String value2) {
-            addCriterion("wx_nickname not between", value1, value2, "wxNickname");
+        public Criteria andNicknameNotBetween(String value1, String value2) {
+            addCriterion("nickname not between", value1, value2, "nickname");
             return (Criteria) this;
         }
 
-        public Criteria andWxUserpicIsNull() {
-            addCriterion("wx_userpic is null");
+        public Criteria andUserpicIsNull() {
+            addCriterion("userpic is null");
             return (Criteria) this;
         }
 
-        public Criteria andWxUserpicIsNotNull() {
-            addCriterion("wx_userpic is not null");
+        public Criteria andUserpicIsNotNull() {
+            addCriterion("userpic is not null");
             return (Criteria) this;
         }
 
-        public Criteria andWxUserpicEqualTo(String value) {
-            addCriterion("wx_userpic =", value, "wxUserpic");
+        public Criteria andUserpicEqualTo(String value) {
+            addCriterion("userpic =", value, "userpic");
             return (Criteria) this;
         }
 
-        public Criteria andWxUserpicNotEqualTo(String value) {
-            addCriterion("wx_userpic <>", value, "wxUserpic");
+        public Criteria andUserpicNotEqualTo(String value) {
+            addCriterion("userpic <>", value, "userpic");
             return (Criteria) this;
         }
 
-        public Criteria andWxUserpicGreaterThan(String value) {
-            addCriterion("wx_userpic >", value, "wxUserpic");
+        public Criteria andUserpicGreaterThan(String value) {
+            addCriterion("userpic >", value, "userpic");
             return (Criteria) this;
         }
 
-        public Criteria andWxUserpicGreaterThanOrEqualTo(String value) {
-            addCriterion("wx_userpic >=", value, "wxUserpic");
+        public Criteria andUserpicGreaterThanOrEqualTo(String value) {
+            addCriterion("userpic >=", value, "userpic");
             return (Criteria) this;
         }
 
-        public Criteria andWxUserpicLessThan(String value) {
-            addCriterion("wx_userpic <", value, "wxUserpic");
+        public Criteria andUserpicLessThan(String value) {
+            addCriterion("userpic <", value, "userpic");
             return (Criteria) this;
         }
 
-        public Criteria andWxUserpicLessThanOrEqualTo(String value) {
-            addCriterion("wx_userpic <=", value, "wxUserpic");
+        public Criteria andUserpicLessThanOrEqualTo(String value) {
+            addCriterion("userpic <=", value, "userpic");
             return (Criteria) this;
         }
 
-        public Criteria andWxUserpicLike(String value) {
-            addCriterion("wx_userpic like", value, "wxUserpic");
+        public Criteria andUserpicLike(String value) {
+            addCriterion("userpic like", value, "userpic");
             return (Criteria) this;
         }
 
-        public Criteria andWxUserpicNotLike(String value) {
-            addCriterion("wx_userpic not like", value, "wxUserpic");
+        public Criteria andUserpicNotLike(String value) {
+            addCriterion("userpic not like", value, "userpic");
             return (Criteria) this;
         }
 
-        public Criteria andWxUserpicIn(List<String> values) {
-            addCriterion("wx_userpic in", values, "wxUserpic");
+        public Criteria andUserpicIn(List<String> values) {
+            addCriterion("userpic in", values, "userpic");
             return (Criteria) this;
         }
 
-        public Criteria andWxUserpicNotIn(List<String> values) {
-            addCriterion("wx_userpic not in", values, "wxUserpic");
+        public Criteria andUserpicNotIn(List<String> values) {
+            addCriterion("userpic not in", values, "userpic");
             return (Criteria) this;
         }
 
-        public Criteria andWxUserpicBetween(String value1, String value2) {
-            addCriterion("wx_userpic between", value1, value2, "wxUserpic");
+        public Criteria andUserpicBetween(String value1, String value2) {
+            addCriterion("userpic between", value1, value2, "userpic");
             return (Criteria) this;
         }
 
-        public Criteria andWxUserpicNotBetween(String value1, String value2) {
-            addCriterion("wx_userpic not between", value1, value2, "wxUserpic");
+        public Criteria andUserpicNotBetween(String value1, String value2) {
+            addCriterion("userpic not between", value1, value2, "userpic");
             return (Criteria) this;
         }
 

@@ -2,6 +2,7 @@ package com.spongeli.shoppingmall.service.manager.impl;
 
 import com.spongeli.shoppingmall.common.bean.MallMenusEx;
 import com.spongeli.shoppingmall.common.system.BaseService;
+import com.spongeli.shoppingmall.common.system.ManagerBaseService;
 import com.spongeli.shoppingmall.pojo.dao.MallMenusMapper;
 import com.spongeli.shoppingmall.pojo.model.MallMenus;
 import com.spongeli.shoppingmall.pojo.model.MallMenusExample;
@@ -21,7 +22,7 @@ import java.util.List;
  * @Date 2020/1/2 10:20
  **/
 @Service
-public class MenusServiceImpl extends BaseService implements MallMenusService {
+public class MenusServiceImpl extends ManagerBaseService implements MallMenusService {
     @Autowired
     private MallMenusMapper mapper;
     @Override

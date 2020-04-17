@@ -37,9 +37,9 @@ public class GoodsServiceImpl extends BaseService implements GoodsService {
     private MallCategoryMapper categoryMapper;
     @Autowired
     private MallCateParamsMapper paramsMapper;
+
     /**
      * 查询商品列表
-     *
      *
      * @param isOnline
      * @param inparam
@@ -49,23 +49,23 @@ public class GoodsServiceImpl extends BaseService implements GoodsService {
     public PageInfo<MallGoodsEx> gainGoodsList(boolean isOnline, GainGoodsListInparam inparam) {
         String orderby = "goods_id asc";
 
-        if(StringUtils.isNotEmpty(inparam.getOrderRule())){
+        if (StringUtils.isNotEmpty(inparam.getOrderRule())) {
             // 排序规则<> 1=综合排序&2=销量排序&3=价格排序（倒序）&4=价格排序（顺序）
-            switch(inparam.getOrderRule()){
-                case GainGoodsListInparam.ORDER_RULE_2 :
+            switch (inparam.getOrderRule()) {
+                case GainGoodsListInparam.ORDER_RULE_2:
                     orderby = "sales_count desc";
                     break;
-                case GainGoodsListInparam.ORDER_RULE_3 :
+                case GainGoodsListInparam.ORDER_RULE_3:
                     orderby = "goods_price desc";
                     break;
-                case GainGoodsListInparam.ORDER_RULE_4 :
+                case GainGoodsListInparam.ORDER_RULE_4:
                     orderby = "goods_price asc";
                     break;
                 default:
                     orderby = "scan_count desc";
             }
-        }else{
-            orderby =  "scan_count asc";
+        } else {
+            orderby = "scan_count asc";
         }
 
 
@@ -84,12 +84,12 @@ public class GoodsServiceImpl extends BaseService implements GoodsService {
         }
 
         MallGoodsExample.Criteria criteria = example.createCriteria();
-        if(Objects.nonNull(inparam.getCateId()) && inparam.getCateId() != -1){
+        if (Objects.nonNull(inparam.getCateId()) && inparam.getCateId() != -1) {
             criteria.andCateIdEqualTo(inparam.getCateId());
         }
 
         // 只查上线的
-        if(isOnline){
+        if (isOnline) {
 //            MallGoodsExample.Criteria criteria = example.createCriteria();
             criteria.andGoodsStatusEqualTo(SystemConstant.YES);
         }
@@ -164,6 +164,7 @@ public class GoodsServiceImpl extends BaseService implements GoodsService {
 
     /**
      * 通过关键字搜索
+     *
      * @param keyword
      * @return
      */
@@ -181,7 +182,7 @@ public class GoodsServiceImpl extends BaseService implements GoodsService {
         return zhMallGoods(mapper.selectByExample(example));
     }
 
-    private List<MallGoodsEx> zhMallGoods(List<MallGoods> list){
+    private List<MallGoodsEx> zhMallGoods(List<MallGoods> list) {
         List<MallGoodsEx> goodsExes = new ArrayList<>();
         list.stream().forEach(item -> {
             goodsExes.add(zhMallGood(item));
@@ -191,15 +192,16 @@ public class GoodsServiceImpl extends BaseService implements GoodsService {
 
     /**
      * 转换成数组
+     *
      * @param item
      * @return
      */
-    private MallGoodsEx zhMallGood(MallGoods item){
+    private MallGoodsEx zhMallGood(MallGoods item) {
         MallGoodsEx ex = new MallGoodsEx();
         BeanUtils.copyProperties(item, ex);
-        ex.setDynamicParamList(JSON.parseArray(item.getDynamicParam(),Integer.class));
-        ex.setServiceParamList(JSON.parseArray(item.getServiceParam(),Integer.class));
-        ex.setStaticsParamList(JSON.parseArray(item.getStaticsParam(),Integer.class));
+        ex.setDynamicParamList(JSON.parseArray(item.getDynamicParam(), Integer.class));
+        ex.setServiceParamList(JSON.parseArray(item.getServiceParam(), Integer.class));
+        ex.setStaticsParamList(JSON.parseArray(item.getStaticsParam(), Integer.class));
         return ex;
     }
 
@@ -212,18 +214,29 @@ public class GoodsServiceImpl extends BaseService implements GoodsService {
 
         // 类别信息
         // 动态属性
-        MallCateParamsExample example = new MallCateParamsExample();
-        example.createCriteria().andAttrIdIn(goods.getDynamicParamList());
-        List<MallCateParams> dynamicParams = paramsMapper.selectByExample(example);
+        List<MallCateParams> dynamicParams = null;
+        if (!CollectionUtils.isEmpty(goods.getDynamicParamList())) {
+            MallCateParamsExample example = new MallCateParamsExample();
+            example.createCriteria().andAttrIdIn(goods.getDynamicParamList());
+            dynamicParams = paramsMapper.selectByExample(example);
+        }
+
         // 服务信息
-        MallCateParamsExample example2 = new MallCateParamsExample();
-        example2.createCriteria().andAttrIdIn(goods.getServiceParamList());
-        List<MallCateParams> servicesParams = paramsMapper.selectByExample(example2);
+        List<MallCateParams> servicesParams = null;
+        if (!CollectionUtils.isEmpty(goods.getDynamicParamList())) {
+            MallCateParamsExample example2 = new MallCateParamsExample();
+            example2.createCriteria().andAttrIdIn(goods.getServiceParamList());
+            servicesParams = paramsMapper.selectByExample(example2);
+        }
+
 
         // 静态属性
-        MallCateParamsExample example3 = new MallCateParamsExample();
-        example3.createCriteria().andAttrIdIn(goods.getStaticsParamList());
-        List<MallCateParams> staticsParams = paramsMapper.selectByExample(example3);
+        List<MallCateParams> staticsParams = null;
+        if (!CollectionUtils.isEmpty(goods.getStaticsParamList())) {
+            MallCateParamsExample example3 = new MallCateParamsExample();
+            example3.createCriteria().andAttrIdIn(goods.getStaticsParamList());
+            staticsParams = paramsMapper.selectByExample(example3);
+        }
 
         response.setGoods(goods);
         response.setStaticsCates(staticsParams);

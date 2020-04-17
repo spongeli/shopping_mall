@@ -8,9 +8,9 @@ public class ShoppingUser implements Serializable {
 
     private String wxOpenid;
 
-    private String wxNickname;
+    private String nickname;
 
-    private String wxUserpic;
+    private String userpic;
 
     private String phone;
 
@@ -38,20 +38,20 @@ public class ShoppingUser implements Serializable {
         this.wxOpenid = wxOpenid == null ? null : wxOpenid.trim();
     }
 
-    public String getWxNickname() {
-        return wxNickname;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setWxNickname(String wxNickname) {
-        this.wxNickname = wxNickname == null ? null : wxNickname.trim();
+    public void setNickname(String nickname) {
+        this.nickname = nickname == null ? null : nickname.trim();
     }
 
-    public String getWxUserpic() {
-        return wxUserpic;
+    public String getUserpic() {
+        return userpic;
     }
 
-    public void setWxUserpic(String wxUserpic) {
-        this.wxUserpic = wxUserpic == null ? null : wxUserpic.trim();
+    public void setUserpic(String userpic) {
+        this.userpic = userpic == null ? null : userpic.trim();
     }
 
     public String getPhone() {
@@ -94,8 +94,8 @@ public class ShoppingUser implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", userId=").append(userId);
         sb.append(", wxOpenid=").append(wxOpenid);
-        sb.append(", wxNickname=").append(wxNickname);
-        sb.append(", wxUserpic=").append(wxUserpic);
+        sb.append(", nickname=").append(nickname);
+        sb.append(", userpic=").append(userpic);
         sb.append(", phone=").append(phone);
         sb.append(", status=").append(status);
         sb.append(", createTime=").append(createTime);

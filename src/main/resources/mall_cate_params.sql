@@ -11,7 +11,7 @@
  Target Server Version : 80016
  File Encoding         : 65001
 
- Date: 16/04/2020 18:00:50
+ Date: 17/04/2020 17:14:52
 */
 
 SET NAMES utf8mb4;
@@ -205,14 +205,20 @@ INSERT INTO `mall_user` VALUES (1, 'admin', 'bfa7295d0bc030ff892fac639e1720fe', 
 DROP TABLE IF EXISTS `shopping_user`;
 CREATE TABLE `shopping_user`  (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `wx_openid` int(11) NULL DEFAULT NULL,
-  `wx_nickname` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `wx_userpic` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `wx_openid` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `nickname` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `userpic` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `status` tinyint(4) NULL DEFAULT NULL,
   `create_time` datetime(0) NULL DEFAULT NULL,
   `login_last_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`user_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of shopping_user
+-- ----------------------------
+INSERT INTO `shopping_user` VALUES (1, 'orhZe5UPLD68g0aPcTk0FijhkOKc', 'lc', 'https://wx.qlogo.cn/mmopen/vi_32/XWicesX6HY2wGyArfVqjL7HXiaQzXLdfPrrhAve1LqjGYhgJQ13hQfX5bBxBKkG4nemy1UJZb4DDQkK4KAia7ibSPg/132', NULL, NULL, 0, '2020-04-17 09:53:42', '2020-04-17 11:56:29');
 
 SET FOREIGN_KEY_CHECKS = 1;

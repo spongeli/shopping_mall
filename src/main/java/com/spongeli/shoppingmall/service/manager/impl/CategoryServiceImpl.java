@@ -3,6 +3,7 @@ package com.spongeli.shoppingmall.service.manager.impl;
 import com.spongeli.shoppingmall.common.bean.MallCategoryEx;
 import com.spongeli.shoppingmall.common.exception.SystemException;
 import com.spongeli.shoppingmall.common.system.BaseService;
+import com.spongeli.shoppingmall.common.system.ManagerBaseService;
 import com.spongeli.shoppingmall.common.system.SystemConstant;
 import com.spongeli.shoppingmall.pojo.dao.MallCategoryMapper;
 import com.spongeli.shoppingmall.pojo.model.MallCategory;
@@ -21,7 +22,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class CategoryServiceImpl extends BaseService implements CategoryService {
+public class CategoryServiceImpl extends ManagerBaseService implements CategoryService {
     @Autowired
     private MallCategoryMapper mapper;
 
