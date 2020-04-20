@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spongeli.shoppingmall.pojo.dao.MallUserMapper">
   <resultMap id="BaseResultMap" type="com.spongeli.shoppingmall.pojo.model.MallUser">
-    <id column="userid" jdbcType="BIGINT" property="userid" />
+    <id column="userid" jdbcType="INTEGER" property="userid" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="create_time" jdbcType="TIME" property="createTime" />
     <result column="status" jdbcType="TINYINT" property="status" />
-    <result column="last_login_time" jdbcType="DATE" property="lastLoginTime" />
+    <result column="last_login_time" jdbcType="TIME" property="lastLoginTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -84,15 +84,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from mall_user
-    where userid = #{userid,jdbcType=BIGINT}
+    where userid = #{userid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from mall_user
-    where userid = #{userid,jdbcType=BIGINT}
+    where userid = #{userid,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.spongeli.shoppingmall.pojo.model.MallUserExample">
     delete from mall_user
@@ -104,8 +104,8 @@
     insert into mall_user (userid, username, `password`, 
       create_time, `status`, last_login_time
       )
-    values (#{userid,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=DATE}, #{status,jdbcType=TINYINT}, #{lastLoginTime,jdbcType=DATE}
+    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIME}, #{status,jdbcType=TINYINT}, #{lastLoginTime,jdbcType=TIME}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.spongeli.shoppingmall.pojo.model.MallUser">
@@ -132,7 +132,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userid != null">
-        #{userid,jdbcType=BIGINT},
+        #{userid,jdbcType=INTEGER},
       </if>
       <if test="username != null">
         #{username,jdbcType=VARCHAR},
@@ -141,13 +141,13 @@
         #{password,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=DATE},
+        #{createTime,jdbcType=TIME},
       </if>
       <if test="status != null">
         #{status,jdbcType=TINYINT},
       </if>
       <if test="lastLoginTime != null">
-        #{lastLoginTime,jdbcType=DATE},
+        #{lastLoginTime,jdbcType=TIME},
       </if>
     </trim>
   </insert>
@@ -161,7 +161,7 @@
     update mall_user
     <set>
       <if test="record.userid != null">
-        userid = #{record.userid,jdbcType=BIGINT},
+        userid = #{record.userid,jdbcType=INTEGER},
       </if>
       <if test="record.username != null">
         username = #{record.username,jdbcType=VARCHAR},
@@ -170,13 +170,13 @@
         `password` = #{record.password,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null">
-        create_time = #{record.createTime,jdbcType=DATE},
+        create_time = #{record.createTime,jdbcType=TIME},
       </if>
       <if test="record.status != null">
         `status` = #{record.status,jdbcType=TINYINT},
       </if>
       <if test="record.lastLoginTime != null">
-        last_login_time = #{record.lastLoginTime,jdbcType=DATE},
+        last_login_time = #{record.lastLoginTime,jdbcType=TIME},
       </if>
     </set>
     <if test="_parameter != null">
@@ -185,12 +185,12 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update mall_user
-    set userid = #{record.userid,jdbcType=BIGINT},
+    set userid = #{record.userid,jdbcType=INTEGER},
       username = #{record.username,jdbcType=VARCHAR},
       `password` = #{record.password,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=DATE},
+      create_time = #{record.createTime,jdbcType=TIME},
       `status` = #{record.status,jdbcType=TINYINT},
-      last_login_time = #{record.lastLoginTime,jdbcType=DATE}
+      last_login_time = #{record.lastLoginTime,jdbcType=TIME}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -205,24 +205,24 @@
         `password` = #{password,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
-        create_time = #{createTime,jdbcType=DATE},
+        create_time = #{createTime,jdbcType=TIME},
       </if>
       <if test="status != null">
         `status` = #{status,jdbcType=TINYINT},
       </if>
       <if test="lastLoginTime != null">
-        last_login_time = #{lastLoginTime,jdbcType=DATE},
+        last_login_time = #{lastLoginTime,jdbcType=TIME},
       </if>
     </set>
-    where userid = #{userid,jdbcType=BIGINT}
+    where userid = #{userid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.spongeli.shoppingmall.pojo.model.MallUser">
     update mall_user
     set username = #{username,jdbcType=VARCHAR},
       `password` = #{password,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=DATE},
+      create_time = #{createTime,jdbcType=TIME},
       `status` = #{status,jdbcType=TINYINT},
-      last_login_time = #{lastLoginTime,jdbcType=DATE}
-    where userid = #{userid,jdbcType=BIGINT}
+      last_login_time = #{lastLoginTime,jdbcType=TIME}
+    where userid = #{userid,jdbcType=INTEGER}
   </update>
 </mapper>

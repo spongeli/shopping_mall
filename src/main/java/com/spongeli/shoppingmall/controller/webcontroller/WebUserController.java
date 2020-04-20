@@ -3,6 +3,7 @@ package com.spongeli.shoppingmall.controller.webcontroller;
 import com.spongeli.shoppingmall.common.system.BaseController;
 import com.spongeli.shoppingmall.common.system.CommonResponse;
 import com.spongeli.shoppingmall.entity.request.user.web.DoLoginPwdInparam;
+import com.spongeli.shoppingmall.entity.request.user.web.DoLoginVerifyInparam;
 import com.spongeli.shoppingmall.entity.request.user.web.DoRegisterInparam;
 import com.spongeli.shoppingmall.entity.request.user.web.WebDoLoginInparam;
 import com.spongeli.shoppingmall.service.commonservice.CommonService;
@@ -64,5 +65,10 @@ public class WebUserController extends BaseController {
     @PostMapping("/doLoginPwd")
     public CommonResponse doLoginByPwd(@RequestBody @Valid DoLoginPwdInparam inparam) {
         return instanceSuccess(service.doLoginByPwd(inparam));
+    }
+
+    @PostMapping("/doLoginVerify")
+    public CommonResponse doLoginVerify(@RequestBody @Valid DoLoginVerifyInparam inparam){
+        return instanceSuccess(service.doLoginVerify(inparam));
     }
 }

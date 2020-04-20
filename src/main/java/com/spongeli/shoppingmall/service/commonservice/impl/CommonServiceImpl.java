@@ -47,9 +47,9 @@ public class CommonServiceImpl extends BaseService implements CommonService {
     public boolean checkVerifyCode(HttpServletRequest request, String verify) {
         Object tempVerify = redisUtil.get(ServiceUtil.getIpAddr(request));
         if (Objects.isNull(tempVerify) || !StringUtils.isEquals(verify, String.valueOf(tempVerify))) {
-            return false;
+            throw new SystemException("验证码不正确");
         }
-        return false;
+        return true;
     }
 
     @Override

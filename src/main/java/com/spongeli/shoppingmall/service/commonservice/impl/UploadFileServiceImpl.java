@@ -16,8 +16,8 @@ import java.util.UUID;
 @Service
 public class UploadFileServiceImpl extends BaseService implements UploadFileService {
 
-//    private static String filePath = "D:\\software\\nginx-1.17.1\\html\\upload\\";
-    private static String filePath = "D:\\softwore\\nginx\\nginx-1.14.2\\html\\upload\\";
+    private static String filePath = "D:\\software\\nginx-1.17.1\\html\\upload\\";
+//    private static String filePath = "D:\\softwore\\nginx\\nginx-1.14.2\\html\\upload\\";
     private static String imgPath = "http://127.0.0.1:9000/upload/";
 
     @Override

@@ -10,7 +10,7 @@ public interface MallUserMapper {
 
     int deleteByExample(MallUserExample example);
 
-    int deleteByPrimaryKey(Long userid);
+    int deleteByPrimaryKey(Integer userid);
 
     int insert(MallUser record);
 
@@ -18,7 +18,7 @@ public interface MallUserMapper {
 
     List<MallUser> selectByExample(MallUserExample example);
 
-    MallUser selectByPrimaryKey(Long userid);
+    MallUser selectByPrimaryKey(Integer userid);
 
     int updateByExampleSelective(@Param("record") MallUser record, @Param("example") MallUserExample example);
 

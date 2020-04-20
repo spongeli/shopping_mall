@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class MallUser implements Serializable {
-    private Long userid;
+    private Integer userid;
 
     private String username;
 
@@ -18,11 +18,11 @@ public class MallUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Long getUserid() {
+    public Integer getUserid() {
         return userid;
     }
 
-    public void setUserid(Long userid) {
+    public void setUserid(Integer userid) {
         this.userid = userid;
     }
 

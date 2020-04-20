@@ -20,7 +20,7 @@ public class DoRegisterInparam {
     private String password;
 
     @NotNull(message = "重复密码不能为空")
-    @Pattern(regexp = "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$", message = "密码格式有误")
+    @Pattern(regexp = "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$", message = "重复密码格式有误")
     private String password2;
 
     public String getUsername() {

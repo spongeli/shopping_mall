@@ -3,19 +3,36 @@
 
  Source Server         : 本地
  Source Server Type    : MySQL
- Source Server Version : 80016
+ Source Server Version : 80018
  Source Host           : localhost:3306
  Source Schema         : tcb
 
  Target Server Type    : MySQL
- Target Server Version : 80016
+ Target Server Version : 80018
  File Encoding         : 65001
 
- Date: 17/04/2020 17:14:52
+ Date: 20/04/2020 23:20:25
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for mall_card
+-- ----------------------------
+DROP TABLE IF EXISTS `mall_card`;
+CREATE TABLE `mall_card`  (
+  `userid` int(11) NOT NULL COMMENT '用户id',
+  `good_id` int(11) NOT NULL COMMENT '商品id',
+  `number` int(11) NOT NULL COMMENT '购买数量',
+  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
+  PRIMARY KEY (`good_id`, `userid`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '购物车' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of mall_card
+-- ----------------------------
+INSERT INTO `mall_card` VALUES (3, 14, 9, '2020-04-20 23:10:32');
 
 -- ----------------------------
 -- Table structure for mall_cate_params
@@ -29,7 +46,7 @@ CREATE TABLE `mall_cate_params`  (
   `attr_value` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `create_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`attr_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of mall_cate_params
@@ -56,7 +73,7 @@ CREATE TABLE `mall_category`  (
   `create_time` datetime(0) NULL DEFAULT NULL,
   `status` tinyint(255) NULL DEFAULT NULL COMMENT '分类发布状态<>0=发布&1=不发布',
   PRIMARY KEY (`category_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of mall_category
@@ -94,9 +111,9 @@ CREATE TABLE `mall_goods`  (
 -- ----------------------------
 -- Records of mall_goods
 -- ----------------------------
-INSERT INTO `mall_goods` VALUES (12, 3, '衣服', NULL, '衣服', 1.00, 1, 1.00, 'http://127.0.0.1:9000/upload/ff0bae9f-4269-4ee0-864d-1252bdd13555.png', '<p><br></p><p><img src=\"http://127.0.0.1:9000/upload/447d9733-39c8-479b-a63d-c0e531e79881.jpg\"></p>', 1, NULL, NULL, 0, '[]', '[]', '[]', '2020-04-16 16:54:29');
-INSERT INTO `mall_goods` VALUES (13, 3, '衣服', NULL, '有参数', 1.00, 1, 1.00, 'http://127.0.0.1:9000/upload/97c33163-a730-4228-bf8a-d7d24d6cb0da.jpg', '<p><br></p><p><img src=\"http://127.0.0.1:9000/upload/7fa79ab1-71b6-4332-a9d6-c10ef6b926c4.jpg\"></p>', 1, NULL, NULL, 0, '[1,3]', '[6]', '[2]', '2020-04-16 16:55:44');
-INSERT INTO `mall_goods` VALUES (14, 3, '衣服', NULL, '大衣', 299.00, 200, 399.00, 'http://127.0.0.1:9000/upload/b2ee4d13-6876-4d08-bc1b-63c970b8530e.jpg,http://127.0.0.1:9000/upload/b00d94f6-56b7-471b-a805-f03cfcd9c7bb.jpg,http://127.0.0.1:9000/upload/1ef7d5c0-99eb-4460-855c-0c6ee095bf83.jpg', '<p><br></p><p><img src=\"http://127.0.0.1:9000/upload/af1d3246-60db-4a98-bcc2-d76d3fb73f3e.jpg\"></p>', 100, NULL, NULL, 0, '[3,5]', '[7]', '[2]', '2020-04-16 17:06:12');
+INSERT INTO `mall_goods` VALUES (12, 3, '衣服', NULL, '衣服', 1.00, 1, 1.00, 'http://127.0.0.1:9000/upload/dd79bad3-76ef-4d86-bb09-0daea855561c.jpg', '<p><br></p><p><img src=\"http://127.0.0.1:9000/upload/447d9733-39c8-479b-a63d-c0e531e79881.jpg\"></p>', 1, NULL, NULL, 0, '[]', '[]', '[]', '2020-04-16 16:54:29');
+INSERT INTO `mall_goods` VALUES (13, 3, '衣服', NULL, '有参数', 1.00, 1, 1.00, 'http://127.0.0.1:9000/upload/97ef9322-8265-4406-83fa-2e2501e903dc.jpg', '<p><br></p><p><img src=\"http://127.0.0.1:9000/upload/7fa79ab1-71b6-4332-a9d6-c10ef6b926c4.jpg\"></p>', 1, NULL, NULL, 0, '[1,3]', '[6]', '[2]', '2020-04-16 16:55:44');
+INSERT INTO `mall_goods` VALUES (14, 3, '衣服', NULL, '大衣', 299.00, 200, 399.00, 'http://127.0.0.1:9000/upload/07e82fbe-49d9-429a-8ce9-aa33204a1864.jpg,http://127.0.0.1:9000/upload/4dd68f66-984a-425d-af93-168fe9ccba12.jpg,http://127.0.0.1:9000/upload/2880585f-5ecd-4602-baaa-c7c7079c04ba.jpg', '<p><br></p><p><img src=\"http://127.0.0.1:9000/upload/1bcdccde-3915-4c0d-a2df-6a3a4dc6b51a.png\"></p>', 100, NULL, NULL, 0, '[3,5]', '[7]', '[2]', '2020-04-16 17:06:12');
 
 -- ----------------------------
 -- Table structure for mall_index_set_up
@@ -178,14 +195,18 @@ CREATE TABLE `mall_order`  (
   `pay_time` datetime(0) NULL DEFAULT NULL,
   `confirm_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`order_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of mall_order
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for mall_user
 -- ----------------------------
 DROP TABLE IF EXISTS `mall_user`;
 CREATE TABLE `mall_user`  (
-  `userid` bigint(20) NOT NULL,
+  `userid` int(11) NOT NULL,
   `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `create_time` time(6) NULL DEFAULT NULL,
@@ -208,17 +229,19 @@ CREATE TABLE `shopping_user`  (
   `wx_openid` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `nickname` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `userpic` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `status` tinyint(4) NULL DEFAULT NULL,
   `create_time` datetime(0) NULL DEFAULT NULL,
   `login_last_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of shopping_user
 -- ----------------------------
-INSERT INTO `shopping_user` VALUES (1, 'orhZe5UPLD68g0aPcTk0FijhkOKc', 'lc', 'https://wx.qlogo.cn/mmopen/vi_32/XWicesX6HY2wGyArfVqjL7HXiaQzXLdfPrrhAve1LqjGYhgJQ13hQfX5bBxBKkG4nemy1UJZb4DDQkK4KAia7ibSPg/132', NULL, NULL, 0, '2020-04-17 09:53:42', '2020-04-17 11:56:29');
+INSERT INTO `shopping_user` VALUES (1, 'orhZe5UPLD68g0aPcTk0FijhkOKc', 'lc', 'https://wx.qlogo.cn/mmopen/vi_32/XWicesX6HY2wGyArfVqjL7HXiaQzXLdfPrrhAve1LqjGYhgJQ13hQfX5bBxBKkG4nemy1UJZb4DDQkK4KAia7ibSPg/132', NULL, NULL, NULL, 0, '2020-04-17 09:53:42', '2020-04-17 11:56:29');
+INSERT INTO `shopping_user` VALUES (3, NULL, 'TCB2020042000002', 'http://127.0.0.1:9000/upload/header.jpg', 'spongeli_lc@sina.com', NULL, 'b58ff0dfcd4a36889184e187dd5c197e', 0, '2020-04-20 21:43:21', '2020-04-20 22:25:58');
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -8,6 +8,7 @@ import com.spongeli.shoppingmall.common.exception.SystemException;
 import com.spongeli.shoppingmall.common.system.WebBaseService;
 import com.spongeli.shoppingmall.config.ManagerUserHandlerInterceptor;
 import com.spongeli.shoppingmall.entity.request.user.web.DoLoginPwdInparam;
+import com.spongeli.shoppingmall.entity.request.user.web.DoLoginVerifyInparam;
 import com.spongeli.shoppingmall.entity.request.user.web.DoRegisterInparam;
 import com.spongeli.shoppingmall.entity.request.user.web.WebDoLoginInparam;
 import com.spongeli.shoppingmall.pojo.dao.ShoppingUserMapper;
@@ -37,7 +38,7 @@ import java.util.Objects;
 @Service
 public class WebUserServiceImpl extends WebBaseService implements WebUserService {
     private static final Logger logger = LogManager.getLogger(ManagerUserHandlerInterceptor.class);
-
+    private String DEFAULT_PIC = "http://127.0.0.1:9000/upload/header.jpg";
     @Value("mall.user.login.key")
     private String loginKey;
 
@@ -88,6 +89,9 @@ public class WebUserServiceImpl extends WebBaseService implements WebUserService
             throw new SystemException("当前手机号或邮箱已注册，请前往登陆");
         }
 
+        // 验证码
+        commonService.checkVerifyCode(getRequest(), inparam.getVerify());
+
         // 添加用户信息
         ShoppingUser user = new ShoppingUser();
         if (MatchUtil.isMobileNO(inparam.getUsername())) {
@@ -100,6 +104,7 @@ public class WebUserServiceImpl extends WebBaseService implements WebUserService
         user.setCreateTime(new Date());
         user.setStatus(SystemConstant.YES);
         user.setNickname(commonService.genOrderNoByRedis(MallConstant.DEFAULTUSERPREFIX));
+        user.setUserpic(DEFAULT_PIC);
         mapper.insert(user);
     }
 
@@ -129,17 +134,45 @@ public class WebUserServiceImpl extends WebBaseService implements WebUserService
         if (!StringUtils.isEquals(user.getPassword(), MD5Util.getMD5(inparam.getPassword() + "-" + loginKey))) {
             throw new SystemException("密码错误！");
         }
+        // 删除登录次数
+        redisUtil.del(redisKey);
+        return getLoginInfo(inparam.getUsername(), user);
+    }
 
+    /**
+     * 组装登录成功后返回对象
+     *
+     * @param username
+     * @param user
+     * @return
+     */
+    private JSONObject getLoginInfo(String username, ShoppingUser user) {
         // 更新最后登录时间
         updateUserLastLoginTime(user);
-        redisUtil.del(redisKey);
-        String tempToken = MD5Util.getMD5(inparam.getUsername() + "-" + loginKey);
-//        存缓存
+        String tempToken = MD5Util.getMD5(username + "-" + loginKey);
+        // 存缓存
         redisUtil.set(tempToken, user);
         JSONObject json = new JSONObject();
         json.put("token", tempToken);
         json.put("userinfo", user);
         return json;
+    }
+
+    /**
+     * @param inparam
+     * @return
+     */
+    @Override
+    public Object doLoginVerify(DoLoginVerifyInparam inparam) {
+
+        // 验证 验证码
+        commonService.checkVerifyCode(getRequest(), inparam.getVerify());
+
+        ShoppingUser user = checkShopping(inparam.getUsername());
+        if (Objects.isNull(user)) {
+            throw new SystemException("用户名不存在");
+        }
+        return getLoginInfo(inparam.getUsername(), user);
     }
 
     private void updateUserLastLoginTime(ShoppingUser shoppingUser) {
@@ -149,6 +182,10 @@ public class WebUserServiceImpl extends WebBaseService implements WebUserService
         mapper.updateByPrimaryKeySelective(record);
     }
 
+    /**
+     * @param username
+     * @return null 或者 ShoppingUser
+     */
     private ShoppingUser checkShopping(String username) {
         ShoppingUserExample example = new ShoppingUserExample();
         ShoppingUserExample.Criteria criteria = example.createCriteria();

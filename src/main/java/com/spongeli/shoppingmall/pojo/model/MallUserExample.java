@@ -106,30 +106,30 @@ public class MallUserExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        protected void addCriterionForJDBCDate(String condition, Date value, String property) {
+        protected void addCriterionForJDBCTime(String condition, Date value, String property) {
             if (value == null) {
                 throw new RuntimeException("Value for " + property + " cannot be null");
             }
-            addCriterion(condition, new java.sql.Date(value.getTime()), property);
+            addCriterion(condition, new java.sql.Time(value.getTime()), property);
         }
 
-        protected void addCriterionForJDBCDate(String condition, List<Date> values, String property) {
+        protected void addCriterionForJDBCTime(String condition, List<Date> values, String property) {
             if (values == null || values.size() == 0) {
                 throw new RuntimeException("Value list for " + property + " cannot be null or empty");
             }
-            List<java.sql.Date> dateList = new ArrayList<java.sql.Date>();
+            List<java.sql.Time> timeList = new ArrayList<java.sql.Time>();
             Iterator<Date> iter = values.iterator();
             while (iter.hasNext()) {
-                dateList.add(new java.sql.Date(iter.next().getTime()));
+                timeList.add(new java.sql.Time(iter.next().getTime()));
             }
-            addCriterion(condition, dateList, property);
+            addCriterion(condition, timeList, property);
         }
 
-        protected void addCriterionForJDBCDate(String condition, Date value1, Date value2, String property) {
+        protected void addCriterionForJDBCTime(String condition, Date value1, Date value2, String property) {
             if (value1 == null || value2 == null) {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
-            addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
+            addCriterion(condition, new java.sql.Time(value1.getTime()), new java.sql.Time(value2.getTime()), property);
         }
 
         public Criteria andUseridIsNull() {
@@ -142,52 +142,52 @@ public class MallUserExample {
             return (Criteria) this;
         }
 
-        public Criteria andUseridEqualTo(Long value) {
+        public Criteria andUseridEqualTo(Integer value) {
             addCriterion("userid =", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andUseridNotEqualTo(Long value) {
+        public Criteria andUseridNotEqualTo(Integer value) {
             addCriterion("userid <>", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andUseridGreaterThan(Long value) {
+        public Criteria andUseridGreaterThan(Integer value) {
             addCriterion("userid >", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andUseridGreaterThanOrEqualTo(Long value) {
+        public Criteria andUseridGreaterThanOrEqualTo(Integer value) {
             addCriterion("userid >=", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andUseridLessThan(Long value) {
+        public Criteria andUseridLessThan(Integer value) {
             addCriterion("userid <", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andUseridLessThanOrEqualTo(Long value) {
+        public Criteria andUseridLessThanOrEqualTo(Integer value) {
             addCriterion("userid <=", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andUseridIn(List<Long> values) {
+        public Criteria andUseridIn(List<Integer> values) {
             addCriterion("userid in", values, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andUseridNotIn(List<Long> values) {
+        public Criteria andUseridNotIn(List<Integer> values) {
             addCriterion("userid not in", values, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andUseridBetween(Long value1, Long value2) {
+        public Criteria andUseridBetween(Integer value1, Integer value2) {
             addCriterion("userid between", value1, value2, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andUseridNotBetween(Long value1, Long value2) {
+        public Criteria andUseridNotBetween(Integer value1, Integer value2) {
             addCriterion("userid not between", value1, value2, "userid");
             return (Criteria) this;
         }
@@ -343,52 +343,52 @@ public class MallUserExample {
         }
 
         public Criteria andCreateTimeEqualTo(Date value) {
-            addCriterionForJDBCDate("create_time =", value, "createTime");
+            addCriterionForJDBCTime("create_time =", value, "createTime");
             return (Criteria) this;
         }
 
         public Criteria andCreateTimeNotEqualTo(Date value) {
-            addCriterionForJDBCDate("create_time <>", value, "createTime");
+            addCriterionForJDBCTime("create_time <>", value, "createTime");
             return (Criteria) this;
         }
 
         public Criteria andCreateTimeGreaterThan(Date value) {
-            addCriterionForJDBCDate("create_time >", value, "createTime");
+            addCriterionForJDBCTime("create_time >", value, "createTime");
             return (Criteria) this;
         }
 
         public Criteria andCreateTimeGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("create_time >=", value, "createTime");
+            addCriterionForJDBCTime("create_time >=", value, "createTime");
             return (Criteria) this;
         }
 
         public Criteria andCreateTimeLessThan(Date value) {
-            addCriterionForJDBCDate("create_time <", value, "createTime");
+            addCriterionForJDBCTime("create_time <", value, "createTime");
             return (Criteria) this;
         }
 
         public Criteria andCreateTimeLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("create_time <=", value, "createTime");
+            addCriterionForJDBCTime("create_time <=", value, "createTime");
             return (Criteria) this;
         }
 
         public Criteria andCreateTimeIn(List<Date> values) {
-            addCriterionForJDBCDate("create_time in", values, "createTime");
+            addCriterionForJDBCTime("create_time in", values, "createTime");
             return (Criteria) this;
         }
 
         public Criteria andCreateTimeNotIn(List<Date> values) {
-            addCriterionForJDBCDate("create_time not in", values, "createTime");
+            addCriterionForJDBCTime("create_time not in", values, "createTime");
             return (Criteria) this;
         }
 
         public Criteria andCreateTimeBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("create_time between", value1, value2, "createTime");
+            addCriterionForJDBCTime("create_time between", value1, value2, "createTime");
             return (Criteria) this;
         }
 
         public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("create_time not between", value1, value2, "createTime");
+            addCriterionForJDBCTime("create_time not between", value1, value2, "createTime");
             return (Criteria) this;
         }
 
@@ -463,52 +463,52 @@ public class MallUserExample {
         }
 
         public Criteria andLastLoginTimeEqualTo(Date value) {
-            addCriterionForJDBCDate("last_login_time =", value, "lastLoginTime");
+            addCriterionForJDBCTime("last_login_time =", value, "lastLoginTime");
             return (Criteria) this;
         }
 
         public Criteria andLastLoginTimeNotEqualTo(Date value) {
-            addCriterionForJDBCDate("last_login_time <>", value, "lastLoginTime");
+            addCriterionForJDBCTime("last_login_time <>", value, "lastLoginTime");
             return (Criteria) this;
         }
 
         public Criteria andLastLoginTimeGreaterThan(Date value) {
-            addCriterionForJDBCDate("last_login_time >", value, "lastLoginTime");
+            addCriterionForJDBCTime("last_login_time >", value, "lastLoginTime");
             return (Criteria) this;
         }
 
         public Criteria andLastLoginTimeGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("last_login_time >=", value, "lastLoginTime");
+            addCriterionForJDBCTime("last_login_time >=", value, "lastLoginTime");
             return (Criteria) this;
         }
 
         public Criteria andLastLoginTimeLessThan(Date value) {
-            addCriterionForJDBCDate("last_login_time <", value, "lastLoginTime");
+            addCriterionForJDBCTime("last_login_time <", value, "lastLoginTime");
             return (Criteria) this;
         }
 
         public Criteria andLastLoginTimeLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("last_login_time <=", value, "lastLoginTime");
+            addCriterionForJDBCTime("last_login_time <=", value, "lastLoginTime");
             return (Criteria) this;
         }
 
         public Criteria andLastLoginTimeIn(List<Date> values) {
-            addCriterionForJDBCDate("last_login_time in", values, "lastLoginTime");
+            addCriterionForJDBCTime("last_login_time in", values, "lastLoginTime");
             return (Criteria) this;
         }
 
         public Criteria andLastLoginTimeNotIn(List<Date> values) {
-            addCriterionForJDBCDate("last_login_time not in", values, "lastLoginTime");
+            addCriterionForJDBCTime("last_login_time not in", values, "lastLoginTime");
             return (Criteria) this;
         }
 
         public Criteria andLastLoginTimeBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("last_login_time between", value1, value2, "lastLoginTime");
+            addCriterionForJDBCTime("last_login_time between", value1, value2, "lastLoginTime");
             return (Criteria) this;
         }
 
         public Criteria andLastLoginTimeNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("last_login_time not between", value1, value2, "lastLoginTime");
+            addCriterionForJDBCTime("last_login_time not between", value1, value2, "lastLoginTime");
             return (Criteria) this;
         }
     }

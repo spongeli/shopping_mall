@@ -1,6 +1,7 @@
 package com.spongeli.shoppingmall.service.web;
 
 import com.spongeli.shoppingmall.entity.request.user.web.DoLoginPwdInparam;
+import com.spongeli.shoppingmall.entity.request.user.web.DoLoginVerifyInparam;
 import com.spongeli.shoppingmall.entity.request.user.web.DoRegisterInparam;
 import com.spongeli.shoppingmall.entity.request.user.web.WebDoLoginInparam;
 
@@ -15,4 +16,6 @@ public interface WebUserService {
     void doRegister(DoRegisterInparam inparam);
 
     Object doLoginByPwd(DoLoginPwdInparam inparam);
+
+    Object doLoginVerify(DoLoginVerifyInparam inparam);
 }

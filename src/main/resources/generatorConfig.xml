@@ -53,9 +53,9 @@
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
 <!--enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"-->
-<!--        <table tableName="mall_user">-->
-<!--            <generatedKey column="user_id" sqlStatement="Mysql" identity="true" />-->
-<!--        </table>-->
+        <table tableName="mall_user">
+            <generatedKey column="user_id" sqlStatement="Mysql" identity="true" />
+        </table>
 <!--        <table tableName="mall_menus">-->
 <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
 <!--        </table>-->
@@ -65,9 +65,10 @@
 <!--            <table tableName="mall_goods">-->
 <!--                <generatedKey column="goods_id" sqlStatement="Mysql" identity="true" />-->
 <!--            </table>-->
-            <table tableName="shopping_user">
-                <generatedKey column="user_id" sqlStatement="Mysql" identity="true" />
-            </table>
+<!--            <table tableName="shopping_user">-->
+<!--                <generatedKey column="user_id" sqlStatement="Mysql" identity="true" />-->
+<!--            </table>-->
+<!--        <table tableName="mall_card"></table>-->
 <!--            <table tableName="mall_category">-->
 <!--                <generatedKey column="category_id" sqlStatement="Mysql" identity="true" />-->
 <!--            </table>-->
