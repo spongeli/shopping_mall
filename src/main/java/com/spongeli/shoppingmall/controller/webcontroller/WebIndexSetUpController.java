@@ -2,7 +2,7 @@ package com.spongeli.shoppingmall.controller.webcontroller;
 
 import com.spongeli.shoppingmall.common.system.BaseController;
 import com.spongeli.shoppingmall.common.system.CommonResponse;
-import com.spongeli.shoppingmall.common.system.SystemConstant;
+import com.spongeli.shoppingmall.common.cont.SystemConstant;
 import com.spongeli.shoppingmall.service.manager.IndexSetUpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,6 +1,6 @@
 package com.spongeli.shoppingmall.common.exception;
 
-import com.spongeli.shoppingmall.common.system.SystemConstant;
+import com.spongeli.shoppingmall.common.cont.SystemConstant;
 
 public class SystemException extends RuntimeException {
     private String message;

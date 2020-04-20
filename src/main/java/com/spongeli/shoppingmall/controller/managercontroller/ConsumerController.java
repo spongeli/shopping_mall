@@ -2,8 +2,8 @@ package com.spongeli.shoppingmall.controller.managercontroller;
 
 import com.spongeli.shoppingmall.common.system.BaseController;
 import com.spongeli.shoppingmall.common.system.CommonResponse;
-import com.spongeli.shoppingmall.entity.request.user.GainShoppingUsersInparam;
-import com.spongeli.shoppingmall.entity.request.user.UpdateShoppingUserInparam;
+import com.spongeli.shoppingmall.entity.request.user.manager.GainShoppingUsersInparam;
+import com.spongeli.shoppingmall.entity.request.user.manager.UpdateShoppingUserInparam;
 import com.spongeli.shoppingmall.service.manager.ConsumerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

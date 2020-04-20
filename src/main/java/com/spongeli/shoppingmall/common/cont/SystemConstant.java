@@ -1,4 +1,4 @@
-package com.spongeli.shoppingmall.common.system;
+package com.spongeli.shoppingmall.common.cont;
 
 /**
  * @Description

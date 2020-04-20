@@ -2,17 +2,12 @@ package com.spongeli.shoppingmall.service.web.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.spongeli.shoppingmall.common.bean.RequestMallUSerBean;
 import com.spongeli.shoppingmall.common.bean.ShoppingUserEx;
 import com.spongeli.shoppingmall.common.exception.SystemException;
-import com.spongeli.shoppingmall.common.system.BaseService;
-import com.spongeli.shoppingmall.common.system.SystemConstant;
+import com.spongeli.shoppingmall.common.cont.SystemConstant;
 import com.spongeli.shoppingmall.common.system.WebBaseService;
 import com.spongeli.shoppingmall.common.wx.WxConstant;
-import com.spongeli.shoppingmall.pojo.dao.MallUserMapper;
 import com.spongeli.shoppingmall.pojo.dao.ShoppingUserMapper;
-import com.spongeli.shoppingmall.pojo.model.MallUser;
-import com.spongeli.shoppingmall.pojo.model.MallUserExample;
 import com.spongeli.shoppingmall.pojo.model.ShoppingUser;
 import com.spongeli.shoppingmall.pojo.model.ShoppingUserExample;
 import com.spongeli.shoppingmall.service.web.WxService;

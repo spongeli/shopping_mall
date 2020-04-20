@@ -1,11 +1,9 @@
 package com.spongeli.shoppingmall.service.manager.impl;
 
 import com.spongeli.shoppingmall.common.exception.SystemException;
-import com.spongeli.shoppingmall.common.system.BaseService;
 import com.spongeli.shoppingmall.common.system.ManagerBaseService;
 import com.spongeli.shoppingmall.common.util.RedisUtil;
-import com.spongeli.shoppingmall.entity.request.user.DoLoginInparam;
-import com.spongeli.shoppingmall.entity.request.user.UpdateShoppingUserInparam;
+import com.spongeli.shoppingmall.entity.request.user.manager.DoLoginInparam;
 import com.spongeli.shoppingmall.entity.response.user.DoLoginOutparam;
 import com.spongeli.shoppingmall.pojo.dao.MallUserMapper;
 import com.spongeli.shoppingmall.pojo.model.MallUser;

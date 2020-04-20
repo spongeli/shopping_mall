@@ -1,9 +1,9 @@
 package com.spongeli.shoppingmall.config;
 
 import com.spongeli.shoppingmall.common.bean.RequestMallUSerBean;
+import com.spongeli.shoppingmall.common.cont.SystemConstant;
 import com.spongeli.shoppingmall.common.exception.SystemException;
-import com.spongeli.shoppingmall.common.system.RequestHolder;
-import com.spongeli.shoppingmall.common.system.SystemConstant;
+import com.spongeli.shoppingmall.common.system.ManagerRequestHolder;
 import com.spongeli.shoppingmall.common.util.RedisUtil;
 import com.spongeli.shoppingmall.pojo.model.MallUser;
 import com.spongeli.shoppingmall.utils.MD5Util;
@@ -47,7 +47,7 @@ public class ManagerUserHandlerInterceptor implements HandlerInterceptor {
         RequestMallUSerBean requestMallUSerBean = new RequestMallUSerBean();
         requestMallUSerBean.setToken(token);
         BeanUtils.copyProperties(user, requestMallUSerBean);
-        RequestHolder.addAll(requestMallUSerBean, request);
+        ManagerRequestHolder.addAll(requestMallUSerBean, request);
         return true;
     }
 
@@ -58,7 +58,7 @@ public class ManagerUserHandlerInterceptor implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable Exception ex) {
-        RequestHolder.remove();
+        ManagerRequestHolder.remove();
         // 计算本次请求时间差
         logger.info("request exception url:{},cost:{} ms", request.getRequestURI(),
                 System.currentTimeMillis() - (long) request.getAttribute(START_TIME));

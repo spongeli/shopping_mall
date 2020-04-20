@@ -1,4 +1,4 @@
-package com.spongeli.shoppingmall.common.project;
+package com.spongeli.shoppingmall.common.cont;
 
 /**
  * 短信服务

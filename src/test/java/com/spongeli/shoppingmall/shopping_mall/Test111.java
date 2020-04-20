@@ -1,7 +1,7 @@
 package com.spongeli.shoppingmall.shopping_mall;
 
 import com.spongeli.shoppingmall.common.exception.SystemException;
-import com.spongeli.shoppingmall.common.system.SystemConstant;
+import com.spongeli.shoppingmall.common.cont.SystemConstant;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
 import org.junit.jupiter.api.Test;

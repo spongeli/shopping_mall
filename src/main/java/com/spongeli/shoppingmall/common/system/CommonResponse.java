@@ -1,5 +1,7 @@
 package com.spongeli.shoppingmall.common.system;
 
+import com.spongeli.shoppingmall.common.cont.SystemConstant;
+
 /**
  * @Description
  * @Author spongeli

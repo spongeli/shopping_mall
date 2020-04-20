@@ -12,7 +12,11 @@ public class ShoppingUser implements Serializable {
 
     private String userpic;
 
+    private String email;
+
     private String phone;
+
+    private String password;
 
     private Byte status;
 
@@ -54,12 +58,28 @@ public class ShoppingUser implements Serializable {
         this.userpic = userpic == null ? null : userpic.trim();
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
+    }
+
     public String getPhone() {
         return phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone == null ? null : phone.trim();
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
     }
 
     public Byte getStatus() {
@@ -96,7 +116,9 @@ public class ShoppingUser implements Serializable {
         sb.append(", wxOpenid=").append(wxOpenid);
         sb.append(", nickname=").append(nickname);
         sb.append(", userpic=").append(userpic);
+        sb.append(", email=").append(email);
         sb.append(", phone=").append(phone);
+        sb.append(", password=").append(password);
         sb.append(", status=").append(status);
         sb.append(", createTime=").append(createTime);
         sb.append(", loginLastTime=").append(loginLastTime);

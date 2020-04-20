@@ -2,6 +2,7 @@ package com.spongeli.shoppingmall.common.system;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.spongeli.shoppingmall.common.cont.SystemConstant;
 
 public class BaseController {
 

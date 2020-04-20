@@ -1,10 +1,8 @@
 package com.spongeli.shoppingmall.service.manager.impl;
 
-import com.alibaba.fastjson.JSONObject;
 import com.spongeli.shoppingmall.common.exception.SystemException;
-import com.spongeli.shoppingmall.common.system.BaseService;
 import com.spongeli.shoppingmall.common.system.ManagerBaseService;
-import com.spongeli.shoppingmall.common.system.SystemConstant;
+import com.spongeli.shoppingmall.common.cont.SystemConstant;
 import com.spongeli.shoppingmall.entity.request.index.IndexSetUpInparam;
 import com.spongeli.shoppingmall.entity.request.index.UpdateIndexSetUpInparam;
 import com.spongeli.shoppingmall.pojo.dao.MallIndexSetUpMapper;
@@ -15,9 +13,7 @@ import com.spongeli.shoppingmall.utils.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;

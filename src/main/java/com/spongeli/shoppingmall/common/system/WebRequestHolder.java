@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
  * @Author spongeli
  * @Date 2020/3/6 15:17
  **/
-public class ShoppingUserHolder{
+public class WebRequestHolder{
     // 保存当前线程的用户信息
     private static final ThreadLocal<ShoppingUserEx> userHolder = new ThreadLocal<>();
     // 保存当前线程的request信息

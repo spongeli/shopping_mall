@@ -6,7 +6,9 @@
     <result column="wx_openid" jdbcType="VARCHAR" property="wxOpenid" />
     <result column="nickname" jdbcType="VARCHAR" property="nickname" />
     <result column="userpic" jdbcType="VARCHAR" property="userpic" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="status" jdbcType="TINYINT" property="status" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="login_last_time" jdbcType="TIMESTAMP" property="loginLastTime" />
@@ -70,7 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    user_id, wx_openid, nickname, userpic, phone, `status`, create_time, login_last_time
+    user_id, wx_openid, nickname, userpic, email, phone, `password`, `status`, create_time, 
+    login_last_time
   </sql>
   <select id="selectByExample" parameterType="com.spongeli.shoppingmall.pojo.model.ShoppingUserExample" resultMap="BaseResultMap">
     select
@@ -107,11 +110,13 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into shopping_user (wx_openid, nickname, userpic, 
-      phone, `status`, create_time, 
-      login_last_time)
+      email, phone, `password`, 
+      `status`, create_time, login_last_time
+      )
     values (#{wxOpenid,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{userpic,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{loginLastTime,jdbcType=TIMESTAMP})
+      #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{loginLastTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.spongeli.shoppingmall.pojo.model.ShoppingUser">
     <selectKey keyProperty="userId" order="AFTER" resultType="java.lang.Integer">
@@ -128,8 +133,14 @@
       <if test="userpic != null">
         userpic,
       </if>
+      <if test="email != null">
+        email,
+      </if>
       <if test="phone != null">
         phone,
+      </if>
+      <if test="password != null">
+        `password`,
       </if>
       <if test="status != null">
         `status`,
@@ -151,8 +162,14 @@
       <if test="userpic != null">
         #{userpic,jdbcType=VARCHAR},
       </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
       <if test="phone != null">
         #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
         #{status,jdbcType=TINYINT},
@@ -186,8 +203,14 @@
       <if test="record.userpic != null">
         userpic = #{record.userpic,jdbcType=VARCHAR},
       </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
       <if test="record.phone != null">
         phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        `password` = #{record.password,jdbcType=VARCHAR},
       </if>
       <if test="record.status != null">
         `status` = #{record.status,jdbcType=TINYINT},
@@ -209,7 +232,9 @@
       wx_openid = #{record.wxOpenid,jdbcType=VARCHAR},
       nickname = #{record.nickname,jdbcType=VARCHAR},
       userpic = #{record.userpic,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
+      `password` = #{record.password,jdbcType=VARCHAR},
       `status` = #{record.status,jdbcType=TINYINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       login_last_time = #{record.loginLastTime,jdbcType=TIMESTAMP}
@@ -229,8 +254,14 @@
       <if test="userpic != null">
         userpic = #{userpic,jdbcType=VARCHAR},
       </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
       <if test="phone != null">
         phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        `password` = #{password,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
         `status` = #{status,jdbcType=TINYINT},
@@ -249,7 +280,9 @@
     set wx_openid = #{wxOpenid,jdbcType=VARCHAR},
       nickname = #{nickname,jdbcType=VARCHAR},
       userpic = #{userpic,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR},
       `status` = #{status,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       login_last_time = #{loginLastTime,jdbcType=TIMESTAMP}

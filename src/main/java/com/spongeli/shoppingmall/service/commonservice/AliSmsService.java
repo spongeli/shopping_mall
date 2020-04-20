@@ -4,4 +4,5 @@ import java.util.Map;
 
 public interface AliSmsService {
     boolean sendAliSmsService(String phone, Map<String,String> param);
+    boolean sendAliSmsService(String phone,String code);
 }

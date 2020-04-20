@@ -1,18 +1,12 @@
 package com.spongeli.shoppingmall.config;
 
-import com.spongeli.shoppingmall.common.bean.RequestMallUSerBean;
+import com.alibaba.fastjson.JSON;
 import com.spongeli.shoppingmall.common.bean.ShoppingUserEx;
-import com.spongeli.shoppingmall.common.exception.SystemException;
-import com.spongeli.shoppingmall.common.system.RequestHolder;
-import com.spongeli.shoppingmall.common.system.ShoppingUserHolder;
-import com.spongeli.shoppingmall.common.system.SystemConstant;
+import com.spongeli.shoppingmall.common.system.WebRequestHolder;
 import com.spongeli.shoppingmall.common.util.RedisUtil;
-import com.spongeli.shoppingmall.pojo.model.MallUser;
-import com.spongeli.shoppingmall.utils.MD5Util;
 import com.spongeli.shoppingmall.utils.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -47,13 +41,18 @@ public class WebUserHandlerInterceptor implements HandlerInterceptor {
         String uri = request.getRequestURI();
         logger.info("前台请求拦截:" + uri);
 
+        // 保存用户信息到当前线程
         String token = request.getHeader("token");
-        if(StringUtils.isNotEmpty(token)){
-            ShoppingUserEx ex = (ShoppingUserEx) redisUtil.get(token);
+        if (StringUtils.isNotEmpty(token)) {
+            Object userinfo = redisUtil.get(token);
+            ShoppingUserEx ex = JSON.parseObject(JSON.toJSONString(userinfo), ShoppingUserEx.class);
             ex.setToken(token);
             // 存储上下文信息
-            ShoppingUserHolder.addAll(ex, request);
+            WebRequestHolder.addAll(ex, request);
         }
+
+        // 保存当前线程的request信息
+        WebRequestHolder.add(request);
         return true;
     }
 
@@ -64,7 +63,7 @@ public class WebUserHandlerInterceptor implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable Exception ex) {
-        RequestHolder.remove();
+        WebRequestHolder.remove();
         // 计算本次请求时间差
         logger.info("request exception url:{},cost:{} ms", request.getRequestURI(),
                 System.currentTimeMillis() - (long) request.getAttribute(START_TIME));

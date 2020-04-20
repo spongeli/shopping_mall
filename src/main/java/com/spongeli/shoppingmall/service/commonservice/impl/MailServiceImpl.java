@@ -162,6 +162,7 @@ public class MailServiceImpl implements MailService {
         }
         Context context = new Context();
         context.setVariable("code", code);
+        logger.info("验证码：{}",code);
         // 传递 emailTemplate.html 模板需要的值，并将模板转换为 String
         String emailContent = templateEngine.process("emailTemplate", context);
         return sendHtmlMail(destEmail, "验证码", emailContent);

@@ -39,7 +39,7 @@ public class ServiceUtil {
             ipAddress = "";
         }
         // ipAddress = this.getRequest().getRemoteAddr();
-
+        System.out.println(ipAddress);
         return ipAddress;
     }
 }

@@ -6,7 +6,7 @@ import com.github.pagehelper.PageInfo;
 import com.spongeli.shoppingmall.common.bean.MallGoodsEx;
 import com.spongeli.shoppingmall.common.exception.SystemException;
 import com.spongeli.shoppingmall.common.system.BaseService;
-import com.spongeli.shoppingmall.common.system.SystemConstant;
+import com.spongeli.shoppingmall.common.cont.SystemConstant;
 import com.spongeli.shoppingmall.entity.request.goods.AddGoodsInparam;
 import com.spongeli.shoppingmall.entity.request.goods.GainGoodsListInparam;
 import com.spongeli.shoppingmall.entity.response.goods.GainGoodByIdResponse;

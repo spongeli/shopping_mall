@@ -1,13 +1,15 @@
 package com.spongeli.shoppingmall.controller.commoncontroller;
 
+import com.spongeli.shoppingmall.common.system.BaseController;
+import com.spongeli.shoppingmall.common.system.CommonResponse;
 import com.spongeli.shoppingmall.common.util.RedisUtil;
 import com.spongeli.shoppingmall.common.util.ServiceUtil;
 import com.spongeli.shoppingmall.common.util.VerifyCode;
+import com.spongeli.shoppingmall.service.commonservice.CommonService;
 import com.spongeli.shoppingmall.service.commonservice.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -18,11 +20,13 @@ import java.io.OutputStream;
 
 @Controller
 @RequestMapping("/common")
-public class CommonController {
+public class CommonController extends BaseController {
 
 
     @Autowired
     private RedisUtil redisUtil;
+    @Autowired
+    private CommonService commonService;
 
     /* 获取验证码图片*/
     @GetMapping("/verify_code")
@@ -48,4 +52,9 @@ public class CommonController {
         }
     }
 
+    @ResponseBody
+    @RequestMapping("/uuid")
+    public CommonResponse gainRedisUUID(){
+        return instanceSuccess(commonService.genOrderNoByRedis("tcb"));
+    }
 }

@@ -1,4 +1,4 @@
-package com.spongeli.shoppingmall.service.commonservice;
+package com.spongeli.shoppingmall.service.commonservice.impl;
 
 
 import com.alibaba.fastjson.JSON;
@@ -11,12 +11,13 @@ import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.exceptions.ServerException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
-import com.spongeli.shoppingmall.common.project.SmsConstant;
-import com.spongeli.shoppingmall.controller.commoncontroller.SmsController;
+import com.spongeli.shoppingmall.common.cont.SmsConstant;
+import com.spongeli.shoppingmall.service.commonservice.AliSmsService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -32,7 +33,6 @@ public class AliSmsServiceImpl implements AliSmsService {
      */
     @Override
     public boolean sendAliSmsService(String phone, Map<String, String> param) {
-        boolean bool = false;
         DefaultProfile profile = DefaultProfile.getProfile("default", SmsConstant.ACCESSKEYID, SmsConstant.ACCESSKEYSECRET);
         IAcsClient client = new DefaultAcsClient(profile);
         CommonRequest request = new CommonRequest();
@@ -49,13 +49,13 @@ public class AliSmsServiceImpl implements AliSmsService {
         // 充填的参数
         request.putQueryParameter("TemplateParam", JSON.toJSONString(param));
         try {
-            logger.info("调用阿里云短信服务请求 phone={}，templateCode={},templateParam={}", phone, param);
+            logger.info("调用阿里云短信服务请求 phone={}，templateParam={}", phone, param);
             CommonResponse response = client.getCommonResponse(request);
-            logger.info("调用阿里云短信服务请求结束：{}", response);
+            logger.info("调用阿里云短信服务请求结束：{}", JSON.toJSONString(response));
             // 下面是一个json格式转换工具，把String 转换为map 也可以转换为对象
             JSONObject jsonObject = JSON.parseObject(response.getData());
             if ("OK".equals(jsonObject.get("Code"))) {
-                bool = true;
+                return true;
             }
         } catch (ServerException e) {
             logger.error("阿里云短信服务异常:{}", e);
@@ -65,5 +65,12 @@ public class AliSmsServiceImpl implements AliSmsService {
             logger.error("json转换异常:{}", e);
         }
         return false;
+    }
+
+    @Override
+    public boolean sendAliSmsService(String phone, String code) {
+        Map<String, String> map = new HashMap<>();
+        map.put("code", code);
+        return this.sendAliSmsService(phone, map);
     }
 }

@@ -1,4 +1,4 @@
-package com.spongeli.shoppingmall.entity.request.user;
+package com.spongeli.shoppingmall.entity.request.user.manager;
 
 import com.spongeli.shoppingmall.common.bean.PageHeplerInparam;
 

@@ -10,6 +10,7 @@ import com.spongeli.shoppingmall.pojo.model.ShoppingUser;
 public class ShoppingUserEx extends ShoppingUser {
     private String token;
     private String sessionKey;
+    private String ip;
 
     public String getSessionKey() {
         return sessionKey;
@@ -25,5 +26,13 @@ public class ShoppingUserEx extends ShoppingUser {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 }

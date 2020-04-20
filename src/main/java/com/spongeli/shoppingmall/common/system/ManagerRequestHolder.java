@@ -5,7 +5,7 @@ import com.spongeli.shoppingmall.pojo.model.MallUser;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class RequestHolder{
+public class ManagerRequestHolder{
     // 保存当前线程的用户信息
     private static final ThreadLocal<RequestMallUSerBean> userHolder = new ThreadLocal<>();
     // 保存当前线程的request信息
