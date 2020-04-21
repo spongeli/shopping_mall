@@ -3,15 +3,15 @@
 
  Source Server         : 本地
  Source Server Type    : MySQL
- Source Server Version : 80018
+ Source Server Version : 80016
  Source Host           : localhost:3306
  Source Schema         : tcb
 
  Target Server Type    : MySQL
- Target Server Version : 80018
+ Target Server Version : 80016
  File Encoding         : 65001
 
- Date: 20/04/2020 23:20:25
+ Date: 21/04/2020 18:11:47
 */
 
 SET NAMES utf8mb4;
@@ -22,17 +22,25 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `mall_card`;
 CREATE TABLE `mall_card`  (
+  `card_id` int(11) NOT NULL AUTO_INCREMENT,
   `userid` int(11) NOT NULL COMMENT '用户id',
   `good_id` int(11) NOT NULL COMMENT '商品id',
+  `select_style` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '选择的样式',
   `number` int(11) NOT NULL COMMENT '购买数量',
   `create_time` datetime(0) NOT NULL COMMENT '创建时间',
-  PRIMARY KEY (`good_id`, `userid`) USING BTREE
+  PRIMARY KEY (`card_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '购物车' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of mall_card
 -- ----------------------------
-INSERT INTO `mall_card` VALUES (3, 14, 9, '2020-04-20 23:10:32');
+INSERT INTO `mall_card` VALUES (7, 3, 12, '大众 XLL', 3, '2020-04-21 14:57:13');
+INSERT INTO `mall_card` VALUES (9, 3, 12, '桑塔纳 XL', 7, '2020-04-21 14:58:14');
+INSERT INTO `mall_card` VALUES (11, 3, 15, '绿色', 2, '2020-04-21 15:02:51');
+INSERT INTO `mall_card` VALUES (12, 3, 15, '蓝色', 1, '2020-04-21 15:27:21');
+INSERT INTO `mall_card` VALUES (13, 3, 15, '红色', 1, '2020-04-21 15:27:26');
+INSERT INTO `mall_card` VALUES (14, 3, 15, '白色', 1, '2020-04-21 15:27:30');
+INSERT INTO `mall_card` VALUES (19, 3, 16, '蓝色', 1, '2020-04-21 16:23:14');
 
 -- ----------------------------
 -- Table structure for mall_cate_params
@@ -46,7 +54,7 @@ CREATE TABLE `mall_cate_params`  (
   `attr_value` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `create_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`attr_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of mall_cate_params
@@ -73,7 +81,7 @@ CREATE TABLE `mall_category`  (
   `create_time` datetime(0) NULL DEFAULT NULL,
   `status` tinyint(255) NULL DEFAULT NULL COMMENT '分类发布状态<>0=发布&1=不发布',
   PRIMARY KEY (`category_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of mall_category
@@ -111,9 +119,9 @@ CREATE TABLE `mall_goods`  (
 -- ----------------------------
 -- Records of mall_goods
 -- ----------------------------
-INSERT INTO `mall_goods` VALUES (12, 3, '衣服', NULL, '衣服', 1.00, 1, 1.00, 'http://127.0.0.1:9000/upload/dd79bad3-76ef-4d86-bb09-0daea855561c.jpg', '<p><br></p><p><img src=\"http://127.0.0.1:9000/upload/447d9733-39c8-479b-a63d-c0e531e79881.jpg\"></p>', 1, NULL, NULL, 0, '[]', '[]', '[]', '2020-04-16 16:54:29');
-INSERT INTO `mall_goods` VALUES (13, 3, '衣服', NULL, '有参数', 1.00, 1, 1.00, 'http://127.0.0.1:9000/upload/97ef9322-8265-4406-83fa-2e2501e903dc.jpg', '<p><br></p><p><img src=\"http://127.0.0.1:9000/upload/7fa79ab1-71b6-4332-a9d6-c10ef6b926c4.jpg\"></p>', 1, NULL, NULL, 0, '[1,3]', '[6]', '[2]', '2020-04-16 16:55:44');
-INSERT INTO `mall_goods` VALUES (14, 3, '衣服', NULL, '大衣', 299.00, 200, 399.00, 'http://127.0.0.1:9000/upload/07e82fbe-49d9-429a-8ce9-aa33204a1864.jpg,http://127.0.0.1:9000/upload/4dd68f66-984a-425d-af93-168fe9ccba12.jpg,http://127.0.0.1:9000/upload/2880585f-5ecd-4602-baaa-c7c7079c04ba.jpg', '<p><br></p><p><img src=\"http://127.0.0.1:9000/upload/1bcdccde-3915-4c0d-a2df-6a3a4dc6b51a.png\"></p>', 100, NULL, NULL, 0, '[3,5]', '[7]', '[2]', '2020-04-16 17:06:12');
+INSERT INTO `mall_goods` VALUES (12, 3, '衣服', NULL, '衣服', 88.80, 1, 99.80, 'http://127.0.0.1:9000/upload/9f5e225b-ecda-4c89-8cfd-6c90459b2a66.png', '<p><br></p><p><img src=\"http://127.0.0.1:9000/upload/447d9733-39c8-479b-a63d-c0e531e79881.jpg\"></p>', 99, 00000000031, 00000000000, 0, '[1,3]', '[]', '[4]', '2020-04-16 16:54:29');
+INSERT INTO `mall_goods` VALUES (15, 3, '衣服', NULL, '汉服', 88.90, 200, 99.90, 'http://127.0.0.1:9000/upload/07e56105-ad98-471d-b185-04d5cbfebbbd.jpg', '<p><br></p><p><img src=\"http://127.0.0.1:9000/upload/42f0f102-922b-492c-be8e-c3a0197b79a9.jpg\"></p>', 200, 00000000009, 00000000000, 2, '[5]', '[7]', '[2]', '2020-04-21 15:02:17');
+INSERT INTO `mall_goods` VALUES (16, 3, '衣服', NULL, '酒泉', 366.00, 300, 998.00, 'http://127.0.0.1:9000/upload/7039f389-db7f-4425-91c4-b4bb88180ed1.jpg', '<p><br></p><p><img src=\"http://127.0.0.1:9000/upload/8c29a131-c5ba-4f3c-9905-adefaaf52af7.jpg\"></p>', 50, 00000000034, 00000000000, 0, '[5]', '[7]', '[2]', '2020-04-21 15:57:57');
 
 -- ----------------------------
 -- Table structure for mall_index_set_up
@@ -198,10 +206,6 @@ CREATE TABLE `mall_order`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of mall_order
--- ----------------------------
-
--- ----------------------------
 -- Table structure for mall_user
 -- ----------------------------
 DROP TABLE IF EXISTS `mall_user`;
@@ -221,6 +225,26 @@ CREATE TABLE `mall_user`  (
 INSERT INTO `mall_user` VALUES (1, 'admin', 'bfa7295d0bc030ff892fac639e1720fe', '17:57:37.000000', 0, '17:57:44.000000');
 
 -- ----------------------------
+-- Table structure for mall_user_scan
+-- ----------------------------
+DROP TABLE IF EXISTS `mall_user_scan`;
+CREATE TABLE `mall_user_scan`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `goods_id` int(11) NULL DEFAULT NULL COMMENT '商品Id',
+  `scan_time` datetime(0) NULL DEFAULT NULL,
+  `goods_img` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '商品的头图',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '用户浏览产品表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of mall_user_scan
+-- ----------------------------
+INSERT INTO `mall_user_scan` VALUES (7, 3, 12, '2020-04-21 17:26:48', 'http://127.0.0.1:9000/upload/9f5e225b-ecda-4c89-8cfd-6c90459b2a66.png', '2020-04-21 17:26:48');
+INSERT INTO `mall_user_scan` VALUES (8, 3, 16, '2020-04-21 17:30:16', 'http://127.0.0.1:9000/upload/7039f389-db7f-4425-91c4-b4bb88180ed1.jpg', '2020-04-21 17:26:48');
+
+-- ----------------------------
 -- Table structure for shopping_user
 -- ----------------------------
 DROP TABLE IF EXISTS `shopping_user`;
@@ -236,12 +260,12 @@ CREATE TABLE `shopping_user`  (
   `create_time` datetime(0) NULL DEFAULT NULL,
   `login_last_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of shopping_user
 -- ----------------------------
 INSERT INTO `shopping_user` VALUES (1, 'orhZe5UPLD68g0aPcTk0FijhkOKc', 'lc', 'https://wx.qlogo.cn/mmopen/vi_32/XWicesX6HY2wGyArfVqjL7HXiaQzXLdfPrrhAve1LqjGYhgJQ13hQfX5bBxBKkG4nemy1UJZb4DDQkK4KAia7ibSPg/132', NULL, NULL, NULL, 0, '2020-04-17 09:53:42', '2020-04-17 11:56:29');
-INSERT INTO `shopping_user` VALUES (3, NULL, 'TCB2020042000002', 'http://127.0.0.1:9000/upload/header.jpg', 'spongeli_lc@sina.com', NULL, 'b58ff0dfcd4a36889184e187dd5c197e', 0, '2020-04-20 21:43:21', '2020-04-20 22:25:58');
+INSERT INTO `shopping_user` VALUES (3, NULL, 'TCB2020042000002', 'http://127.0.0.1:9000/upload/header.jpg', 'spongeli_lc@sina.com', NULL, 'b58ff0dfcd4a36889184e187dd5c197e', 0, '2020-04-20 21:43:21', '2020-04-21 17:26:48');
 
 SET FOREIGN_KEY_CHECKS = 1;

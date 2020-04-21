@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.spongeli.shoppingmall.pojo.dao.MallCardMapper">
-  <resultMap id="BaseResultMap" type="com.spongeli.shoppingmall.pojo.model.MallCard">
-    <id column="card_id" jdbcType="INTEGER" property="cardId" />
-    <result column="userid" jdbcType="INTEGER" property="userid" />
-    <result column="good_id" jdbcType="INTEGER" property="goodId" />
-    <result column="select_style" jdbcType="VARCHAR" property="selectStyle" />
-    <result column="number" jdbcType="INTEGER" property="number" />
+<mapper namespace="com.spongeli.shoppingmall.pojo.dao.MallUserScanMapper">
+  <resultMap id="BaseResultMap" type="com.spongeli.shoppingmall.pojo.model.MallUserScan">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
+    <result column="scan_time" jdbcType="TIMESTAMP" property="scanTime" />
+    <result column="goods_img" jdbcType="VARCHAR" property="goodsImg" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -68,15 +68,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    card_id, userid, good_id, select_style, `number`, create_time
+    id, user_id, goods_id, scan_time, goods_img, create_time
   </sql>
-  <select id="selectByExample" parameterType="com.spongeli.shoppingmall.pojo.model.MallCardExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.spongeli.shoppingmall.pojo.model.MallUserScanExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from mall_card
+    from mall_user_scan
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,93 +87,91 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from mall_card
-    where card_id = #{cardId,jdbcType=INTEGER}
+    from mall_user_scan
+    where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from mall_card
-    where card_id = #{cardId,jdbcType=INTEGER}
+    delete from mall_user_scan
+    where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.spongeli.shoppingmall.pojo.model.MallCardExample">
-    delete from mall_card
+  <delete id="deleteByExample" parameterType="com.spongeli.shoppingmall.pojo.model.MallUserScanExample">
+    delete from mall_user_scan
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.spongeli.shoppingmall.pojo.model.MallCard">
-    insert into mall_card (card_id, userid, good_id, 
-      select_style, `number`, create_time
-      )
-    values (#{cardId,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{goodId,jdbcType=INTEGER}, 
-      #{selectStyle,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
-      )
+  <insert id="insert" parameterType="com.spongeli.shoppingmall.pojo.model.MallUserScan">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into mall_user_scan (user_id, goods_id, scan_time, 
+      goods_img, create_time)
+    values (#{userId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{scanTime,jdbcType=TIMESTAMP}, 
+      #{goodsImg,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.spongeli.shoppingmall.pojo.model.MallCard">
-    insert into mall_card
+  <insert id="insertSelective" parameterType="com.spongeli.shoppingmall.pojo.model.MallUserScan">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into mall_user_scan
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="cardId != null">
-        card_id,
+      <if test="userId != null">
+        user_id,
       </if>
-      <if test="userid != null">
-        userid,
+      <if test="goodsId != null">
+        goods_id,
       </if>
-      <if test="goodId != null">
-        good_id,
+      <if test="scanTime != null">
+        scan_time,
       </if>
-      <if test="selectStyle != null">
-        select_style,
-      </if>
-      <if test="number != null">
-        `number`,
+      <if test="goodsImg != null">
+        goods_img,
       </if>
       <if test="createTime != null">
         create_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="cardId != null">
-        #{cardId,jdbcType=INTEGER},
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
       </if>
-      <if test="userid != null">
-        #{userid,jdbcType=INTEGER},
+      <if test="goodsId != null">
+        #{goodsId,jdbcType=INTEGER},
       </if>
-      <if test="goodId != null">
-        #{goodId,jdbcType=INTEGER},
+      <if test="scanTime != null">
+        #{scanTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="selectStyle != null">
-        #{selectStyle,jdbcType=VARCHAR},
-      </if>
-      <if test="number != null">
-        #{number,jdbcType=INTEGER},
+      <if test="goodsImg != null">
+        #{goodsImg,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.spongeli.shoppingmall.pojo.model.MallCardExample" resultType="java.lang.Long">
-    select count(*) from mall_card
+  <select id="countByExample" parameterType="com.spongeli.shoppingmall.pojo.model.MallUserScanExample" resultType="java.lang.Long">
+    select count(*) from mall_user_scan
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update mall_card
+    update mall_user_scan
     <set>
-      <if test="record.cardId != null">
-        card_id = #{record.cardId,jdbcType=INTEGER},
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.userid != null">
-        userid = #{record.userid,jdbcType=INTEGER},
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
       </if>
-      <if test="record.goodId != null">
-        good_id = #{record.goodId,jdbcType=INTEGER},
+      <if test="record.goodsId != null">
+        goods_id = #{record.goodsId,jdbcType=INTEGER},
       </if>
-      <if test="record.selectStyle != null">
-        select_style = #{record.selectStyle,jdbcType=VARCHAR},
+      <if test="record.scanTime != null">
+        scan_time = #{record.scanTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.number != null">
-        `number` = #{record.number,jdbcType=INTEGER},
+      <if test="record.goodsImg != null">
+        goods_img = #{record.goodsImg,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -184,45 +182,45 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update mall_card
-    set card_id = #{record.cardId,jdbcType=INTEGER},
-      userid = #{record.userid,jdbcType=INTEGER},
-      good_id = #{record.goodId,jdbcType=INTEGER},
-      select_style = #{record.selectStyle,jdbcType=VARCHAR},
-      `number` = #{record.number,jdbcType=INTEGER},
+    update mall_user_scan
+    set id = #{record.id,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      goods_id = #{record.goodsId,jdbcType=INTEGER},
+      scan_time = #{record.scanTime,jdbcType=TIMESTAMP},
+      goods_img = #{record.goodsImg,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.spongeli.shoppingmall.pojo.model.MallCard">
-    update mall_card
+  <update id="updateByPrimaryKeySelective" parameterType="com.spongeli.shoppingmall.pojo.model.MallUserScan">
+    update mall_user_scan
     <set>
-      <if test="userid != null">
-        userid = #{userid,jdbcType=INTEGER},
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="goodId != null">
-        good_id = #{goodId,jdbcType=INTEGER},
+      <if test="goodsId != null">
+        goods_id = #{goodsId,jdbcType=INTEGER},
       </if>
-      <if test="selectStyle != null">
-        select_style = #{selectStyle,jdbcType=VARCHAR},
+      <if test="scanTime != null">
+        scan_time = #{scanTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="number != null">
-        `number` = #{number,jdbcType=INTEGER},
+      <if test="goodsImg != null">
+        goods_img = #{goodsImg,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where card_id = #{cardId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.spongeli.shoppingmall.pojo.model.MallCard">
-    update mall_card
-    set userid = #{userid,jdbcType=INTEGER},
-      good_id = #{goodId,jdbcType=INTEGER},
-      select_style = #{selectStyle,jdbcType=VARCHAR},
-      `number` = #{number,jdbcType=INTEGER},
+  <update id="updateByPrimaryKey" parameterType="com.spongeli.shoppingmall.pojo.model.MallUserScan">
+    update mall_user_scan
+    set user_id = #{userId,jdbcType=INTEGER},
+      goods_id = #{goodsId,jdbcType=INTEGER},
+      scan_time = #{scanTime,jdbcType=TIMESTAMP},
+      goods_img = #{goodsImg,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP}
-    where card_id = #{cardId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

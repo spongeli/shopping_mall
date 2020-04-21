@@ -4,21 +4,25 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.spongeli.shoppingmall.common.bean.MallGoodsEx;
+import com.spongeli.shoppingmall.common.bean.ShoppingUserEx;
+import com.spongeli.shoppingmall.common.cont.SystemConstant;
 import com.spongeli.shoppingmall.common.exception.SystemException;
 import com.spongeli.shoppingmall.common.system.BaseService;
-import com.spongeli.shoppingmall.common.cont.SystemConstant;
+import com.spongeli.shoppingmall.common.system.WebBaseService;
 import com.spongeli.shoppingmall.entity.request.goods.AddGoodsInparam;
 import com.spongeli.shoppingmall.entity.request.goods.GainGoodsListInparam;
 import com.spongeli.shoppingmall.entity.response.goods.GainGoodByIdResponse;
 import com.spongeli.shoppingmall.pojo.dao.MallCateParamsMapper;
 import com.spongeli.shoppingmall.pojo.dao.MallCategoryMapper;
 import com.spongeli.shoppingmall.pojo.dao.MallGoodsMapper;
+import com.spongeli.shoppingmall.pojo.dao.MallUserScanMapper;
 import com.spongeli.shoppingmall.pojo.model.*;
 import com.spongeli.shoppingmall.service.manager.GoodsService;
 import com.spongeli.shoppingmall.utils.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
@@ -30,14 +34,15 @@ import java.util.Objects;
  * 商品管理servie
  */
 @Service
-public class GoodsServiceImpl extends BaseService implements GoodsService {
+public class GoodsServiceImpl extends WebBaseService implements GoodsService {
     @Autowired
     private MallGoodsMapper mapper;
     @Autowired
     private MallCategoryMapper categoryMapper;
     @Autowired
     private MallCateParamsMapper paramsMapper;
-
+    @Autowired
+    private MallUserScanMapper scanMapper;
     /**
      * 查询商品列表
      *
@@ -75,24 +80,61 @@ public class GoodsServiceImpl extends BaseService implements GoodsService {
         if (StringUtils.isNotEmpty(inparam.getSearch())) {
             MallGoodsExample.Criteria criteria = example.createCriteria();
             criteria.andGoodsNameLike("%" + inparam.getSearch() + "%");
+            if (Objects.nonNull(inparam.getCateId()) && inparam.getCateId() != -1) {
+                criteria.andCateIdEqualTo(inparam.getCateId());
+            }
+            // 只查上线的
+            if (isOnline) {
+                criteria.andGoodsStatusEqualTo(SystemConstant.YES);
+            }else{
+                // 除了被删除的
+                criteria.andGoodsStatusNotEqualTo(SystemConstant.DELETE);
+            }
+
             MallGoodsExample.Criteria criteria1 = example.createCriteria();
             criteria1.andGoodsHotsLabelLike("%" + inparam.getSearch() + "%");
+            if (Objects.nonNull(inparam.getCateId()) && inparam.getCateId() != -1) {
+                criteria1.andCateIdEqualTo(inparam.getCateId());
+            }
+
+            // 只查上线的
+            if (isOnline) {
+                criteria1.andGoodsStatusEqualTo(SystemConstant.YES);
+            }else{
+                // 除了被删除的
+                criteria1.andGoodsStatusNotEqualTo(SystemConstant.DELETE);
+            }
+
             example.or(criteria1);
             MallGoodsExample.Criteria criteria2 = example.createCriteria();
-            criteria1.andCateNameLike("%" + inparam.getSearch() + "%");
+            criteria2.andCateNameLike("%" + inparam.getSearch() + "%");
+            if (Objects.nonNull(inparam.getCateId()) && inparam.getCateId() != -1) {
+                criteria2.andCateIdEqualTo(inparam.getCateId());
+            }
+
+            // 只查上线的
+            if (isOnline) {
+                criteria2.andGoodsStatusEqualTo(SystemConstant.YES);
+            }else{
+                // 除了被删除的
+                criteria2.andGoodsStatusNotEqualTo(SystemConstant.DELETE);
+            }
             example.or(criteria2);
+        }else{
+            MallGoodsExample.Criteria criteria3 = example.createCriteria();
+            if (Objects.nonNull(inparam.getCateId()) && inparam.getCateId() != -1) {
+                criteria3.andCateIdEqualTo(inparam.getCateId());
+            }
+
+            // 只查上线的
+            if (isOnline) {
+                criteria3.andGoodsStatusEqualTo(SystemConstant.YES);
+            }else{
+                // 除了被删除的
+                criteria3.andGoodsStatusNotEqualTo(SystemConstant.DELETE);
+            }
         }
 
-        MallGoodsExample.Criteria criteria = example.createCriteria();
-        if (Objects.nonNull(inparam.getCateId()) && inparam.getCateId() != -1) {
-            criteria.andCateIdEqualTo(inparam.getCateId());
-        }
-
-        // 只查上线的
-        if (isOnline) {
-//            MallGoodsExample.Criteria criteria = example.createCriteria();
-            criteria.andGoodsStatusEqualTo(SystemConstant.YES);
-        }
         List<MallGoods> goods = mapper.selectByExample(example);
         return new PageInfo<>(zhMallGoods(goods));
     }
@@ -107,13 +149,17 @@ public class GoodsServiceImpl extends BaseService implements GoodsService {
     public void addGoods(AddGoodsInparam inparam) {
         MallGoods goods = new MallGoods();
         BeanUtils.copyProperties(inparam, goods);
-        goods.setGoodsStatus((byte) 1); // 默认不上架
+        goods.setGoodsStatus(SystemConstant.NO); // 默认不上架
         goods.setCreateTime(new Date());
         // 设置属性名称
         goods.setCateName(attrNameById(inparam.getCateId()));
         goods.setStaticsParam(JSON.toJSONString(inparam.getStaticsParam()));
         goods.setDynamicParam(JSON.toJSONString(inparam.getDynamicParam()));
         goods.setServiceParam(JSON.toJSONString(inparam.getServiceParam()));
+
+        // 静态数据
+        goods.setScanCount(0);
+        goods.setSalesCount(0);
         mapper.insert(goods);
     }
 
@@ -159,7 +205,11 @@ public class GoodsServiceImpl extends BaseService implements GoodsService {
     @Override
     public void deleteGoods(Integer goodId) {
         validGoodsExist(goodId);
-        mapper.deleteByPrimaryKey(goodId);
+
+        MallGoods record = new MallGoods();
+        record.setGoodsId(goodId);
+        record.setGoodsStatus(SystemConstant.DELETE);
+        mapper.updateByPrimaryKeySelective(record);
     }
 
     /**
@@ -205,46 +255,99 @@ public class GoodsServiceImpl extends BaseService implements GoodsService {
         return ex;
     }
 
+    /**
+     * 查看商品详情
+     *
+     * @param goodId
+     * @return
+     */
     @Override
+    @Transactional
     public GainGoodByIdResponse GainGoodById(Integer goodId) {
         GainGoodByIdResponse response = new GainGoodByIdResponse();
 
         // 商品信息
-        MallGoodsEx goods = zhMallGood(validGoodsExist(goodId));
+        MallGoods goods = validGoodsExist(goodId);
+        MallGoodsEx goodEx = zhMallGood(validGoodsExist(goodId));
 
-        // 类别信息
+        // 增加商品浏览量/和用户浏览日志
+        updateGoodScan(goods);
+
         // 动态属性
         List<MallCateParams> dynamicParams = null;
-        if (!CollectionUtils.isEmpty(goods.getDynamicParamList())) {
+        if (!CollectionUtils.isEmpty(goodEx.getDynamicParamList())) {
             MallCateParamsExample example = new MallCateParamsExample();
-            example.createCriteria().andAttrIdIn(goods.getDynamicParamList());
+            example.createCriteria().andAttrIdIn(goodEx.getDynamicParamList());
             dynamicParams = paramsMapper.selectByExample(example);
         }
 
         // 服务信息
         List<MallCateParams> servicesParams = null;
-        if (!CollectionUtils.isEmpty(goods.getDynamicParamList())) {
+        if (!CollectionUtils.isEmpty(goodEx.getServiceParamList())) {
             MallCateParamsExample example2 = new MallCateParamsExample();
-            example2.createCriteria().andAttrIdIn(goods.getServiceParamList());
+            example2.createCriteria().andAttrIdIn(goodEx.getServiceParamList());
             servicesParams = paramsMapper.selectByExample(example2);
         }
 
 
         // 静态属性
         List<MallCateParams> staticsParams = null;
-        if (!CollectionUtils.isEmpty(goods.getStaticsParamList())) {
+        if (!CollectionUtils.isEmpty(goodEx.getStaticsParamList())) {
             MallCateParamsExample example3 = new MallCateParamsExample();
-            example3.createCriteria().andAttrIdIn(goods.getStaticsParamList());
+            example3.createCriteria().andAttrIdIn(goodEx.getStaticsParamList());
             staticsParams = paramsMapper.selectByExample(example3);
         }
 
-        response.setGoods(goods);
+        response.setGoods(goodEx);
         response.setStaticsCates(staticsParams);
         response.setDynamicCates(dynamicParams);
         response.setServiceCates(servicesParams);
         return response;
     }
 
+    /**
+     * 增加浏览记录
+     * @param good
+     * @param currentUserId
+     */
+    @Override
+    public void addScanGoods(MallGoods good, Integer currentUserId) {
+        MallUserScanExample example = new MallUserScanExample();
+        MallUserScanExample.Criteria criteria = example.createCriteria();
+        criteria.andUserIdEqualTo(currentUserId);
+        criteria.andGoodsIdEqualTo(good.getGoodsId());
+        List<MallUserScan> mallUserScans = scanMapper.selectByExample(example);
+        if(CollectionUtils.isEmpty(mallUserScans)){
+            MallUserScan recordScan = new MallUserScan();
+            recordScan.setCreateTime(new Date());
+            recordScan.setGoodsId(good.getGoodsId());
+            recordScan.setGoodsImg(good.getGoodsHeaderImg().split(",")[0]);
+            recordScan.setUserId(currentUserId);
+            recordScan.setScanTime(new Date());
+            scanMapper.insert(recordScan);
+        }else{
+            MallUserScan recordScan = new MallUserScan();
+            recordScan.setId(mallUserScans.get(0).getId());
+            recordScan.setScanTime(new Date());
+            scanMapper.updateByPrimaryKeySelective(recordScan);
+        }
+    }
+
+    private void updateGoodScan(MallGoods good) {
+
+        // 商品浏览次数
+        MallGoods record = new MallGoods();
+        record.setGoodsId(good.getGoodsId());
+        int scanNum = (Objects.isNull(good.getScanCount()) ? 0 : good.getScanCount()) + 1;
+        record.setScanCount(scanNum);
+        good.setScanCount(scanNum);
+        mapper.updateByPrimaryKeySelective(record);
+
+        // 用户浏览记录
+        try {
+            addScanGoods(good, getCurrentUserId());
+        }catch (SystemException e){}
+    }
 
     /**
      * 校验商品Id存在性

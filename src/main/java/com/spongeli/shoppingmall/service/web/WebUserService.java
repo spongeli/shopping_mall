@@ -5,6 +5,8 @@ import com.spongeli.shoppingmall.entity.request.user.web.DoLoginVerifyInparam;
 import com.spongeli.shoppingmall.entity.request.user.web.DoRegisterInparam;
 import com.spongeli.shoppingmall.entity.request.user.web.WebDoLoginInparam;
 
+import java.util.List;
+
 /**
  * @Description
  * @Author spongeli
@@ -18,4 +20,6 @@ public interface WebUserService {
     Object doLoginByPwd(DoLoginPwdInparam inparam);
 
     Object doLoginVerify(DoLoginVerifyInparam inparam);
+
+    void addScanGoods(List<Integer> ids);
 }

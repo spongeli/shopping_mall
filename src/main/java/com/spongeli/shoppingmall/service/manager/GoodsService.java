@@ -24,4 +24,6 @@ public interface GoodsService {
     List<MallGoodsEx> queryByKeyword(String keyword);
 
     GainGoodByIdResponse GainGoodById(Integer goodId);
+
+    void addScanGoods(MallGoods good, Integer currentUserId);
 }

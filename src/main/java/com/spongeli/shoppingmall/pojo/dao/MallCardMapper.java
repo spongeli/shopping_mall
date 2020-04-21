@@ -10,7 +10,7 @@ public interface MallCardMapper {
 
     int deleteByExample(MallCardExample example);
 
-    int deleteByPrimaryKey(@Param("goodId") Integer goodId, @Param("userid") Integer userid);
+    int deleteByPrimaryKey(Integer cardId);
 
     int insert(MallCard record);
 
@@ -18,7 +18,7 @@ public interface MallCardMapper {
 
     List<MallCard> selectByExample(MallCardExample example);
 
-    MallCard selectByPrimaryKey(@Param("goodId") Integer goodId, @Param("userid") Integer userid);
+    MallCard selectByPrimaryKey(Integer cardId);
 
     int updateByExampleSelective(@Param("record") MallCard record, @Param("example") MallCardExample example);
 

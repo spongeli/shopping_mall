@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @Description
@@ -67,8 +68,19 @@ public class WebUserController extends BaseController {
         return instanceSuccess(service.doLoginByPwd(inparam));
     }
 
+    /**
+     * 验证码登陆
+     * @param inparam
+     * @return
+     */
     @PostMapping("/doLoginVerify")
     public CommonResponse doLoginVerify(@RequestBody @Valid DoLoginVerifyInparam inparam){
         return instanceSuccess(service.doLoginVerify(inparam));
+    }
+
+    @GetMapping("/scan")
+    public CommonResponse addScanGoods(@RequestParam("ids") List<Integer> ids){
+        service.addScanGoods(ids);
+        return instanceSuccess();
     }
 }

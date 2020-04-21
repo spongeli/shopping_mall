@@ -4,15 +4,35 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class MallCard implements Serializable {
-    private Integer goodId;
+    private Integer cardId;
 
     private Integer userid;
+
+    private Integer goodId;
+
+    private String selectStyle;
 
     private Integer number;
 
     private Date createTime;
 
     private static final long serialVersionUID = 1L;
+
+    public Integer getCardId() {
+        return cardId;
+    }
+
+    public void setCardId(Integer cardId) {
+        this.cardId = cardId;
+    }
+
+    public Integer getUserid() {
+        return userid;
+    }
+
+    public void setUserid(Integer userid) {
+        this.userid = userid;
+    }
 
     public Integer getGoodId() {
         return goodId;
@@ -22,12 +42,12 @@ public class MallCard implements Serializable {
         this.goodId = goodId;
     }
 
-    public Integer getUserid() {
-        return userid;
+    public String getSelectStyle() {
+        return selectStyle;
     }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
+    public void setSelectStyle(String selectStyle) {
+        this.selectStyle = selectStyle == null ? null : selectStyle.trim();
     }
 
     public Integer getNumber() {
@@ -52,8 +72,10 @@ public class MallCard implements Serializable {
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
-        sb.append(", goodId=").append(goodId);
+        sb.append(", cardId=").append(cardId);
         sb.append(", userid=").append(userid);
+        sb.append(", goodId=").append(goodId);
+        sb.append(", selectStyle=").append(selectStyle);
         sb.append(", number=").append(number);
         sb.append(", createTime=").append(createTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);

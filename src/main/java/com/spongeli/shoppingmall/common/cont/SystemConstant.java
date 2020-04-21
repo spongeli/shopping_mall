@@ -22,8 +22,9 @@ public interface SystemConstant {
     String QUERY_ALL = "all";
     String QUERY_PART = "part";
 
-    Byte YES = (byte)0;
-    Byte NO = (byte)1;
+    Byte YES = (byte)0; // 上架
+    Byte NO = (byte)1;  // 下架
+    Byte DELETE = (byte)2; // 删除
 
     String CATE_DYNAMIC = "dynamic";
     String CATE_STATICS = "statics";

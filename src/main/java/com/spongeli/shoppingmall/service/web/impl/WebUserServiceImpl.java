@@ -11,10 +11,14 @@ import com.spongeli.shoppingmall.entity.request.user.web.DoLoginPwdInparam;
 import com.spongeli.shoppingmall.entity.request.user.web.DoLoginVerifyInparam;
 import com.spongeli.shoppingmall.entity.request.user.web.DoRegisterInparam;
 import com.spongeli.shoppingmall.entity.request.user.web.WebDoLoginInparam;
+import com.spongeli.shoppingmall.pojo.dao.MallGoodsMapper;
 import com.spongeli.shoppingmall.pojo.dao.ShoppingUserMapper;
+import com.spongeli.shoppingmall.pojo.model.MallGoods;
+import com.spongeli.shoppingmall.pojo.model.MallGoodsExample;
 import com.spongeli.shoppingmall.pojo.model.ShoppingUser;
 import com.spongeli.shoppingmall.pojo.model.ShoppingUserExample;
 import com.spongeli.shoppingmall.service.commonservice.CommonService;
+import com.spongeli.shoppingmall.service.manager.GoodsService;
 import com.spongeli.shoppingmall.service.web.WebUserService;
 import com.spongeli.shoppingmall.utils.MD5Util;
 import com.spongeli.shoppingmall.utils.MatchUtil;
@@ -46,6 +50,10 @@ public class WebUserServiceImpl extends WebBaseService implements WebUserService
     private ShoppingUserMapper mapper;
     @Autowired
     private CommonService commonService;
+    @Autowired
+    private GoodsService goodsService;
+    @Autowired
+    private MallGoodsMapper goodsMapper;
 
     /**
      * 微信授权获取 昵称和pic
@@ -159,6 +167,8 @@ public class WebUserServiceImpl extends WebBaseService implements WebUserService
     }
 
     /**
+     * 验证码登陆
+     *
      * @param inparam
      * @return
      */
@@ -174,6 +184,25 @@ public class WebUserServiceImpl extends WebBaseService implements WebUserService
         }
         return getLoginInfo(inparam.getUsername(), user);
     }
+
+    /**
+     * 增加浏览商品记录
+     *
+     * @param ids
+     */
+    @Override
+    public void addScanGoods(List<Integer> ids) {
+        if (CollectionUtils.isEmpty(ids)) return;
+
+        MallGoodsExample example = new MallGoodsExample();
+        example.createCriteria().andGoodsIdIn(ids);
+        List<MallGoods> mallGoods = goodsMapper.selectByExample(example);
+        if (CollectionUtils.isEmpty(mallGoods)) return;
+        mallGoods.stream().forEach(item -> {
+            goodsService.addScanGoods(item, getCurrentUserId());
+        });
+    }
+
 
     private void updateUserLastLoginTime(ShoppingUser shoppingUser) {
         ShoppingUser record = new ShoppingUser();
