@@ -73,7 +73,10 @@
         <!--            <table tableName="mall_category">-->
         <!--                <generatedKey column="category_id" sqlStatement="Mysql" identity="true" />-->
         <!--            </table>-->
-        <table tableName="mall_user_scan">
+<!--        <table tableName="mall_user_scan">-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+        <table tableName="mall_user_address">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
         <!--            <table tableName="mall_order">-->

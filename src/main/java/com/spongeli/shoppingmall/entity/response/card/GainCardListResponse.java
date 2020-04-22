@@ -18,6 +18,7 @@ public class GainCardListResponse {
     private String goodsName;
     private String goodsHeaderImg;
     private Double goodsPrice;
+    private Byte goodsStatus;
 
     public Integer getCardId() {
         return cardId;
@@ -97,5 +98,13 @@ public class GainCardListResponse {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Byte getGoodsStatus() {
+        return goodsStatus;
+    }
+
+    public void setGoodsStatus(Byte goodsStatus) {
+        this.goodsStatus = goodsStatus;
     }
 }

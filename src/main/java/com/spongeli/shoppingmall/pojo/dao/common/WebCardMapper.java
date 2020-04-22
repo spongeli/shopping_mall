@@ -20,6 +20,7 @@ public interface WebCardMapper {
             "\tt2.goods_hots_label,\n" +
             "\tt2.goods_name,\n" +
             "\tt2.goods_header_img,\n" +
+            "\tt2.goods_status,\n" +
             "\tt2.goods_price\n" +
             "FROM\n" +
             "\tmall_card t1\n" +
